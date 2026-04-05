@@ -2,7 +2,6 @@ import { ReactNode } from 'react';
 import { Header } from './Header';
 import { Footer } from './Footer';
 import { ScrollToTop } from '../ui/ScrollToTop';
-import { CustomCursor } from '../ui/CustomCursor';
 
 interface LayoutProps {
   children: ReactNode;
@@ -11,7 +10,6 @@ interface LayoutProps {
 export function Layout({ children }: LayoutProps) {
   return (
     <div className="min-h-screen flex flex-col bg-[#F8FAFC] font-sans text-[#0F172A] relative overflow-x-hidden">
-      <CustomCursor />
       <Header />
       <main className="flex-grow">
         {children}

@@ -213,8 +213,7 @@ export const CaseStudyCarousel: React.FC<CaseStudyCarouselProps> = ({
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
         >
-          {/* Background Glow */}
-          <div className="absolute inset-[-40px_-60px] bg-[radial-gradient(circle_at_0%_0%,rgba(255,255,255,0.9),transparent_55%),radial-gradient(circle_at_50%_100%,rgba(59,130,246,0.3),transparent_55%)] opacity-85 -z-10" />
+          {/* Background Glow Removed for performance */}
 
           {/* Navigation Arrows */}
           {filteredCaseStudies.length > 1 && (
@@ -256,18 +255,19 @@ export const CaseStudyCarousel: React.FC<CaseStudyCarouselProps> = ({
                              position === 'left' || position === 'right' ? 0.45 : 0,
                     zIndex: position === 'center' ? 10 : 
                             position === 'left' || position === 'right' ? 5 : 0,
-                    filter: position === 'center' ? 'blur(0px)' : 'blur(1px)',
+                    filter: position === 'center' ? 'none' : 'grayscale(100%)',
                   }}
                   transition={{
-                    duration: 0.6,
-                    ease: [0.22, 0.61, 0.36, 1]
+                    duration: 0.4,
+                    ease: "easeOut"
                   }}
+                  style={{ willChange: "transform, opacity" }}
                   className={cn(
                     "absolute top-0 left-1/2 w-[92%] md:w-[74%] max-w-[960px] pointer-events-none",
                     position === 'center' && "pointer-events-auto"
                   )}
                 >
-                  <div className="w-full rounded-[24px] md:rounded-[36px] p-6 md:p-8 bg-gradient-to-br from-[#e0ebff] via-[#bfd6ff] to-[#f9fbff] shadow-[0_28px_70px_rgba(15,23,42,0.26)] border border-white/80 backdrop-blur-md grid md:grid-cols-[1.5fr_1.1fr] gap-6 md:gap-8 overflow-hidden">
+                  <div className="w-full rounded-[24px] md:rounded-[36px] p-6 md:p-8 bg-white shadow-[0_20px_50px_rgba(15,23,42,0.15)] border border-slate-100 grid md:grid-cols-[1.5fr_1.1fr] gap-6 md:gap-8 overflow-hidden">
                     <div className="flex flex-col gap-4 md:gap-5">
                       <div className="flex items-center gap-3">
                         <img 
@@ -299,28 +299,17 @@ export const CaseStudyCarousel: React.FC<CaseStudyCarouselProps> = ({
                             {metric.label}
                           </div>
                           
-                          {/* Animated Wave */}
-                          <div className="hidden sm:block w-10 h-2 rounded-full bg-gradient-to-r from-blue-600 to-green-500 relative overflow-hidden shrink-0">
-                            <motion.div 
-                              animate={{ x: ['-100%', '100%'] }}
-                              transition={{ duration: 1.3, repeat: Infinity, ease: "linear" }}
-                              className="absolute inset-0 bg-[radial-gradient(circle_at_0_50%,rgba(255,255,255,0.95)_0,transparent_60%)]"
-                            />
+                          {/* Wave */}
+                          <div className="hidden sm:block w-10 h-2 rounded-full bg-slate-100 relative overflow-hidden shrink-0">
                           </div>
 
                           {/* Animated Growth Bars */}
                           <div className="flex items-end gap-1 h-3 shrink-0">
                             {[0, 1, 2].map((bar) => (
-                              <motion.div
+                              <div
                                 key={bar}
-                                animate={{ height: ['25%', '100%', '35%'] }}
-                                transition={{ 
-                                  duration: 1, 
-                                  repeat: Infinity, 
-                                  ease: "easeInOut",
-                                  delay: bar * 0.15
-                                }}
-                                className="w-[3px] rounded-full bg-gradient-to-b from-green-500 to-teal-700"
+                                className="w-[3px] rounded-full bg-slate-200"
+                                style={{ height: `${30 + bar * 30}%` }}
                               />
                             ))}
                           </div>

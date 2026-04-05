@@ -12,7 +12,7 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ isLoading = true }
         <motion.div
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.8, ease: "easeInOut" }}
+          transition={{ duration: 0.4, ease: "easeOut" }}
           className="fixed inset-0 z-[9999] flex items-center justify-center bg-white"
         >
           <div className="relative flex flex-col items-center">

@@ -31,7 +31,7 @@
   }
 
   .btn-primary {
-    @apply inline-flex items-center justify-center px-8 py-3.5 rounded-full text-white font-medium text-lg transition-all duration-500 cursor-pointer shadow-lg shadow-blue-900/20;
+    @apply inline-flex items-center justify-center px-8 py-3.5 rounded-full text-white font-medium text-lg transition-all duration-300 cursor-pointer shadow-lg shadow-blue-900/20;
     background: linear-gradient(to right, var(--e-global-color-accent) 0%, var(--e-global-color-accentsecondary) 50%, var(--e-global-color-accent) 100%);
     background-size: 200% auto;
   }
@@ -82,11 +82,12 @@
   gap: 30px;
   align-items: center;
   white-space: nowrap;
-  animation: scroll-left 35s linear infinite;
+  animation: scroll-left 40s linear infinite;
+  will-change: transform;
 }
 
 .logo-row-wrapper:nth-of-type(even) .logo-row {
-  animation: scroll-right 35s linear infinite;
+  animation: scroll-right 40s linear infinite;
 }
 
 .logo-item {
@@ -125,7 +126,7 @@
 @media (max-width: 768px) {
   .logo-row {
     gap: 16px !important;
-    animation-duration: 26s !important;
+    animation-duration: 30s !important;
   }
   .logo-item {
     width: 130px !important;

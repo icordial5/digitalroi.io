@@ -18,9 +18,9 @@ export const ScrollReveal: React.FC<ScrollRevealProps> = ({
   className,
   delay = 0,
   direction = "up",
-  distance = 50,
-  duration = 0.6,
-  staggerChildren = 0.1,
+  distance = 20,
+  duration = 0.4,
+  staggerChildren = 0.05,
 }) => {
   const variants: Variants = {
     hidden: {
@@ -35,7 +35,7 @@ export const ScrollReveal: React.FC<ScrollRevealProps> = ({
       transition: {
         duration,
         delay,
-        ease: [0.25, 0.1, 0.25, 1],
+        ease: "easeOut",
         staggerChildren,
       },
     },
@@ -48,6 +48,7 @@ export const ScrollReveal: React.FC<ScrollRevealProps> = ({
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-50px" }}
+        style={{ willChange: "transform, opacity" }}
       >
         {children}
       </motion.div>
@@ -79,9 +80,10 @@ export const StaggerItem: React.FC<{ children: React.ReactNode; className?: stri
   return (
     <motion.div
       variants={{
-        hidden: { opacity: 0, y: 20 },
-        visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+        hidden: { opacity: 0, y: 10 },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
       }}
+      style={{ willChange: "transform, opacity" }}
       className={className}
     >
       {children}

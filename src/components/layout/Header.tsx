@@ -43,30 +43,26 @@ export function Header() {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       className={cn(
-        'fixed top-0 left-0 right-0 z-50 transition-all duration-500',
+        'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
         isScrolled ? 'py-2' : 'py-6'
       )}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div 
-          animate={{ 
-            backgroundColor: isScrolled ? 'rgba(255, 255, 255, 0.9)' : 'rgba(255, 255, 255, 1)',
-            backdropFilter: isScrolled ? 'blur(10px)' : 'blur(0px)',
-          }}
-          className="flex justify-between items-center bg-white rounded-full px-6 py-3 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.1)] border border-white/20"
+        <div 
+          className={cn(
+            "flex justify-between items-center bg-white rounded-full px-6 py-3 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.1)] border border-white/20 transition-all duration-300",
+            isScrolled ? "bg-white/90 backdrop-blur-md" : "bg-white"
+          )}
         >
           {/* Logo */}
           <Link to="/" className="flex-shrink-0 flex items-center group">
-            <motion.img
-              animate={{ 
-                height: isScrolled ? 40 : 52,
-                scale: isScrolled ? 1 : 1.05
-              }}
-              transition={{ duration: 0.3, ease: "easeInOut" }}
-              whileHover={{ scale: isScrolled ? 1.05 : 1.1 }}
+            <img
               src="https://ik.imagekit.io/digitalroipune/untitled-tag-us_mp4_hd.original.jpg"
               alt="Digital ROI"
-              className="w-auto object-contain"
+              className={cn(
+                "w-auto object-contain transition-all duration-300",
+                isScrolled ? "h-10 scale-100" : "h-12 scale-105"
+              )}
               referrerPolicy="no-referrer"
             />
           </Link>
@@ -181,12 +177,12 @@ export function Header() {
           <div className="md:hidden flex items-center">
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="text-[#0F172A] hover:text-[#0A3D91] focus:outline-none transition-transform active:scale-90"
+              className="text-[#0F172A] hover:text-[#0A3D91] focus:outline-none transition-transform active:scale-95"
             >
               {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
           </div>
-        </motion.div>
+        </div>
       </div>
 
       {/* Mobile Navigation */}

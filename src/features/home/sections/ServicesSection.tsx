@@ -55,10 +55,10 @@ export const ServicesSection: React.FC = () => {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div 
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.4, ease: "easeOut" }}
           className="flex items-center justify-center gap-3 mb-12"
         >
           <Sparkles className="w-8 h-8 text-[#084E96]" />
@@ -77,8 +77,8 @@ export const ServicesSection: React.FC = () => {
             >
               <motion.div 
                 variants={{
-                  hidden: { opacity: 0, x: service.imageLeft ? -50 : 50 },
-                  visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: "easeOut" } }
+                  hidden: { opacity: 0, x: service.imageLeft ? -20 : 20 },
+                  visible: { opacity: 1, x: 0, transition: { duration: 0.4, ease: "easeOut" } }
                 }}
                 className="w-full md:w-1/2"
               >
@@ -89,8 +89,8 @@ export const ServicesSection: React.FC = () => {
 
               <motion.div 
                 variants={{
-                  hidden: { opacity: 0, x: service.imageLeft ? 50 : -50 },
-                  visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: "easeOut" } }
+                  hidden: { opacity: 0, x: service.imageLeft ? 20 : -20 },
+                  visible: { opacity: 1, x: 0, transition: { duration: 0.4, ease: "easeOut" } }
                 }}
                 className="w-full md:w-1/2"
               >

@@ -22,7 +22,7 @@ const testimonials = [
     role: "VP - Chief Admin Officer",
     company: "Regrow Biosciences",
     thumbnail: "https://ik.imagekit.io/digitalroipune/WhatsApp-Image-2025-11-18-at-11.42.36-AM.jpeg?updatedAt=1775149652369",
-    videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1" 
+    videoUrl: "https://www.youtube.com/embed/A8YYjMf1uFQ?autoplay=1" 
   }
 ];
 
@@ -34,7 +34,13 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ onPlay
   return (
     <section className="py-16 bg-[#DDEDF8]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
+        <motion.div 
+          initial={{ opacity: 0, y: 15 }} 
+          whileInView={{ opacity: 1, y: 0 }} 
+          viewport={{ once: true }} 
+          transition={{ duration: 0.3, ease: "easeOut" }}
+          className="text-center mb-16"
+        >
           <h2 className="text-4xl md:text-5xl font-bold text-[#1A202C]">
             What Our <span className="text-[#084E96]">Clients</span> <span className="text-[#84A9DE]">Say</span>
           </h2>
@@ -42,7 +48,11 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ onPlay
         <div className="grid md:grid-cols-3 gap-8">
           {testimonials.map((testimonial, index) => (
             <motion.div 
-              key={index} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: index * 0.2 }}
+              key={index} 
+              initial={{ opacity: 0, y: 20 }} 
+              whileInView={{ opacity: 1, y: 0 }} 
+              viewport={{ once: true }} 
+              transition={{ duration: 0.3, delay: index * 0.1, ease: "easeOut" }}
               className="bg-white rounded-3xl p-4 shadow-sm hover:shadow-xl transition-shadow duration-300"
             >
               <div className="relative rounded-2xl overflow-hidden cursor-pointer group aspect-video" onClick={() => onPlayVideo(testimonial.videoUrl)}>

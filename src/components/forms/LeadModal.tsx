@@ -65,8 +65,9 @@ export const LeadForm: React.FC<LeadFormProps> = ({ type, onSuccess }) => {
   if (isSuccess) {
     return (
       <motion.div 
-        initial={{ opacity: 0, scale: 0.9 }}
+        initial={{ opacity: 0, scale: 0.98 }}
         animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.3, ease: "easeOut" }}
         className="flex flex-col items-center justify-center py-12 text-center"
       >
         <div className="w-20 h-20 bg-emerald-100 rounded-full flex items-center justify-center mb-6">
@@ -267,9 +268,10 @@ export const LeadModal: React.FC = () => {
 
           {/* Modal Content */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9, y: 20 }}
+            initial={{ opacity: 0, scale: 0.98, y: 10 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.9, y: 20 }}
+            exit={{ opacity: 0, scale: 0.98, y: 10 }}
+            transition={{ duration: 0.3, ease: "easeOut" }}
             className="relative w-full max-w-[560px] bg-white rounded-[2rem] shadow-2xl overflow-hidden"
           >
             <button 

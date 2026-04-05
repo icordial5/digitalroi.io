@@ -71,9 +71,10 @@ export const GrowTogetherSection: React.FC<GrowTogetherSectionProps> = ({
     <section className="py-16 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div 
-          initial={{ opacity: 0, y: 40 }} 
+          initial={{ opacity: 0, y: 20 }} 
           whileInView={{ opacity: 1, y: 0 }} 
           viewport={{ once: true }} 
+          transition={{ duration: 0.4, ease: "easeOut" }}
           className="relative rounded-[3rem] overflow-hidden bg-gradient-to-r from-[#4A90E2] to-[#84A9DE] p-10 md:p-16 lg:p-20"
         >
           <div className="absolute top-0 left-0 w-full h-6 opacity-20" style={{ backgroundImage: 'radial-gradient(circle at 10px -7px, transparent 8px, white 8px, white 9px, transparent 9px)', backgroundSize: '20px 20px' }} />
