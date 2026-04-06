@@ -3,10 +3,9 @@ import { motion } from 'motion/react';
 import { useModal } from '@/context/ModalContext';
 
 const hospitalityLogos = [
-  "https://ik.imagekit.io/digitalroipune/malhar-machi.png",
-  "https://ik.imagekit.io/digitalroipune/joy-n-crew.png",
   "https://ik.imagekit.io/digitalroipune/the-yoga-institute.png",
-  "https://ik.imagekit.io/digitalroipune/jalpushti.png"
+  "https://ik.imagekit.io/digitalroipune/joy-n-crew.png",
+  "https://ik.imagekit.io/digitalroipune/Jal-srushti.png"
 ];
 
 export const HospitalityHero: React.FC = () => {
@@ -70,7 +69,7 @@ export const HospitalityHero: React.FC = () => {
           <div className="logo-scroll-section mt-8">
             <div className="logo-row-wrapper">
               <div className="logo-row">
-                {[...hospitalityLogos, ...hospitalityLogos].map((logo, i) => (
+                {[...hospitalityLogos, ...hospitalityLogos, ...hospitalityLogos, ...hospitalityLogos].map((logo, i) => (
                   <div key={i} className="logo-item">
                     <img src={logo} alt="" referrerPolicy="no-referrer" />
                   </div>

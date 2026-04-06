@@ -3,17 +3,24 @@ import { motion } from 'motion/react';
 import { Sparkles } from 'lucide-react';
 import { useModal } from '@/context/ModalContext';
 
-const solarLogos = [
+const solarLogosRow1 = [
+  "https://ik.imagekit.io/digitalroipune/truzon.png",
+  "https://ik.imagekit.io/digitalroipune/manchanda.png",
+  "https://ik.imagekit.io/digitalroipune/grid.png",
+  "https://ik.imagekit.io/digitalroipune/enphase.png",
+  "https://ik.imagekit.io/digitalroipune/solar-square.png",
+  "https://ik.imagekit.io/digitalroipune/enerparc.png",
   "https://ik.imagekit.io/digitalroipune/roofsol.png",
+];
+
+const solarLogosRow2 = [
   "https://ik.imagekit.io/digitalroipune/livguard.png",
   "https://ik.imagekit.io/digitalroipune/Alligator-Solar.png",
   "https://ik.imagekit.io/digitalroipune/repos-energy.png",
   "https://ik.imagekit.io/digitalroipune/Truzon.png",
   "https://ik.imagekit.io/digitalroipune/forcdyno.png",
-  "https://ik.imagekit.io/digitalroipune/beem.png",
-  "https://ik.imagekit.io/digitalroipune/nchanda.png",
+  "https://ik.imagekit.io/digitalroipune/Husk.png",
   "https://ik.imagekit.io/digitalroipune/Enphase.png",
-  "https://ik.imagekit.io/digitalroipune/manchanda.png",
 ];
 
 export const EnergyHero: React.FC = () => {
@@ -75,23 +82,25 @@ export const EnergyHero: React.FC = () => {
             <h2 className="text-2xl md:text-3xl font-bold text-[#111118]">Trusted by 40+ Solar Brands</h2>
           </motion.div>
           
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-            {solarLogos.map((logo, index) => (
-              <motion.div 
-                key={index}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.5 + index * 0.05 }}
-                className="bg-white p-6 rounded-xl shadow-sm flex items-center justify-center border border-slate-100 h-24"
-              >
-                <img 
-                  src={logo} 
-                  alt="Solar Brand" 
-                  className="max-h-full max-w-full object-contain grayscale hover:grayscale-0 transition-all"
-                  referrerPolicy="no-referrer"
-                />
-              </motion.div>
-            ))}
+          <div className="logo-scroll-section">
+            <div className="logo-row-wrapper">
+              <div className="logo-row">
+                {[...solarLogosRow1, ...solarLogosRow1].map((logo, i) => (
+                  <div key={i} className="logo-item" style={logo.toLowerCase().includes('enphase') ? { background: 'black' } : {}}>
+                    <img src={logo} alt="" referrerPolicy="no-referrer" />
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="logo-row-wrapper">
+              <div className="logo-row">
+                {[...solarLogosRow2, ...solarLogosRow2].map((logo, i) => (
+                  <div key={i} className="logo-item" style={logo.toLowerCase().includes('enphase') ? { background: 'black' } : {}}>
+                    <img src={logo} alt="" referrerPolicy="no-referrer" />
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </div>

@@ -90,13 +90,13 @@ export const GrowTogetherSection: React.FC<GrowTogetherSectionProps> = ({
               
               <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
                 <StaggerItem className="flex flex-col sm:flex-row gap-6 w-full lg:w-auto">
-                  <div className="bg-[#1e4b8a]/40 backdrop-blur-md border border-white/20 rounded-3xl p-8 flex-1 min-w-[240px]">
+                  <div className="bg-gradient-to-br from-[#1e4b8a]/60 to-[#1e4b8a]/20 backdrop-blur-md border border-white/20 rounded-3xl p-8 flex-1 min-w-[240px]">
                     <div className="text-4xl md:text-5xl font-bold text-white mb-2">
                       <Counter value={stat1Value} suffix={stat1Suffix} prefix={stat1Prefix} />
                     </div>
                     <div className="text-lg text-white/80">{stat1Label}</div>
                   </div>
-                  <div className="bg-[#1e4b8a]/40 backdrop-blur-md border border-white/20 rounded-3xl p-8 flex-1 min-w-[240px]">
+                  <div className="bg-gradient-to-br from-[#1e4b8a]/60 to-[#1e4b8a]/20 backdrop-blur-md border border-white/20 rounded-3xl p-8 flex-1 min-w-[240px]">
                     <div className="text-4xl md:text-5xl font-bold text-white mb-2">
                       <Counter value={stat2Value} suffix={stat2Suffix} prefix={stat2Prefix} />
                     </div>

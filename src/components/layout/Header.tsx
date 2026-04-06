@@ -4,6 +4,7 @@ import { ChevronDown, Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { cn } from '@/utils/cn';
 import { useModal } from '@/context/ModalContext';
+import logo from '@/assets/logo.svg';
 
 const INDUSTRIES = [
   { name: 'Energy', path: '/industries/energy' },
@@ -57,13 +58,12 @@ export function Header() {
           {/* Logo */}
           <Link to="/" className="flex-shrink-0 flex items-center group">
             <img
-              src="https://ik.imagekit.io/digitalroipune/untitled-tag-us_mp4_hd.original.jpg"
+              src={logo}
               alt="Digital ROI"
               className={cn(
                 "w-auto object-contain transition-all duration-300",
                 isScrolled ? "h-10 scale-100" : "h-12 scale-105"
               )}
-              referrerPolicy="no-referrer"
             />
           </Link>
 
