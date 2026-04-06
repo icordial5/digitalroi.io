@@ -60,9 +60,9 @@ export const WhatsAppButton: React.FC = () => {
 
         {/* WhatsApp Icon */}
         <img 
-          src="https://ik.imagekit.io/digitalroipune/WhatsApp.svg.png?updatedAt=1775149651156" 
+          src="https://ik.imagekit.io/digitalroipune/WhatsApp_icon.png" 
           alt="WhatsApp" 
-          className="w-[24px] h-[24px] md:w-[30px] md:h-[30px] object-contain brightness-0 invert"
+          className="w-[24px] h-[24px] md:w-[30px] md:h-[30px] object-contain"
         />
 
         {/* Tooltip (Desktop only) */}
