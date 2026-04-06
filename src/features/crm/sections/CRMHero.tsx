@@ -3,12 +3,12 @@ import { motion } from 'motion/react';
 import { CRMQuiz } from './CRMQuiz';
 
 const crmLogos = [
-  { name: 'Zoho', url: 'https://ik.imagekit.io/digitalroipune/zoho.png' },
-  { name: 'HubSpot', url: 'https://ik.imagekit.io/digitalroipune/hubspot.png' },
-  { name: 'LeadSquared', url: 'https://ik.imagekit.io/digitalroipune/leadsquared.png' },
-  { name: 'Merito', url: 'https://ik.imagekit.io/digitalroipune/merito.png' },
-  { name: 'Freshworks', url: 'https://ik.imagekit.io/digitalroipune/freshworks.png' },
-  { name: 'Solar Ladder', url: 'https://ik.imagekit.io/digitalroipune/solar-ladder.png' },
+  { name: 'CRM 1', url: 'https://ik.imagekit.io/digitalroipune/Group%203.png' },
+  { name: 'CRM 2', url: 'https://ik.imagekit.io/digitalroipune/Group%205.png' },
+  { name: 'CRM 3', url: 'https://ik.imagekit.io/digitalroipune/Group%204.png' },
+  { name: 'CRM 4', url: 'https://ik.imagekit.io/digitalroipune/Group%208.png' },
+  { name: 'CRM 5', url: 'https://ik.imagekit.io/digitalroipune/Group%206.png' },
+  { name: 'CRM 6', url: 'https://ik.imagekit.io/digitalroipune/Group%207.png?updatedAt=1768808014342' },
 ];
 
 export const CRMHero: React.FC = () => {
@@ -68,35 +68,31 @@ export const CRMHero: React.FC = () => {
         </div>
 
         {/* CRM's we work with */}
-        <div className="mt-24 text-center">
+        <div className="mt-24">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="flex items-center justify-center gap-3 mb-10"
+            className="flex items-center justify-center gap-3 mb-12"
           >
             <div className="w-4 h-4 bg-blue-600 rotate-45" />
             <h2 className="text-3xl md:text-4xl font-bold text-slate-900">CRM's we work with</h2>
           </motion.div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-            {crmLogos.map((logo, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 flex items-center justify-center hover:shadow-md transition-all group"
-              >
-                <img 
-                  src={logo.url} 
-                  alt={logo.name} 
-                  className="max-h-10 w-auto grayscale group-hover:grayscale-0 transition-all duration-500"
-                  referrerPolicy="no-referrer"
-                />
-              </motion.div>
-            ))}
+          <div className="logo-scroll-section">
+            <div className="logo-row-wrapper">
+              <div className="logo-row">
+                {[...crmLogos, ...crmLogos, ...crmLogos, ...crmLogos].map((logo, index) => (
+                  <div key={index} className="logo-item">
+                    <img 
+                      src={logo.url} 
+                      alt={logo.name} 
+                      referrerPolicy="no-referrer"
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </div>

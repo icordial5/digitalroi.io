@@ -17,8 +17,10 @@ const Home: React.FC = () => {
   return (
     <Layout>
       <SEO 
-        title="Lead Generation & CRM Automation" 
-        description="Digital ROI helps brands grow with full-funnel performance marketing that generates, qualifies, and nurtures leads into revenue."
+        title="Full Funnel Marketing Agency - Turn Leads into Revenue" 
+        description="Full funnel marketing focused on turning leads into revenue. Improve lead quality, speed up follow-ups, and fix gaps between marketing and conversions."
+        canonicalUrl="https://digitalroi.io/"
+        exactTitle={true}
       />
       <HeroSection />
       <TrustedLogosSection />

@@ -27,7 +27,7 @@ export const EnergyHero: React.FC = () => {
   const { openModal } = useModal();
 
   return (
-    <section className="relative pt-32 pb-16 overflow-hidden bg-[#F0F4F8]">
+    <section className="relative pt-40 pb-16 overflow-hidden bg-[#F0F4F8]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
@@ -41,7 +41,7 @@ export const EnergyHero: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="text-5xl md:text-7xl font-bold tracking-tight text-[#111118] mb-6 max-w-5xl mx-auto leading-[1.1]"
+          className="text-5xl md:text-7xl font-bold tracking-tight text-[#111118] mb-6 max-w-4xl mx-auto leading-[1.1]"
         >
           Close more <span className="text-gradient-blue">Solar Deals</span> <br />
           with Performance-Driven <br />
@@ -86,7 +86,7 @@ export const EnergyHero: React.FC = () => {
             <div className="logo-row-wrapper">
               <div className="logo-row">
                 {[...solarLogosRow1, ...solarLogosRow1].map((logo, i) => (
-                  <div key={i} className="logo-item" style={logo.toLowerCase().includes('enphase') ? { background: 'black' } : {}}>
+                  <div key={i} className="logo-item" style={logo.toLowerCase().includes('enphase') ? { background: 'white' } : {}}>
                     <img src={logo} alt="" referrerPolicy="no-referrer" />
                   </div>
                 ))}
@@ -95,7 +95,7 @@ export const EnergyHero: React.FC = () => {
             <div className="logo-row-wrapper">
               <div className="logo-row">
                 {[...solarLogosRow2, ...solarLogosRow2].map((logo, i) => (
-                  <div key={i} className="logo-item" style={logo.toLowerCase().includes('enphase') ? { background: 'black' } : {}}>
+                  <div key={i} className="logo-item" style={logo.toLowerCase().includes('enphase') ? { background: 'white' } : {}}>
                     <img src={logo} alt="" referrerPolicy="no-referrer" />
                   </div>
                 ))}

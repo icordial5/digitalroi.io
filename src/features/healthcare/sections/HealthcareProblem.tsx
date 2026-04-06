@@ -50,17 +50,17 @@ export const HealthcareProblem: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
-          className="mb-12"
+          className="text-center mb-12"
         >
           <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#f5a6231a] border-[1.5px] border-[#f5a62366] text-[#b8700a] text-[clamp(11px,0.7rem+0.2vw,13px)] font-bold tracking-[0.11em] uppercase mb-4.5">
             <AlertCircle className="w-3.5 h-3.5 text-[#f5a623]" />
             The Real Problem
           </span>
-          <h2 className="text-[clamp(28px,2.4rem+1.2vw,52px)] font-extrabold text-[#1a2035] leading-[1.12] tracking-tight mb-3.5 max-w-[700px]">
+          <h2 className="text-[clamp(28px,4vw,48px)] font-extrabold text-[#0f1f5c] leading-[1.15] mb-4 tracking-tight mx-auto">
             Why Most Healthcare providers<br />
-            <span className="text-[#2563c6]">Lose Patients</span>
+            <span className="text-[#1e4db7]">Lose Patients</span>
           </h2>
-          <p className="text-[clamp(15px,0.95rem+0.2vw,18px)] text-[#3d4a6b] leading-[1.65] max-w-[560px]">
+          <p className="text-[clamp(15px,1.8vw,18px)] text-[#4a5a8a] max-w-[560px] mx-auto leading-[1.65]">
             Even after generating enquiries, most hospitals & clinics fail to convert them into real patient walk-ins, not because of marketing, but because of what happens after the enquiry comes in.
           </p>
         </motion.div>

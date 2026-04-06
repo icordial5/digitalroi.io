@@ -12,11 +12,11 @@ const QUICK_LINKS = [
 ];
 
 const INDUSTRIES = [
-  { name: 'Energy', path: '/industries/energy' },
-  { name: 'Healthcare', path: '/industries/healthcare' },
-  { name: 'Education', path: '/industries/education' },
-  { name: 'Jewellery', path: '/industries/jewellery' },
-  { name: 'Hospitality', path: '/industries/hospitality' },
+  { name: 'Solar', path: '/industries/solar-marketing' },
+  { name: 'Healthcare', path: '/industries/healthcare-marketing' },
+  { name: 'Education', path: '/industries/education-marketing' },
+  { name: 'Jewellery', path: '/industries/jewellery-marketing' },
+  { name: 'Hospitality', path: '/industries/hospitality-marketing' },
 ];
 
 export function Footer() {

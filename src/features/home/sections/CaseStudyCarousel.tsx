@@ -267,32 +267,36 @@ export const CaseStudyCarousel: React.FC<CaseStudyCarouselProps> = ({
                     position === 'center' && "pointer-events-auto"
                   )}
                 >
-                  <div className="w-full rounded-[24px] md:rounded-[36px] p-6 md:p-8 bg-white shadow-[0_20px_50px_rgba(15,23,42,0.15)] border border-slate-100 grid md:grid-cols-[1.5fr_1.1fr] gap-6 md:gap-8 overflow-hidden">
+                  <div 
+                    className="w-full bg-white rounded-[24px] md:rounded-[36px] p-6 md:p-8 shadow-[0_20px_50px_rgba(15,23,42,0.15)] border border-slate-100 grid md:grid-cols-[1.5fr_1.1fr] gap-6 md:gap-8 overflow-hidden"
+                  >
                     <div className="flex flex-col gap-4 md:gap-5">
                       <div className="flex items-center gap-3">
-                        <img 
-                          src={study.logo} 
-                          alt={`${study.heading} logo`}
-                          className="h-16 md:h-20 w-auto object-contain drop-shadow-[0_6px_14px_rgba(15,23,42,0.25)]"
-                          referrerPolicy="no-referrer"
-                        />
+                        <div className="bg-slate-50 p-3 rounded-2xl inline-flex border border-slate-100">
+                          <img 
+                            src={study.logo} 
+                            alt={`${study.heading} logo`}
+                            className="h-12 md:h-16 w-auto object-contain"
+                            referrerPolicy="no-referrer"
+                          />
+                        </div>
                       </div>
                       <div>
                         <h3 className="text-xl md:text-3xl font-bold text-slate-900 leading-tight">
                           {study.heading}
                         </h3>
-                        <p className="text-sm md:text-base text-slate-700 mt-2 leading-relaxed">
+                        <p className="text-sm md:text-base text-slate-600 mt-2 leading-relaxed">
                           {study.subtext}
                         </p>
                       </div>
-                      <div className="h-px w-full bg-gradient-to-r from-transparent via-slate-900/20 to-transparent mt-2" />
+                      <div className="h-px w-full bg-gradient-to-r from-transparent via-slate-200 to-transparent mt-2" />
                     </div>
 
                     <div className="flex flex-col justify-center gap-3">
                       {study.metrics.map((metric, mIdx) => (
                         <div 
                           key={mIdx}
-                          className="flex items-center gap-3 p-3 md:p-4 rounded-full bg-white/95 border border-slate-200 shadow-[0_10px_26px_rgba(15,23,42,0.16)]"
+                          className="flex items-center gap-3 p-3 md:p-4 rounded-full bg-white border border-slate-100 shadow-[0_10px_26px_rgba(15,23,42,0.06)]"
                         >
                           <div className="flex-1 min-w-0 text-xs md:text-sm leading-tight text-slate-800">
                             <strong className="text-sm md:text-base font-extrabold mr-1">{metric.value}</strong>
@@ -300,7 +304,7 @@ export const CaseStudyCarousel: React.FC<CaseStudyCarouselProps> = ({
                           </div>
                           
                           {/* Wave */}
-                          <div className="hidden sm:block w-10 h-2 rounded-full bg-slate-100 relative overflow-hidden shrink-0">
+                          <div className="hidden sm:block w-10 h-2 rounded-full bg-slate-200/50 relative overflow-hidden shrink-0">
                           </div>
 
                           {/* Animated Growth Bars */}
@@ -308,7 +312,7 @@ export const CaseStudyCarousel: React.FC<CaseStudyCarouselProps> = ({
                             {[0, 1, 2].map((bar) => (
                               <div
                                 key={bar}
-                                className="w-[3px] rounded-full bg-slate-200"
+                                className="w-[3px] rounded-full bg-slate-300"
                                 style={{ height: `${30 + bar * 30}%` }}
                               />
                             ))}

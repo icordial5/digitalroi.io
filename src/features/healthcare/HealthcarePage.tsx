@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Helmet } from 'react-helmet-async';
+import { SEO } from '@/components/ui/SEO';
 import { Layout } from '@/components/layout/Layout';
 import { HealthcareHero } from './sections/HealthcareHero';
 import { HealthcareComparison } from './sections/HealthcareComparison';
@@ -19,10 +19,12 @@ export const HealthcarePage: React.FC = () => {
 
   return (
     <Layout>
-      <Helmet>
-        <title>Healthcare Marketing & Patient Growth Solutions | Digital ROI</title>
-        <meta name="description" content="Increase your OPD without increasing ad spend. We help hospitals and clinics turn enquiries into patient walk-ins with our proven Patient Revenue Engine." />
-      </Helmet>
+      <SEO 
+        title="Healthcare Marketing to Increase Patient Appointments" 
+        description="Get more patient appointments with faster responses, better targeting, and structured follow-ups. Built for clinics and hospitals to improve conversions."
+        canonicalUrl="https://digitalroi.io/industries/healthcare-marketing"
+        exactTitle={true}
+      />
       
       <main className="bg-white">
         {/* 1st Fold */}

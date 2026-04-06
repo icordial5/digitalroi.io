@@ -48,11 +48,11 @@ const AnimatedRoutes = () => {
           <Route path="/crm-automation" element={<PageTransition><CRMAutomationPage /></PageTransition>} />
           
           {/* Industries */}
-          <Route path="/industries/energy" element={<PageTransition><EnergyPage /></PageTransition>} />
-          <Route path="/industries/healthcare" element={<PageTransition><HealthcarePage /></PageTransition>} />
-          <Route path="/industries/education" element={<PageTransition><EducationPage /></PageTransition>} />
-          <Route path="/industries/jewellery" element={<PageTransition><JewelleryPage /></PageTransition>} />
-          <Route path="/industries/hospitality" element={<PageTransition><HospitalityPage /></PageTransition>} />
+          <Route path="/industries/solar-marketing" element={<PageTransition><EnergyPage /></PageTransition>} />
+          <Route path="/industries/healthcare-marketing" element={<PageTransition><HealthcarePage /></PageTransition>} />
+          <Route path="/industries/education-marketing" element={<PageTransition><EducationPage /></PageTransition>} />
+          <Route path="/industries/jewellery-marketing" element={<PageTransition><JewelleryPage /></PageTransition>} />
+          <Route path="/industries/hospitality-marketing" element={<PageTransition><HospitalityPage /></PageTransition>} />
           
           <Route path="/blog" element={<PageTransition><PlaceholderPage title="Blog" description="Insights on performance marketing and CRM automation." /></PageTransition>} />
           <Route path="/case-studies" element={<PageTransition><PlaceholderPage title="Case Studies" description="See how we've helped brands scale their revenue." /></PageTransition>} />

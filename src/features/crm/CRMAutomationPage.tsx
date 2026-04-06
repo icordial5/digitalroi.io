@@ -1,10 +1,10 @@
 import React from 'react';
-import { Helmet } from 'react-helmet-async';
+import { SEO } from '@/components/ui/SEO';
 import { Layout } from '@/components/layout/Layout';
 import { CRMHero } from './sections/CRMHero';
 import { CRMFramework } from './sections/CRMFramework';
 import { BusinessAutomation } from './sections/BusinessAutomation';
-import { CRMCTA } from './sections/CRMCTA';
+import { CTASection } from '../home/sections/CTASection';
 import { CaseStudyCarousel } from '../home/sections/CaseStudyCarousel';
 import { PartnersSection } from '../home/sections/PartnersSection';
 import { GrowTogetherSection } from '../home/sections/GrowTogetherSection';
@@ -12,10 +12,12 @@ import { GrowTogetherSection } from '../home/sections/GrowTogetherSection';
 export const CRMAutomationPage: React.FC = () => {
   return (
     <Layout>
-      <Helmet>
-        <title>CRM Automation & Sales Process Optimization | Digital ROI</title>
-        <meta name="description" content="Improve your sales process by 30%+ with automated CRM workflows and reporting. We help you actually use your CRM to drive revenue." />
-      </Helmet>
+      <SEO 
+        title="CRM Automation for Lead Tracking & Follow-ups" 
+        description="Capture every lead, automate follow-ups, and track conversions with CRM automation. Improve response time and turn more leads into customers."
+        canonicalUrl="https://digitalroi.io/crm-automation"
+        exactTitle={true}
+      />
       
       <main className="bg-white">
         {/* 1st Fold - Hero with Quiz */}
@@ -28,7 +30,22 @@ export const CRMAutomationPage: React.FC = () => {
         <BusinessAutomation />
 
         {/* 4th Fold - CTA */}
-        <CRMCTA />
+        <CTASection 
+          title={
+            <div className="flex flex-col items-center justify-center gap-2 md:gap-3">
+              <span className="block text-xl md:text-2xl font-semibold text-[#2D3748]">Most brands we work with see a</span>
+              <span className="block text-5xl md:text-7xl font-extrabold text-gradient-blue leading-none py-2">30% to 50%</span>
+              <span className="block text-xl md:text-2xl font-semibold text-[#2D3748] whitespace-normal md:whitespace-nowrap">jump in efficiency within the first</span>
+              <span className="block text-4xl md:text-5xl font-extrabold text-gradient-blue">90 days.</span>
+            </div>
+          }
+          description={
+            <>
+              We use <strong className="text-[#002b59] font-semibold">tried-and-tested CRM strategies</strong> built specially for <strong className="text-[#002b59] font-semibold">sales teams</strong> to bring real results - not just automation.
+            </>
+          }
+          formType="crm"
+        />
 
         {/* 5th Fold - Case Studies */}
         <CaseStudyCarousel 

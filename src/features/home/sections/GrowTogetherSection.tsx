@@ -75,38 +75,37 @@ export const GrowTogetherSection: React.FC<GrowTogetherSectionProps> = ({
           whileInView={{ opacity: 1, y: 0 }} 
           viewport={{ once: true }} 
           transition={{ duration: 0.4, ease: "easeOut" }}
-          className="relative rounded-[3rem] overflow-hidden bg-gradient-to-r from-[#4A90E2] to-[#84A9DE] p-10 md:p-16 lg:p-20"
+          className="relative rounded-[3rem] overflow-hidden bg-[#EAF5FB] border-[3px] border-[#2D3748] p-10 md:p-16 lg:p-20 shadow-2xl"
         >
-          <div className="absolute top-0 left-0 w-full h-6 opacity-20" style={{ backgroundImage: 'radial-gradient(circle at 10px -7px, transparent 8px, white 8px, white 9px, transparent 9px)', backgroundSize: '20px 20px' }} />
-          <img src="https://ik.imagekit.io/digitalroipune/digitalroi-fly.webp" alt="" className="absolute top-8 right-8 w-32 md:w-48 opacity-90" referrerPolicy="no-referrer" />
+          <img src="https://ik.imagekit.io/digitalroipune/digitalroi-fly.webp" alt="" className="absolute top-0 right-0 md:top-4 md:right-4 w-20 md:w-36 object-contain opacity-90" referrerPolicy="no-referrer" />
           <div className="relative z-10">
             <StaggerContainer>
               <StaggerItem>
                 <div className="flex items-center gap-2 mb-12">
-                  <Sparkles className="w-6 h-6 text-white" />
-                  <h2 className="text-3xl md:text-5xl font-bold text-white">{title}</h2>
+                  <Sparkles className="w-6 h-6 text-[#084E96]" />
+                  <h2 className="text-3xl md:text-5xl font-bold text-[#1A202C]">{title}</h2>
                 </div>
               </StaggerItem>
               
               <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
                 <StaggerItem className="flex flex-col sm:flex-row gap-6 w-full lg:w-auto">
-                  <div className="bg-gradient-to-br from-[#1e4b8a]/60 to-[#1e4b8a]/20 backdrop-blur-md border border-white/20 rounded-3xl p-8 flex-1 min-w-[240px]">
-                    <div className="text-4xl md:text-5xl font-bold text-white mb-2">
+                  <div className="bg-white/50 backdrop-blur-sm border border-[#2D3748]/10 rounded-3xl p-8 flex-1 min-w-[240px]">
+                    <div className="text-4xl md:text-5xl font-bold text-[#1A202C] mb-2">
                       <Counter value={stat1Value} suffix={stat1Suffix} prefix={stat1Prefix} />
                     </div>
-                    <div className="text-lg text-white/80">{stat1Label}</div>
+                    <div className="text-lg text-[#2D3748]">{stat1Label}</div>
                   </div>
-                  <div className="bg-gradient-to-br from-[#1e4b8a]/60 to-[#1e4b8a]/20 backdrop-blur-md border border-white/20 rounded-3xl p-8 flex-1 min-w-[240px]">
-                    <div className="text-4xl md:text-5xl font-bold text-white mb-2">
+                  <div className="bg-white/50 backdrop-blur-sm border border-[#2D3748]/10 rounded-3xl p-8 flex-1 min-w-[240px]">
+                    <div className="text-4xl md:text-5xl font-bold text-[#1A202C] mb-2">
                       <Counter value={stat2Value} suffix={stat2Suffix} prefix={stat2Prefix} />
                     </div>
-                    <div className="text-lg text-white/80">{stat2Label}</div>
+                    <div className="text-lg text-[#2D3748]">{stat2Label}</div>
                   </div>
                 </StaggerItem>
                 
                 <StaggerItem className="shrink-0">
                   <button 
-                    onClick={() => openModal(formType)}
+                    onClick={() => openModal(formType as any)}
                     className="btn-primary !px-10 !py-4 !text-xl"
                   >
                     Get Your Growth Plan

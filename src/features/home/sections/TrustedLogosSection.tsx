@@ -53,7 +53,7 @@ const LogoRow: React.FC<{ title: string; logos: string[] }> = ({ title, logos })
     <div className="category-title">{title}</div>
     <div className="logo-row">
       {[...logos, ...logos].map((logo, i) => (
-        <div key={i} className="logo-item" style={logo.includes('Enphase') ? { background: 'black' } : {}}>
+        <div key={i} className="logo-item" style={logo.includes('Enphase') ? { background: 'white' } : {}}>
           <img src={logo} alt="" referrerPolicy="no-referrer" />
         </div>
       ))}

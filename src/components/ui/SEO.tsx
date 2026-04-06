@@ -7,6 +7,7 @@ interface SEOProps {
   ogType?: string;
   ogImage?: string;
   jsonLd?: Record<string, any>;
+  exactTitle?: boolean;
 }
 
 export function SEO({
@@ -14,11 +15,12 @@ export function SEO({
   description,
   canonicalUrl,
   ogType = 'website',
-  ogImage = 'https://ik.imagekit.io/digitalroipune/untitled-tag-us_mp4_hd.original.jpg',
+  ogImage = 'https://ik.imagekit.io/digitalroipune/digitalroi-logo.svg',
   jsonLd,
+  exactTitle = false,
 }: SEOProps) {
   const siteName = 'Digital ROI';
-  const fullTitle = `${title} | ${siteName}`;
+  const fullTitle = exactTitle ? title : `${title} | ${siteName}`;
 
   return (
     <Helmet>

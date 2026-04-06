@@ -12,12 +12,15 @@ export const EnergyResults: React.FC = () => {
           viewport={{ once: true }}
           className="max-w-4xl mx-auto"
         >
-          <h2 className="text-3xl md:text-5xl font-bold text-[#111118] mb-8 leading-tight">
-            Most Solar brands we work with see a <span className="text-gradient-blue">30% to 50% jump</span> in site visits within the first 90 days.
-          </h2>
+          <div className="flex flex-col items-center justify-center gap-2 md:gap-3 mb-8">
+            <span className="block text-xl md:text-2xl font-semibold text-[#2D3748]">Most Solar brands we work with see a</span>
+            <span className="block text-5xl md:text-7xl font-extrabold text-gradient-blue leading-none py-2">30% to 50%</span>
+            <span className="block text-xl md:text-2xl font-semibold text-[#2D3748] whitespace-normal md:whitespace-nowrap">jump in site visits within the first</span>
+            <span className="block text-4xl md:text-5xl font-extrabold text-gradient-blue">90 days.</span>
+          </div>
           
           <p className="text-xl text-slate-600 mb-12 leading-relaxed">
-            We use tried-and-tested marketing strategies built specially for Solar brands to bring real results — not just traffic.
+            We use tried-and-tested marketing strategies built specially for Solar brands to bring real results - not just traffic.
           </p>
           
           <Link
