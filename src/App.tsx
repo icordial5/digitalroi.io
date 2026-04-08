@@ -21,6 +21,7 @@ const LeadGenPage = lazy(() => import('./features/lead-gen/LeadGenPage'));
 const AboutPage = lazy(() => import('./features/about/AboutPage'));
 const ContactPage = lazy(() => import('./features/contact/ContactPage'));
 const CRMAutomationPage = lazy(() => import('./features/crm/CRMAutomationPage'));
+const PuneMumbaiLandingPage = lazy(() => import('./features/landing-pages/PuneMumbaiLandingPage'));
 const PrivacyPolicy = lazy(() => import('./features/legal/PrivacyPolicy'));
 const TermsConditions = lazy(() => import('./features/legal/TermsConditions'));
 const PlaceholderPage = lazy(() => import('./components/layout/PlaceholderPage').then(module => ({ default: module.PlaceholderPage })));
@@ -50,6 +51,7 @@ const AnimatedRoutes = () => {
           <Route path="/crm-automation" element={<PageTransition><CRMAutomationPage /></PageTransition>} />
           <Route path="/ecommerce-marketing" element={<PageTransition><EcommercePage /></PageTransition>} />
           <Route path="/lead-generation" element={<PageTransition><LeadGenPage /></PageTransition>} />
+          <Route path="/pune-mumbai-digital-marketing" element={<PageTransition><PuneMumbaiLandingPage /></PageTransition>} />
           
           {/* Industries */}
           <Route path="/industries/solar-marketing" element={<PageTransition><EnergyPage /></PageTransition>} />
