@@ -5,6 +5,8 @@ import { fileURLToPath } from 'url';
 import axios from 'axios';
 import nodemailer from 'nodemailer';
 import dotenv from 'dotenv';
+import { createServer } from 'http';
+import { Server } from 'socket.io';
 
 dotenv.config();
 
@@ -14,8 +16,75 @@ const __dirname = path.dirname(__filename);
 async function startServer() {
   const app = express();
   const PORT = 3000;
+  const httpServer = createServer(app);
+  const io = new Server(httpServer, {
+    cors: {
+      origin: "*",
+      methods: ["GET", "POST"]
+    }
+  });
 
   app.use(express.json());
+
+  // Live Visitor Counter Logic
+  const activeUsers = new Map<string, { lastActive: number, socketId: string }>();
+
+  io.on('connection', (socket) => {
+    const userAgent = socket.handshake.headers['user-agent'] || '';
+    
+    // Simple bot detection
+    const isBot = /bot|crawler|spider|crawling|googlebot|bingbot|yandexbot|duckduckbot/i.test(userAgent);
+    
+    if (isBot) {
+      socket.disconnect();
+      return;
+    }
+
+    socket.on('register', (sessionId: string) => {
+      if (!sessionId) return;
+      
+      activeUsers.set(sessionId, {
+        lastActive: Date.now(),
+        socketId: socket.id
+      });
+      
+      io.emit('visitorCount', activeUsers.size);
+    });
+
+    socket.on('heartbeat', (sessionId: string) => {
+      if (activeUsers.has(sessionId)) {
+        activeUsers.set(sessionId, {
+          lastActive: Date.now(),
+          socketId: socket.id
+        });
+      }
+    });
+
+    socket.on('disconnect', () => {
+      for (const [sessionId, data] of activeUsers.entries()) {
+        if (data.socketId === socket.id) {
+          activeUsers.delete(sessionId);
+          io.emit('visitorCount', activeUsers.size);
+          break;
+        }
+      }
+    });
+  });
+
+  // Cleanup inactive users every 10 seconds
+  setInterval(() => {
+    const now = Date.now();
+    let changed = false;
+    for (const [sessionId, data] of activeUsers.entries()) {
+      if (now - data.lastActive > 30000) { // 30 seconds timeout
+        activeUsers.delete(sessionId);
+        changed = true;
+      }
+    }
+    if (changed) {
+      io.emit('visitorCount', activeUsers.size);
+    }
+  }, 10000);
 
   // Zoho CRM Integration Logic
   const ZOHO_CLIENT_ID = process.env.ZOHO_CLIENT_ID || '1000.7KHA0M8KQI3BWRALU6YVDTFCC13W9N';
@@ -290,7 +359,7 @@ async function startServer() {
     });
   }
 
-  app.listen(PORT, '0.0.0.0', () => {
+  httpServer.listen(PORT, '0.0.0.0', () => {
     console.log(`Server running on http://localhost:${PORT}`);
   });
 }

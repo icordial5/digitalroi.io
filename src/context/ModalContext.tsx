@@ -7,7 +7,9 @@ export type FormType =
   | 'jewellery' 
   | 'hospitality' 
   | 'healthcare' 
-  | 'homepage';
+  | 'ecommerce'
+  | 'homepage'
+  | 'lead_gen';
 
 interface ModalContextType {
   isOpen: boolean;

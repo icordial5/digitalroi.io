@@ -22,6 +22,8 @@ export const LeadForm: React.FC<LeadFormProps> = ({ type, onSuccess }) => {
       case 'jewellery': return 'Ready to Grow Your Jewellery Brand?';
       case 'hospitality': return 'Ready to Grow Your Hotel/Restaurant?';
       case 'healthcare': return 'Ready to Grow Your Healthcare Facility?';
+      case 'ecommerce': return 'Ready to Grow Your Online Store?';
+      case 'lead_gen': return 'Ready to Grow Your Business?';
       default: return 'Ready to Grow Your Business?';
     }
   };
@@ -29,6 +31,7 @@ export const LeadForm: React.FC<LeadFormProps> = ({ type, onSuccess }) => {
   const getFormSubtitle = () => {
     switch (type) {
       case 'crm_automation': return 'Unlock the full potential of your CRM system with expert insights';
+      case 'lead_gen': return 'Select your business type to get the best solution tailored to your needs';
       default: return 'Fill out the form and our team will get back to you within 24 hours';
     }
   };
@@ -113,6 +116,17 @@ export const LeadForm: React.FC<LeadFormProps> = ({ type, onSuccess }) => {
         </div>
       </div>
 
+      {type === 'lead_gen' && (
+        <div className="space-y-1.5">
+          <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider">Business Type*</label>
+          <select name="business_type" required className="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:outline-none focus:border-blue-500 transition-all appearance-none bg-white">
+            <option value="">Select Business Type</option>
+            <option value="Lead Generation">Lead Generation</option>
+            <option value="E-commerce">E-commerce</option>
+          </select>
+        </div>
+      )}
+
       {/* Industry Specific Fields */}
       {type === 'crm_automation' && (
         <>
@@ -153,7 +167,7 @@ export const LeadForm: React.FC<LeadFormProps> = ({ type, onSuccess }) => {
         </>
       )}
 
-      {(type === 'solar' || type === 'homepage' || type === 'jewellery') && (
+      {(type === 'solar' || type === 'homepage' || type === 'jewellery' || type === 'ecommerce' || type === 'lead_gen') && (
         <div className="space-y-1.5">
           <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider">Brand Name*</label>
           <input 

@@ -6,6 +6,11 @@ import { cn } from '@/utils/cn';
 import { useModal } from '@/context/ModalContext';
 import logo from '@/assets/logo.svg';
 
+const SERVICES = [
+  { name: 'Ecommerce Marketing', path: '/ecommerce-marketing' },
+  { name: 'Lead Generation', path: '/lead-generation' },
+];
+
 const INDUSTRIES = [
   { name: 'Solar', path: '/industries/solar-marketing' },
   { name: 'Healthcare', path: '/industries/healthcare-marketing' },
@@ -18,6 +23,7 @@ export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isIndustriesOpen, setIsIndustriesOpen] = useState(false);
+  const [isServicesOpen, setIsServicesOpen] = useState(false);
   const location = useLocation();
   const { openModal } = useModal();
 
@@ -32,6 +38,7 @@ export function Header() {
   useEffect(() => {
     setIsMobileMenuOpen(false);
     setIsIndustriesOpen(false);
+    setIsServicesOpen(false);
   }, [location.pathname]);
 
   const isActive = (path: string) => {
@@ -81,6 +88,46 @@ export function Header() {
                 <motion.div layoutId="nav-underline" className="absolute -bottom-1 left-0 right-0 h-0.5 bg-[#2563EB] rounded-full" />
               )}
             </Link>
+
+            {/* Services Dropdown */}
+            <div className="relative group">
+              <button
+                className={cn(
+                  "flex items-center font-medium transition-colors py-1",
+                  (location.pathname === '/ecommerce-marketing' || location.pathname === '/') ? "text-[#2563EB]" : "text-[#0F172A] hover:text-[#2563EB]"
+                )}
+                onMouseEnter={() => setIsServicesOpen(true)}
+                onMouseLeave={() => setIsServicesOpen(false)}
+              >
+                Services <ChevronDown className="ml-1 h-4 w-4" />
+              </button>
+              
+              <AnimatePresence>
+                {isServicesOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                    className="absolute top-full left-0 mt-2 w-56 bg-white rounded-xl shadow-lg py-2 origin-top-left border border-slate-100"
+                    onMouseEnter={() => setIsServicesOpen(true)}
+                    onMouseLeave={() => setIsServicesOpen(false)}
+                  >
+                    {SERVICES.map((service) => (
+                      <Link
+                        key={service.name}
+                        to={service.path}
+                        className={cn(
+                          "block px-4 py-2 text-sm transition-colors",
+                          location.pathname === service.path ? "bg-[#F8FAFC] text-[#2563EB]" : "text-[#64748B] hover:bg-[#F8FAFC] hover:text-[#2563EB]"
+                        )}
+                      >
+                        {service.name}
+                      </Link>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
             
             <div className="relative group">
               <button
@@ -137,30 +184,6 @@ export function Header() {
                 <motion.div layoutId="nav-underline" className="absolute -bottom-1 left-0 right-0 h-0.5 bg-[#2563EB] rounded-full" />
               )}
             </Link>
-            <Link 
-              to="/about" 
-              className={cn(
-                "relative font-medium transition-colors py-1",
-                isActive('/about') ? "text-[#2563EB]" : "text-[#0F172A] hover:text-[#2563EB]"
-              )}
-            >
-              About Us
-              {isActive('/about') && (
-                <motion.div layoutId="nav-underline" className="absolute -bottom-1 left-0 right-0 h-0.5 bg-[#2563EB] rounded-full" />
-              )}
-            </Link>
-            <Link 
-              to="/contact" 
-              className={cn(
-                "relative font-medium transition-colors py-1",
-                isActive('/contact') ? "text-[#2563EB]" : "text-[#0F172A] hover:text-[#2563EB]"
-              )}
-            >
-              Contact Us
-              {isActive('/contact') && (
-                <motion.div layoutId="nav-underline" className="absolute -bottom-1 left-0 right-0 h-0.5 bg-[#2563EB] rounded-full" />
-              )}
-            </Link>
           </nav>
 
           {/* CTA Button */}
@@ -199,6 +222,20 @@ export function Header() {
                 Home
               </Link>
               <div className="px-3 py-2">
+                <div className="text-base font-medium text-[#0F172A] mb-2">Services</div>
+                <div className="pl-4 space-y-1 border-l-2 border-gray-100">
+                  {SERVICES.map((service) => (
+                    <Link
+                      key={service.name}
+                      to={service.path}
+                      className={cn("block px-3 py-2 text-sm font-medium rounded-md", location.pathname === service.path ? "text-[#0A3D91] bg-blue-50" : "text-[#64748B] hover:text-[#0A3D91] hover:bg-gray-50")}
+                    >
+                      {service.name}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+              <div className="px-3 py-2">
                 <div className="text-base font-medium text-[#0F172A] mb-2">Industries</div>
                 <div className="pl-4 space-y-1 border-l-2 border-gray-100">
                   {INDUSTRIES.map((industry) => (
@@ -214,12 +251,6 @@ export function Header() {
               </div>
               <Link to="/crm-automation" className={cn("block px-3 py-2 text-base font-medium rounded-md", isActive('/crm-automation') ? "text-[#0A3D91] bg-blue-50" : "text-[#0F172A] hover:text-[#0A3D91] hover:bg-gray-50")}>
                 CRM Automation
-              </Link>
-              <Link to="/about" className={cn("block px-3 py-2 text-base font-medium rounded-md", isActive('/about') ? "text-[#0A3D91] bg-blue-50" : "text-[#0F172A] hover:text-[#0A3D91] hover:bg-gray-50")}>
-                About Us
-              </Link>
-              <Link to="/contact" className={cn("block px-3 py-2 text-base font-medium rounded-md", isActive('/contact') ? "text-[#0A3D91] bg-blue-50" : "text-[#0F172A] hover:text-[#0A3D91] hover:bg-gray-50")}>
-                Contact Us
               </Link>
               <div className="pt-4 px-3">
                 <button

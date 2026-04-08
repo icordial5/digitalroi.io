@@ -1,10 +1,14 @@
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Facebook, Linkedin, Instagram, Mail, Phone, MapPin, ArrowRight } from 'lucide-react';
 import { motion } from 'motion/react';
 import { useModal } from '@/context/ModalContext';
+import { io } from 'socket.io-client';
+import { v4 as uuidv4 } from 'uuid';
 
 const QUICK_LINKS = [
   { name: 'Home', path: '/' },
+  { name: 'Ecommerce Marketing', path: '/ecommerce-marketing' },
   { name: 'CRM Automation', path: '/crm-automation' },
   { name: 'About Us', path: '/about' },
   { name: 'Contact Us', path: '/contact' },
@@ -143,15 +147,92 @@ export function Footer() {
             <Link to="/privacy" target="_blank" className="hover:text-white transition-colors">Privacy Policy</Link>
           </div>
           
-          <p className="text-sm text-gray-500 text-center">
-            © 2026 Digimonk Marketing Pvt. Ltd. All Rights Reserved.
-          </p>
+          <div className="flex flex-col items-center md:items-end gap-2">
+            <p className="text-sm text-gray-500 text-center">
+              © 2026 Digimonk Marketing Pvt. Ltd. All Rights Reserved.
+            </p>
+            <p className="text-xs text-gray-600">
+              Design and Develop <a href="https://icordial.com" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">iCordial.com</a>
+            </p>
+          </div>
 
-          <div className="text-xs text-gray-600">
-            CIN: U74999PN2018PTC176098
+          <div className="flex flex-col items-center md:items-end gap-2">
+            <div className="text-xs text-gray-600">
+              CIN: U74999PN2018PTC176098
+            </div>
+            <VisitorCounter />
           </div>
         </div>
       </div>
     </footer>
+  );
+}
+
+function VisitorCounter() {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    // Get or create session ID
+    let sessionId = localStorage.getItem('visitor_session_id');
+    if (!sessionId) {
+      sessionId = uuidv4();
+      localStorage.setItem('visitor_session_id', sessionId);
+    }
+
+    // Connect to Socket.io server
+    const socket = io();
+
+    socket.on('connect', () => {
+      socket.emit('register', sessionId);
+    });
+
+    socket.on('visitorCount', (newCount: number) => {
+      // Add a base offset of 112 to the real user count to meet the "start above 100" requirement
+      // while still accurately tracking real-time fluctuations of actual users.
+      setCount(newCount + 112);
+    });
+
+    // Send heartbeat on user activity
+    const handleActivity = () => {
+      socket.emit('heartbeat', sessionId);
+    };
+
+    // Throttle activity events
+    let throttleTimer: ReturnType<typeof setTimeout> | null = null;
+    const throttledActivity = () => {
+      if (throttleTimer) return;
+      throttleTimer = setTimeout(() => {
+        handleActivity();
+        throttleTimer = null;
+      }, 5000); // Max 1 heartbeat every 5 seconds
+    };
+
+    window.addEventListener('mousemove', throttledActivity);
+    window.addEventListener('keydown', throttledActivity);
+    window.addEventListener('scroll', throttledActivity);
+    window.addEventListener('click', throttledActivity);
+
+    // Initial heartbeat
+    handleActivity();
+
+    return () => {
+      window.removeEventListener('mousemove', throttledActivity);
+      window.removeEventListener('keydown', throttledActivity);
+      window.removeEventListener('scroll', throttledActivity);
+      window.removeEventListener('click', throttledActivity);
+      if (throttleTimer) clearTimeout(throttleTimer);
+      socket.disconnect();
+    };
+  }, []);
+
+  if (count === 0) return null; // Hide until we have a count
+
+  return (
+    <div className="flex items-center gap-2 px-3 py-1 bg-white/5 rounded-full border border-white/10">
+      <div className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse" />
+      <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wider">
+        Live Visitors: <span className="text-white tabular-nums">{count.toLocaleString()}</span>
+      </span>
+    </div>
   );
 }

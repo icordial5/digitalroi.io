@@ -45,7 +45,7 @@ export const AboutHero: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-3xl md:text-5xl font-bold text-slate-900 leading-tight mb-12 max-w-5xl mx-auto"
+            className="text-2xl md:text-3xl font-bold text-slate-900 leading-tight mb-12 max-w-4xl mx-auto"
           >
             <span className="text-blue-600">Digital ROI</span> is a full-funnel performance marketing agency helping brands grow through <span className="text-blue-400">high-quality lead generation,</span> smart automation, and measurable conversions.
           </motion.h2>

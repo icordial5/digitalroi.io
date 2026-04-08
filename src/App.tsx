@@ -16,6 +16,8 @@ const HealthcarePage = lazy(() => import('./features/healthcare/HealthcarePage')
 const EducationPage = lazy(() => import('./features/education/EducationPage'));
 const JewelleryPage = lazy(() => import('./features/jewellery/JewelleryPage'));
 const HospitalityPage = lazy(() => import('./features/hospitality/HospitalityPage'));
+const EcommercePage = lazy(() => import('./features/ecommerce/EcommercePage'));
+const LeadGenPage = lazy(() => import('./features/lead-gen/LeadGenPage'));
 const AboutPage = lazy(() => import('./features/about/AboutPage'));
 const ContactPage = lazy(() => import('./features/contact/ContactPage'));
 const CRMAutomationPage = lazy(() => import('./features/crm/CRMAutomationPage'));
@@ -46,6 +48,8 @@ const AnimatedRoutes = () => {
           <Route path="/about" element={<PageTransition><AboutPage /></PageTransition>} />
           <Route path="/contact" element={<PageTransition><ContactPage /></PageTransition>} />
           <Route path="/crm-automation" element={<PageTransition><CRMAutomationPage /></PageTransition>} />
+          <Route path="/ecommerce-marketing" element={<PageTransition><EcommercePage /></PageTransition>} />
+          <Route path="/lead-generation" element={<PageTransition><LeadGenPage /></PageTransition>} />
           
           {/* Industries */}
           <Route path="/industries/solar-marketing" element={<PageTransition><EnergyPage /></PageTransition>} />

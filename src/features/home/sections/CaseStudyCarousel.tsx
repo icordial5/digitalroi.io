@@ -14,7 +14,7 @@ interface CaseStudy {
   heading: string;
   subtext: string;
   metrics: Metric[];
-  industry?: 'energy' | 'healthcare' | 'education' | 'luxury' | 'other';
+  industry?: 'energy' | 'healthcare' | 'education' | 'luxury' | 'ecommerce' | 'other';
 }
 
 const caseStudies: CaseStudy[] = [
@@ -144,12 +144,46 @@ const caseStudies: CaseStudy[] = [
       { value: "2.5×", label: "Increase in Pipeline" }
     ],
     industry: 'energy'
+  },
+  {
+    id: 12,
+    logo: "https://ik.imagekit.io/digitalroipune/be-bodywise.png",
+    heading: "Fitness for Mind, Body, Soul",
+    subtext: "Scaled online revenue while maintaining profitability through targeted performance marketing.",
+    metrics: [
+      { value: "1.2×", label: "growth in revenue" },
+      { value: "15%", label: "improvement in CAC" },
+      { value: "40%", label: "improvement in ROAS" }
+    ],
+    industry: 'ecommerce'
+  },
+  {
+    id: 13,
+    logo: "https://ik.imagekit.io/digitalroipune/darveys.png",
+    heading: "International luxury fashion",
+    subtext: "Drove high-value transactions and improved return on ad spend for global luxury brands.",
+    metrics: [
+      { value: "2.2×", label: "growth in revenue" },
+      { value: "90%", label: "improvement in ROAS" }
+    ],
+    industry: 'ecommerce'
+  },
+  {
+    id: 14,
+    logo: "https://ik.imagekit.io/digitalroipune/sri-sri.png",
+    heading: "Ayurvedic wellness",
+    subtext: "Expanded customer base and increased online sales for Ayurvedic wellness products.",
+    metrics: [
+      { value: "2.7×", label: "growth in revenue" },
+      { value: "80%", label: "improvement in ROAS" }
+    ],
+    industry: 'ecommerce'
   }
 ];
 
 interface CaseStudyCarouselProps {
   title?: string;
-  industry?: 'energy' | 'healthcare' | 'education' | 'luxury' | 'other';
+  industry?: 'energy' | 'healthcare' | 'education' | 'luxury' | 'ecommerce' | 'other';
   ids?: number[];
 }
 
@@ -268,11 +302,12 @@ export const CaseStudyCarousel: React.FC<CaseStudyCarouselProps> = ({
                   )}
                 >
                   <div 
-                    className="w-full bg-white rounded-[24px] md:rounded-[36px] p-6 md:p-8 shadow-[0_20px_50px_rgba(15,23,42,0.15)] border border-slate-100 grid md:grid-cols-[1.5fr_1.1fr] gap-6 md:gap-8 overflow-hidden"
+                    className="w-full rounded-[24px] md:rounded-[36px] p-6 md:p-8 shadow-[0_20px_50px_rgba(15,23,42,0.15)] border border-white/10 grid md:grid-cols-[1.5fr_1.1fr] gap-6 md:gap-8 overflow-hidden"
+                    style={{ background: 'linear-gradient(100deg, rgb(8, 78, 150) 0%, rgb(42, 129, 227) 100%)' }}
                   >
                     <div className="flex flex-col gap-4 md:gap-5">
                       <div className="flex items-center gap-3">
-                        <div className="bg-slate-50 p-3 rounded-2xl inline-flex border border-slate-100">
+                        <div className="bg-white p-3 rounded-2xl inline-flex shadow-sm">
                           <img 
                             src={study.logo} 
                             alt={`${study.heading} logo`}
@@ -282,21 +317,21 @@ export const CaseStudyCarousel: React.FC<CaseStudyCarouselProps> = ({
                         </div>
                       </div>
                       <div>
-                        <h3 className="text-xl md:text-3xl font-bold text-slate-900 leading-tight">
+                        <h3 className="text-xl md:text-3xl font-bold text-white leading-tight">
                           {study.heading}
                         </h3>
-                        <p className="text-sm md:text-base text-slate-600 mt-2 leading-relaxed">
+                        <p className="text-sm md:text-base text-white/80 mt-2 leading-relaxed">
                           {study.subtext}
                         </p>
                       </div>
-                      <div className="h-px w-full bg-gradient-to-r from-transparent via-slate-200 to-transparent mt-2" />
+                      <div className="h-px w-full bg-gradient-to-r from-transparent via-white/20 to-transparent mt-2" />
                     </div>
 
                     <div className="flex flex-col justify-center gap-3">
                       {study.metrics.map((metric, mIdx) => (
                         <div 
                           key={mIdx}
-                          className="flex items-center gap-3 p-3 md:p-4 rounded-full bg-white border border-slate-100 shadow-[0_10px_26px_rgba(15,23,42,0.06)]"
+                          className="flex items-center gap-3 p-3 md:p-4 rounded-full bg-white/95 border border-white/20 shadow-[0_10px_26px_rgba(15,23,42,0.16)]"
                         >
                           <div className="flex-1 min-w-0 text-xs md:text-sm leading-tight text-slate-800">
                             <strong className="text-sm md:text-base font-extrabold mr-1">{metric.value}</strong>

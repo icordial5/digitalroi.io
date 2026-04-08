@@ -228,12 +228,12 @@ export const CRMFramework: React.FC = () => {
   return (
     <section className="bg-white">
       {/* Header Section */}
-      <div className="bg-[#CFE0FF] py-12 px-6 md:px-16 text-center">
+      <div className="bg-slate-50 py-12 px-6 md:px-16 text-center border-b border-slate-100">
         <motion.h1 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-[32px] md:text-[42px] font-bold text-black mb-4 leading-tight tracking-tight"
+          className="text-[32px] md:text-[42px] font-bold text-[#111118] mb-4 leading-tight tracking-tight"
         >
           Our CRM Automation Delivery Framework
         </motion.h1>
@@ -242,14 +242,14 @@ export const CRMFramework: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.1 }}
-          className="text-lg text-black/90 max-w-[800px] mx-auto leading-relaxed"
+          className="text-lg text-slate-600 max-w-[800px] mx-auto leading-relaxed"
         >
           Transform your sales operations from manual chaos to an automated, reporting-ready revenue engine
         </motion.p>
       </div>
 
       {/* Tab Navigation */}
-      <div className="flex flex-wrap justify-center items-start gap-5 py-10 px-5 bg-[#f8f9fa] border-b-2 border-[#e0e0e0]">
+      <div className="flex flex-wrap justify-center items-start gap-5 py-10 px-5 bg-white border-b border-slate-100">
         {phases.map((phase) => (
           <button
             key={phase.id}
@@ -262,12 +262,12 @@ export const CRMFramework: React.FC = () => {
             <div className={cn(
               "w-[70px] h-[70px] rounded-full border-2 flex items-center justify-center transition-all duration-400",
               activeTab === phase.id 
-                ? "bg-gradient-to-br from-black via-[#1a1a1a] to-black border-black scale-110 shadow-[0_10px_30px_rgba(0,0,0,0.4),inset_0_2px_8px_rgba(255,255,255,0.15)]" 
-                : "bg-[#e8eaf6] border-[#d1d5db] group-hover:bg-[#c8e6c9] group-hover:border-[#66bb6a] group-hover:-translate-y-1 group-hover:scale-105 group-hover:shadow-[0_8px_20px_rgba(76,175,80,0.3)]"
+                ? "bg-[#111118] border-[#111118] scale-110 shadow-lg" 
+                : "bg-slate-50 border-slate-200 group-hover:bg-blue-50 group-hover:border-blue-200 group-hover:-translate-y-1 group-hover:scale-105 group-hover:shadow-md"
             )}>
               <div className={cn(
                 "transition-all duration-400",
-                activeTab === phase.id ? "text-white scale-110" : "text-[#6b7280] group-hover:text-[#2e7d32] group-hover:scale-110"
+                activeTab === phase.id ? "text-white scale-110" : "text-slate-400 group-hover:text-blue-600 group-hover:scale-110"
               )}>
                 {phase.icon}
               </div>
@@ -275,13 +275,13 @@ export const CRMFramework: React.FC = () => {
             <div className="text-center">
               <div className={cn(
                 "text-[11px] font-semibold uppercase tracking-[0.5px] mb-0.5 transition-colors duration-300",
-                activeTab === phase.id ? "text-[#2e7d32] font-bold" : "text-[#9ca3af] group-hover:text-[#2e7d32]"
+                activeTab === phase.id ? "text-blue-600 font-bold" : "text-slate-400 group-hover:text-blue-600"
               )}>
                 {phase.label}
               </div>
               <div className={cn(
                 "text-[13px] font-semibold transition-colors duration-300",
-                activeTab === phase.id ? "text-[#2e7d32] font-bold" : "text-[#4b5563] group-hover:text-[#2e7d32]"
+                activeTab === phase.id ? "text-[#111118] font-bold" : "text-slate-600 group-hover:text-blue-600"
               )}>
                 {phase.name}
               </div>
@@ -291,7 +291,7 @@ export const CRMFramework: React.FC = () => {
       </div>
 
       {/* Tab Content Wrapper */}
-      <div className="relative min-h-[600px] w-full overflow-hidden bg-[#CFE0FF]">
+      <div className="relative min-h-[600px] w-full overflow-hidden bg-slate-50">
         <AnimatePresence mode="wait">
           <motion.div
             key={activeTab}
@@ -312,7 +312,7 @@ export const CRMFramework: React.FC = () => {
                 <img 
                   src={activePhase.image} 
                   alt={activePhase.title} 
-                  className="w-full h-auto rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.25)] hover:scale-[1.02] transition-transform duration-300 block"
+                  className="w-full h-auto rounded-3xl shadow-2xl hover:scale-[1.01] transition-transform duration-300 block border border-slate-100"
                   referrerPolicy="no-referrer"
                 />
               </motion.div>
@@ -322,24 +322,24 @@ export const CRMFramework: React.FC = () => {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.3 }}
-                className="bg-gradient-to-br from-black to-[#00a8ff] text-white p-10 md:p-12 rounded-2xl shadow-[0_15px_40px_rgba(0,0,0,0.2)]"
+                className="bg-white p-10 md:p-12 rounded-3xl shadow-xl border border-slate-100"
               >
-                <div className="text-[13px] font-semibold tracking-[2px] opacity-90 mb-2.5 uppercase text-white">
+                <div className="text-[13px] font-bold tracking-[2px] text-blue-600 mb-2.5 uppercase">
                   {activePhase.label}
                 </div>
-                <h2 className="text-[32px] font-bold mb-5 leading-[1.2] text-white">
+                <h2 className="text-[32px] font-bold mb-5 leading-[1.2] text-[#111118]">
                   {activePhase.title}
                 </h2>
 
                 {activePhase.introText && (
-                  <p className="text-[15px] mb-2.5 opacity-95 text-white font-bold">{activePhase.introText}</p>
+                  <p className="text-[15px] mb-2.5 text-slate-700 font-bold">{activePhase.introText}</p>
                 )}
 
                 {activePhase.features.length > 0 && (
                   <ul className="list-none m-0 p-0 mb-6">
                     {activePhase.features.map((feature, i) => (
-                      <li key={i} className="relative pl-[26px] py-2 text-sm leading-[1.5] opacity-95 text-white">
-                        <span className="absolute left-0 font-bold text-base text-white">✓</span>
+                      <li key={i} className="relative pl-[26px] py-2 text-sm leading-[1.5] text-slate-600">
+                        <span className="absolute left-0 font-bold text-base text-blue-600">✓</span>
                         {feature}
                       </li>
                     ))}
@@ -348,11 +348,11 @@ export const CRMFramework: React.FC = () => {
 
                 {activePhase.extraLists?.map((list, i) => (
                   <div key={i} className="mb-6 last:mb-0">
-                    <p className="text-[15px] mb-2.5 opacity-95 text-white font-bold">{list.title}</p>
+                    <p className="text-[15px] mb-2.5 text-slate-700 font-bold">{list.title}</p>
                     <ul className="list-none m-0 p-0">
                       {list.items.map((item, j) => (
-                        <li key={j} className="relative pl-[26px] py-1.5 text-sm leading-[1.5] opacity-95 text-white">
-                          <span className="absolute left-0 font-bold text-base text-white">✓</span>
+                        <li key={j} className="relative pl-[26px] py-1.5 text-sm leading-[1.5] text-slate-600">
+                          <span className="absolute left-0 font-bold text-base text-blue-600">✓</span>
                           {item}
                         </li>
                       ))}
@@ -360,14 +360,14 @@ export const CRMFramework: React.FC = () => {
                   </div>
                 ))}
 
-                <div className="bg-white/15 p-[18px] rounded-lg mt-1.5 border-l-4 border-white">
-                  <h3 className="text-[15px] font-bold mb-2.5 uppercase tracking-[1px] text-white">
+                <div className="bg-slate-50 p-[18px] rounded-2xl mt-1.5 border-l-4 border-blue-600">
+                  <h3 className="text-[15px] font-bold mb-2.5 uppercase tracking-[1px] text-[#111118]">
                     Deliverables:
                   </h3>
                   <ul className="list-none m-0 p-0">
                     {activePhase.deliverables.map((item, i) => (
-                      <li key={i} className="relative pl-[22px] py-1 text-[13px] leading-[1.5] text-white">
-                        <span className="absolute left-0 font-bold text-[15px] text-white">→</span>
+                      <li key={i} className="relative pl-[22px] py-1 text-[13px] leading-[1.5] text-slate-600">
+                        <span className="absolute left-0 font-bold text-[15px] text-blue-600">→</span>
                         {item}
                       </li>
                     ))}
@@ -377,7 +377,7 @@ export const CRMFramework: React.FC = () => {
                 <div className="mt-8">
                   <button 
                     onClick={() => openModal('crm_automation')}
-                    className="w-full py-4 px-6 bg-white text-[#1a70ae] font-bold rounded-xl hover:bg-blue-50 transition-all transform hover:-translate-y-1 shadow-lg cursor-pointer"
+                    className="btn-primary w-full !py-4"
                   >
                     GET FREE CRM AUDIT
                   </button>

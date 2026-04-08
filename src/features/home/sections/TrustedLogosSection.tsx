@@ -48,6 +48,24 @@ const luxuryLogos = [
   "https://ik.imagekit.io/digitalroipune/mcaffeine.png"
 ];
 
+const ecommerceLogos = [
+  "https://ik.imagekit.io/digitalroipune/all-things-baby.png",
+  "https://ik.imagekit.io/digitalroipune/bodywise.png",
+  "https://ik.imagekit.io/digitalroipune/carolina.png",
+  "https://ik.imagekit.io/digitalroipune/dan-henry.png",
+  "https://ik.imagekit.io/digitalroipune/darveys.png",
+  "https://ik.imagekit.io/digitalroipune/daughter-earth.png",
+  "https://ik.imagekit.io/digitalroipune/dusaan.png",
+  "https://ik.imagekit.io/digitalroipune/flossy.png",
+  "https://ik.imagekit.io/digitalroipune/glen.png",
+  "https://ik.imagekit.io/digitalroipune/kaya%20clinic.png",
+  "https://ik.imagekit.io/digitalroipune/mcaffeine.png",
+  "https://ik.imagekit.io/digitalroipune/sri-sri-tattva.png",
+  "https://ik.imagekit.io/digitalroipune/studio-suits.png",
+  "https://ik.imagekit.io/digitalroipune/the-kaatn-trail.png",
+  "https://ik.imagekit.io/digitalroipune/traser-logo.png"
+];
+
 const LogoRow: React.FC<{ title: string; logos: string[] }> = ({ title, logos }) => (
   <div className="logo-row-wrapper">
     <div className="category-title">{title}</div>
@@ -67,6 +85,7 @@ export const TrustedLogosSection: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <div className="logo-scroll-section">
           <h2 className="logo-section-title">Trusted by Leading Companies Across Industries</h2>
+          <LogoRow title="Ecommerce" logos={ecommerceLogos} />
           <LogoRow title="Solar & Energy" logos={solarLogos} />
           <LogoRow title="Healthcare" logos={healthcareLogos} />
           <LogoRow title="Education" logos={educationLogos} />

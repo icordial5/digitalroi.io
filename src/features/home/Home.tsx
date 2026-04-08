@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Layout } from '@/components/layout/Layout';
 import { SEO } from '@/components/ui/SEO';
 import { HeroSection } from './sections/HeroSection';
@@ -10,9 +10,18 @@ import { CaseStudyCarousel } from './sections/CaseStudyCarousel';
 import { PartnersSection } from './sections/PartnersSection';
 import { GrowTogetherSection } from './sections/GrowTogetherSection';
 import { VideoModal } from './components/VideoModal';
+import { SolutionSelectorModal } from '@/components/modals/SolutionSelectorModal';
 
 const Home: React.FC = () => {
   const [activeVideo, setActiveVideo] = useState<string | null>(null);
+  const [isSolutionModalOpen, setIsSolutionModalOpen] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsSolutionModalOpen(true);
+    }, 3000);
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <Layout>
@@ -31,6 +40,7 @@ const Home: React.FC = () => {
       <PartnersSection />
       <GrowTogetherSection />
       <VideoModal videoUrl={activeVideo} onClose={() => setActiveVideo(null)} />
+      <SolutionSelectorModal isOpen={isSolutionModalOpen} onClose={() => setIsSolutionModalOpen(false)} />
     </Layout>
   );
 };
