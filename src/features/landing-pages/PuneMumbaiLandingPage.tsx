@@ -12,7 +12,7 @@ export const PuneMumbaiLandingPage: React.FC = () => {
   const { openModal } = useModal();
 
   return (
-    <Layout>
+    <Layout hideHeader={true}>
       <SEO 
         title="Digital Marketing Agency in Pune & Mumbai | Digital ROI" 
         description="Helping e-commerce brands and lead generation businesses increase sales and conversions with smarter targeting, automation, and optimized follow-ups."
@@ -20,7 +20,7 @@ export const PuneMumbaiLandingPage: React.FC = () => {
       />
 
       {/* 1. HERO SECTION */}
-      <section className="relative pt-40 pb-20 overflow-hidden bg-[#0A0A0F] text-white">
+      <section className="relative pt-20 pb-20 overflow-hidden bg-[#0A0A0F] text-white">
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-600/20 blur-[120px] rounded-full pointer-events-none" />
         <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-900/20 blur-[120px] rounded-full pointer-events-none" />
         
@@ -62,25 +62,25 @@ export const PuneMumbaiLandingPage: React.FC = () => {
       </section>
 
       {/* 2. TRUST STRIP */}
-      <section className="py-20 bg-white">
+      <section className="py-24 bg-[#F8FAFC]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Trusted by growing businesses across Pune & Mumbai</h2>
-            <p className="text-lg text-gray-600 font-medium">Healthcare • Solar • Education • High-Ticket Services</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 tracking-tight">Trusted by growing businesses across Pune & Mumbai</h2>
+            <p className="text-lg text-gray-500 font-medium tracking-wide">HEALTHCARE • SOLAR • EDUCATION • HIGH-TICKET SERVICES</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
             {[
-              { name: 'Truemeds', stats: ['2x increase in conversions', '40% lower CAC'] },
-              { name: 'Papillon Hair World', stats: ['5x increase in enquiries', '2x increase in appointments'] },
-              { name: 'Spinalogy Clinic', stats: ['3x higher conversion rate', '200% higher lead quality'] },
-              { name: 'Amaha', stats: ['2x increase in appointments', '60% lower CAC'] },
-              { name: 'MentorBeep', stats: ['4x increase in admission enquiries', '2x faster response time'] },
-              { name: 'Walnut School', stats: ['40% higher admission conversion', '2x faster lead response time'] },
-              { name: 'The Yoga Institute', stats: ['2x more qualified course enquiries', '50% reduction in junk leads'] },
-              { name: 'Solar Square', stats: ['3x increase in site inspections', '2x higher enquiry-to-installation rate'] },
-              { name: 'Jemkon', stats: ['2x more exclusive high-intent leads', '34% faster lead response & fulfilment'] },
-              { name: 'Repos Energy', stats: ['3x increase in exclusive B2B enquiries', '45% faster fuel demand fulfilment'] }
+              { name: 'Truemeds', stats: [{ value: '2x', label: 'increase in conversions' }, { value: '40%', label: 'lower CAC' }] },
+              { name: 'Papillon Hair World', stats: [{ value: '5x', label: 'increase in enquiries' }, { value: '2x', label: 'increase in appointments' }] },
+              { name: 'Spinalogy Clinic', stats: [{ value: '3x', label: 'higher conversion rate' }, { value: '200%', label: 'higher lead quality' }] },
+              { name: 'Amaha', stats: [{ value: '2x', label: 'increase in appointments' }, { value: '60%', label: 'lower CAC' }] },
+              { name: 'MentorBeep', stats: [{ value: '4x', label: 'increase in admission enquiries' }, { value: '2x', label: 'faster response time' }] },
+              { name: 'Walnut School', stats: [{ value: '40%', label: 'higher admission conversion' }, { value: '2x', label: 'faster lead response time' }] },
+              { name: 'The Yoga Institute', stats: [{ value: '2x', label: 'more qualified course enquiries' }, { value: '50%', label: 'reduction in junk leads' }] },
+              { name: 'Solar Square', stats: [{ value: '3x', label: 'increase in site inspections' }, { value: '2x', label: 'higher enquiry-to-installation rate' }] },
+              { name: 'Jemkon', stats: [{ value: '2x', label: 'more exclusive high-intent leads' }, { value: '34%', label: 'faster lead response & fulfilment' }] },
+              { name: 'Repos Energy', stats: [{ value: '3x', label: 'increase in exclusive B2B enquiries' }, { value: '45%', label: 'faster fuel demand fulfilment' }] }
             ].map((client, idx) => (
               <motion.div 
                 key={idx}
@@ -88,23 +88,31 @@ export const PuneMumbaiLandingPage: React.FC = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.05 }}
-                className="bg-slate-50 rounded-2xl p-6 border border-slate-100 hover:border-blue-200 hover:shadow-lg transition-all"
+                className="bg-white rounded-3xl p-8 border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(37,99,235,0.12)] hover:-translate-y-1 transition-all duration-300 relative overflow-hidden group"
               >
-                <h3 className="text-xl font-bold text-gray-900 mb-4">{client.name}</h3>
-                <ul className="space-y-2">
+                <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-blue-50 to-transparent rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity" />
+                <h3 className="text-xl font-bold text-gray-900 mb-6 flex items-center gap-3">
+                  <div className="w-2 h-2 rounded-full bg-blue-600" />
+                  {client.name}
+                </h3>
+                <div className="space-y-5">
                   {client.stats.map((stat, sIdx) => (
-                    <li key={sIdx} className="flex items-start text-gray-700">
-                      <span className="text-blue-600 mr-2 mt-1">•</span>
-                      <span>{stat}</span>
-                    </li>
+                    <div key={sIdx} className="flex items-center gap-4">
+                      <div className="w-16 shrink-0 text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-400">
+                        {stat.value}
+                      </div>
+                      <div className="text-sm font-medium text-gray-600 leading-tight">
+                        {stat.label}
+                      </div>
+                    </div>
                   ))}
-                </ul>
+                </div>
               </motion.div>
             ))}
           </div>
 
           <div className="text-center">
-            <p className="text-xl font-medium text-gray-800 bg-blue-50 inline-block px-8 py-4 rounded-full">
+            <p className="text-xl font-medium text-blue-900 bg-blue-100/50 border border-blue-200 inline-block px-8 py-4 rounded-full shadow-sm">
               Helping businesses turn leads into actual enquiries, appointments, sales, and revenue.
             </p>
           </div>
@@ -402,14 +410,14 @@ export const PuneMumbaiLandingPage: React.FC = () => {
       </section>
 
       {/* 9. TRUST SECTION */}
-      <section className="py-16 bg-slate-50 border-y border-slate-200">
+      <section className="py-20 bg-slate-50 border-y border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-2xl font-bold text-gray-900 mb-10">Trusted & Recognised Across Platforms</h2>
-          <div className="flex flex-wrap justify-center items-center gap-12 md:gap-20 opacity-70 grayscale hover:grayscale-0 transition-all duration-500">
-            <img src="https://ik.imagekit.io/digitalroipune/google-partner.png" alt="Google Premier Partner" className="h-16 object-contain" />
-            <img src="https://ik.imagekit.io/digitalroipune/meta-partner.png" alt="Meta Business Partner" className="h-16 object-contain" />
-            <div className="flex items-center gap-3 font-bold text-2xl text-gray-800">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" className="h-12 w-12" />
+          <h2 className="text-3xl font-bold text-gray-900 mb-14">Trusted & Recognised Across Platforms</h2>
+          <div className="flex flex-wrap justify-center items-center gap-12 md:gap-24 opacity-70 grayscale hover:grayscale-0 transition-all duration-500">
+            <img src="https://ik.imagekit.io/digitalroipune/google-partner.png" alt="Google Premier Partner" className="h-24 md:h-28 object-contain" />
+            <img src="https://ik.imagekit.io/digitalroipune/meta-partner.png" alt="Meta Business Partner" className="h-24 md:h-28 object-contain" />
+            <div className="flex items-center gap-4 font-bold text-3xl md:text-4xl text-gray-800">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" className="h-16 w-16 md:h-20 md:w-20" />
               WhatsApp Business
             </div>
           </div>
