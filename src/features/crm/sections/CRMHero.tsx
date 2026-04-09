@@ -8,7 +8,7 @@ const crmLogos = [
   { name: 'CRM 3', url: 'https://ik.imagekit.io/digitalroipune/Group%204.png' },
   { name: 'CRM 4', url: 'https://ik.imagekit.io/digitalroipune/Group%208.png' },
   { name: 'CRM 5', url: 'https://ik.imagekit.io/digitalroipune/Group%206.png' },
-  { name: 'CRM 6', url: 'https://ik.imagekit.io/digitalroipune/Group%207.png?updatedAt=1768808014342' },
+  { name: 'CRM 6', url: 'https://ik.imagekit.io/digitalroipune/Group%207.png' },
 ];
 
 export const CRMHero: React.FC = () => {

@@ -44,7 +44,8 @@ export const LeadForm: React.FC<LeadFormProps> = ({ type, onSuccess }) => {
     const data = Object.fromEntries(formData.entries());
     
     try {
-      const response = await axios.post('/api/leads/submit', {
+      const apiUrl = import.meta.env.VITE_API_URL || '';
+      const response = await axios.post(`${apiUrl}/api/leads/submit`, {
         ...data,
         form_type: type
       });

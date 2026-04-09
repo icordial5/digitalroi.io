@@ -27,7 +27,7 @@ export const PartnersSection: React.FC = () => {
             transition={{ duration: 0.3, delay: 0.05, ease: "easeOut" }} 
             className="w-48 md:w-64"
           >
-            <img src="https://digitalroi.io/wp-content/uploads/2026/03/PremierPartner-CMYK.svg" alt="Google Partner" className="w-full h-auto drop-shadow-sm" referrerPolicy="no-referrer" />
+            <img src="https://ik.imagekit.io/digitalroipune/PremierPartner-CMYK.svg" alt="Google Partner" className="w-full h-auto drop-shadow-sm" referrerPolicy="no-referrer" />
           </motion.div>
           <motion.div 
             initial={{ opacity: 0, y: 10 }} 
@@ -36,7 +36,7 @@ export const PartnersSection: React.FC = () => {
             transition={{ duration: 0.3, delay: 0.1, ease: "easeOut" }} 
             className="w-40 md:w-56"
           >
-            <img src="https://digitalroi.io/wp-content/uploads/2026/03/MBP-Badge-Dark-backgrounds@2x.png" alt="Meta Partner" className="w-full h-auto drop-shadow-sm" referrerPolicy="no-referrer" />
+            <img src="https://ik.imagekit.io/digitalroipune/MBP-Badge-Dark-backgrounds@2x.png" alt="Meta Partner" className="w-full h-auto drop-shadow-sm" referrerPolicy="no-referrer" />
           </motion.div>
           <motion.div 
             initial={{ opacity: 0, y: 10 }} 

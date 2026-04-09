@@ -7,6 +7,7 @@ import nodemailer from 'nodemailer';
 import dotenv from 'dotenv';
 import { createServer } from 'http';
 import { Server } from 'socket.io';
+import cors from 'cors';
 
 dotenv.config();
 
@@ -24,6 +25,7 @@ async function startServer() {
     }
   });
 
+  app.use(cors());
   app.use(express.json());
 
   // Live Visitor Counter Logic

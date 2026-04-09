@@ -121,7 +121,8 @@ export const CRMQuiz: React.FC = () => {
     const leadVolume = answers[5] !== -1 ? questions[5].options[answers[5]].text : '';
     
     try {
-      const response = await fetch('/api/crm-quiz/submit', {
+      const apiUrl = import.meta.env.VITE_API_URL || '';
+      const response = await fetch(`${apiUrl}/api/crm-quiz/submit`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

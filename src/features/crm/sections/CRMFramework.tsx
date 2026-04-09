@@ -27,7 +27,7 @@ const phases: Phase[] = [
         <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
       </svg>
     ),
-    image: 'https://digitalroi.io/wp-content/uploads/2026/01/CRM-Discovery-Process-Mapping.png',
+    image: 'https://ik.imagekit.io/digitalroipune/CRM-Discovery-Process-Mapping.png',
     features: [
       'Business and sales process understanding workshops',
       'Lead journey mapping (Lead → Conversion)',
@@ -50,7 +50,7 @@ const phases: Phase[] = [
         <path d="M9 3v18"></path>
       </svg>
     ),
-    image: 'https://digitalroi.io/wp-content/uploads/2026/01/CRM-Setup-Configuration.png',
+    image: 'https://ik.imagekit.io/digitalroipune/CRM-Setup-Configuration.png',
     features: [
       'CRM account setup and configuration (Zoho / HubSpot / equivalent)',
       'User roles, permissions, and access controls',
@@ -74,7 +74,7 @@ const phases: Phase[] = [
         <line x1="12" y1="22.08" x2="12" y2="12"></line>
       </svg>
     ),
-    image: 'https://digitalroi.io/wp-content/uploads/2026/01/Lead-Capture-Integration.png',
+    image: 'https://ik.imagekit.io/digitalroipune/Lead-Capture-Integration.png',
     introText: 'Integration of CRM with:',
     features: [
       'Website lead forms / landing pages',
@@ -99,7 +99,7 @@ const phases: Phase[] = [
         <polyline points="12 6 12 12 16 14"></polyline>
       </svg>
     ),
-    image: 'https://digitalroi.io/wp-content/uploads/2026/01/Lead-Routing-Assignment-Automation.png',
+    image: 'https://ik.imagekit.io/digitalroipune/Lead-Routing-Assignment-Automation.png',
     features: [
       'City / branch / product-based lead routing rules',
       'Round-robin or priority-based lead distribution',
@@ -121,7 +121,7 @@ const phases: Phase[] = [
         <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
       </svg>
     ),
-    image: 'https://digitalroi.io/wp-content/uploads/2026/01/Task-SLA-Follow-up-Automation.png',
+    image: 'https://ik.imagekit.io/digitalroipune/Task-SLA-Follow-up-Automation.png',
     features: [
       'Auto task creation on lead and deal events',
       'SLA timers for first contact and follow-ups',
@@ -143,7 +143,7 @@ const phases: Phase[] = [
         <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
       </svg>
     ),
-    image: 'https://digitalroi.io/wp-content/uploads/2026/01/Communication-Automation-CRM-led.png',
+    image: 'https://ik.imagekit.io/digitalroipune/Communication-Automation-CRM-led.png',
     features: [],
     extraLists: [
       {
@@ -179,7 +179,7 @@ const phases: Phase[] = [
         <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
       </svg>
     ),
-    image: 'https://digitalroi.io/wp-content/uploads/2026/01/Clean-and-accurate-sales-pipeline.png',
+    image: 'https://ik.imagekit.io/digitalroipune/Clean-and-accurate-sales-pipeline.png',
     features: [
       'Automatic deal stage movement based on actions',
       'Trigger-based task creation for next sales steps',
@@ -202,7 +202,7 @@ const phases: Phase[] = [
         <line x1="6" y1="20" x2="6" y2="14"></line>
       </svg>
     ),
-    image: 'https://digitalroi.io/wp-content/uploads/2026/01/Reporting-Dashboards.png',
+    image: 'https://ik.imagekit.io/digitalroipune/Reporting-Dashboards.png',
     introText: 'CRM dashboards for:',
     features: [
       'Lead volume by source',
