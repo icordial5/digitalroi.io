@@ -201,21 +201,17 @@ async function startServer() {
     const token = await getZohoAccessToken();
     if (token) {
       try {
-        const zohoResponse = await axios.post('https://www.zohoapis.com/crm/v2/Leads', {
+        const zohoResponse = await axios.post(`https://www.zohoapis.${ZOHO_DATACENTER}/crm/v2/Leads`, {
           data: [{
             Last_Name: name,
             Email: email,
-            Phone: mobile,
+            Mobile: mobile,
             Company: company,
-            Description: `CRM Quiz Lead - Score: ${scoreNum}/20`,
+            Description: `CRM Quiz Lead - Score: ${scoreNum}/20\nCategory: ${category}\nAnswers: ${JSON.stringify(quizAnswers)}`,
             Lead_Source: 'Website - CRM Quiz',
             Lead_Status: 'Not Contacted',
-            // Custom fields (assuming they exist in Zoho)
-            Quiz_Score: scoreNum,
-            Quiz_Answers: JSON.stringify(quizAnswers),
             Lead_Volume: leadVolume,
-            CRM_Name: crmName,
-            Quiz_Category: category
+            Current_CRM: crmName
           }],
           trigger: ['workflow']
         }, {

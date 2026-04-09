@@ -28,6 +28,7 @@ const PlaceholderPage = lazy(() => import('./components/layout/PlaceholderPage')
 
 import { ModalProvider } from './context/ModalContext';
 import { LeadModal } from './components/forms/LeadModal';
+import { CookieConsent } from './components/ui/CookieConsent';
 
 // Fallback component that signals Suspense is loading
 const SuspenseFallback = ({ onMount, onUnmount }: { onMount: () => void, onUnmount: () => void }) => {
@@ -97,6 +98,7 @@ export default function App() {
             <AnimatedRoutes />
           </Suspense>
           <LeadModal />
+          <CookieConsent />
         </Router>
       </ModalProvider>
     </HelmetProvider>

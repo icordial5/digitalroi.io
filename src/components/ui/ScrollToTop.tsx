@@ -34,9 +34,9 @@ export const ScrollToTop: React.FC = () => {
           exit={{ opacity: 0, y: 10 }}
           whileTap={{ scale: 0.95 }}
           onClick={scrollToTop}
-          className="fixed bottom-8 right-8 z-[999] w-14 h-14 bg-[#2563EB] text-white rounded-full flex items-center justify-center shadow-lg hover:bg-[#1D4ED8] transition-colors"
+          className="fixed bottom-24 right-6 md:bottom-28 md:right-8 z-[999] w-12 h-12 md:w-14 md:h-14 bg-[#2563EB] text-white rounded-full flex items-center justify-center shadow-lg hover:bg-[#1D4ED8] transition-colors"
         >
-          <ArrowUp className="w-6 h-6" />
+          <ArrowUp className="w-5 h-5 md:w-6 md:h-6" />
         </motion.button>
       )}
     </AnimatePresence>
