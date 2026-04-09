@@ -40,7 +40,7 @@ export function Footer() {
               Ready to scale your <span className="text-[#2563EB]">revenue?</span>
             </h2>
             <p className="text-gray-400 text-lg max-w-xl">
-              Join 10+ brands that are already growing their business with our performance marketing strategies.
+              Join 130+ brands that are already growing their business with our performance marketing strategies.
             </p>
           </div>
           <motion.button

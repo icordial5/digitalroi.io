@@ -106,15 +106,26 @@ export const LeadForm: React.FC<LeadFormProps> = ({ type, onSuccess }) => {
           />
         </div>
         <div className="space-y-1.5">
-          <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider">Company Email*</label>
+          <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider">Company Name*</label>
           <input 
-            type="email" 
-            name="email" 
-            placeholder="your@email.com" 
+            type="text" 
+            name="company" 
+            placeholder="Your company name" 
             required 
             className="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all"
           />
         </div>
+      </div>
+
+      <div className="space-y-1.5">
+        <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider">Company Email*</label>
+        <input 
+          type="email" 
+          name="email" 
+          placeholder="your@email.com" 
+          required 
+          className="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all"
+        />
       </div>
 
       {type === 'lead_gen' && (
@@ -131,16 +142,6 @@ export const LeadForm: React.FC<LeadFormProps> = ({ type, onSuccess }) => {
       {/* Industry Specific Fields */}
       {type === 'crm_automation' && (
         <>
-          <div className="space-y-1.5">
-            <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider">Company Name*</label>
-            <input 
-              type="text" 
-              name="company" 
-              placeholder="Enter company name" 
-              required 
-              className="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all"
-            />
-          </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-1.5">
               <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider">Monthly Lead Volume*</label>

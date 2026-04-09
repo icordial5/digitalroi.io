@@ -3,7 +3,7 @@ import { Layout } from '@/components/layout/Layout';
 import { SEO } from '@/components/ui/SEO';
 import { motion } from 'motion/react';
 import { useModal } from '@/context/ModalContext';
-import { ArrowRight, CheckCircle2, XCircle, TrendingUp, Users, Target, BarChart3, MapPin, Zap, ShieldCheck } from 'lucide-react';
+import { ArrowRight, CheckCircle2, XCircle, TrendingUp, Users, Target, BarChart3, MapPin, Zap, ShieldCheck, TrendingDown, Clock } from 'lucide-react';
 import { TestimonialsSection } from '../home/sections/TestimonialsSection';
 import { CaseStudyCarousel } from '../home/sections/CaseStudyCarousel';
 import { StaggerContainer, StaggerItem } from '@/components/ui/ScrollReveal';
@@ -44,7 +44,7 @@ export const PuneMumbaiLandingPage: React.FC = () => {
             
             <StaggerItem>
               <p className="text-lg md:text-xl text-gray-400 mb-10 max-w-3xl mx-auto leading-relaxed">
-                Helping e-commerce brands and lead generation businesses increase sales and conversions with smarter targeting, automation, and optimized follow-ups.
+                Helping <span className="text-blue-500 font-semibold">e-commerce</span> brands and <span className="text-blue-500 font-semibold">lead generation</span> businesses increase sales and conversions with smarter targeting, automation, and optimized follow-ups.
               </p>
             </StaggerItem>
             
@@ -66,21 +66,23 @@ export const PuneMumbaiLandingPage: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 tracking-tight">Trusted by growing businesses across Pune & Mumbai</h2>
-            <p className="text-lg text-gray-500 font-medium tracking-wide">HEALTHCARE • SOLAR • EDUCATION • HIGH-TICKET SERVICES</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+          <div className="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-8" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+            <style>{`
+              .flex::-webkit-scrollbar { display: none; }
+            `}</style>
             {[
-              { name: 'Truemeds', stats: [{ value: '2x', label: 'increase in conversions' }, { value: '40%', label: 'lower CAC' }] },
-              { name: 'Papillon Hair World', stats: [{ value: '5x', label: 'increase in enquiries' }, { value: '2x', label: 'increase in appointments' }] },
-              { name: 'Spinalogy Clinic', stats: [{ value: '3x', label: 'higher conversion rate' }, { value: '200%', label: 'higher lead quality' }] },
-              { name: 'Amaha', stats: [{ value: '2x', label: 'increase in appointments' }, { value: '60%', label: 'lower CAC' }] },
-              { name: 'MentorBeep', stats: [{ value: '4x', label: 'increase in admission enquiries' }, { value: '2x', label: 'faster response time' }] },
-              { name: 'Walnut School', stats: [{ value: '40%', label: 'higher admission conversion' }, { value: '2x', label: 'faster lead response time' }] },
-              { name: 'The Yoga Institute', stats: [{ value: '2x', label: 'more qualified course enquiries' }, { value: '50%', label: 'reduction in junk leads' }] },
-              { name: 'Solar Square', stats: [{ value: '3x', label: 'increase in site inspections' }, { value: '2x', label: 'higher enquiry-to-installation rate' }] },
-              { name: 'Jemkon', stats: [{ value: '2x', label: 'more exclusive high-intent leads' }, { value: '34%', label: 'faster lead response & fulfilment' }] },
-              { name: 'Repos Energy', stats: [{ value: '3x', label: 'increase in exclusive B2B enquiries' }, { value: '45%', label: 'faster fuel demand fulfilment' }] }
+              { name: 'Truemeds', logo: 'https://ui-avatars.com/api/?name=Truemeds&background=0D8ABC&color=fff', stats: [{ value: '2x', label: 'increase in conversions' }, { value: '40%', label: 'lower CAC' }] },
+              { name: 'Papillon Hair World', logo: 'https://ui-avatars.com/api/?name=Papillon+Hair+World&background=F59E0B&color=fff', stats: [{ value: '5x', label: 'increase in enquiries' }, { value: '2x', label: 'increase in appointments' }] },
+              { name: 'Spinalogy Clinic', logo: 'https://ui-avatars.com/api/?name=Spinalogy+Clinic&background=10B981&color=fff', stats: [{ value: '3x', label: 'higher conversion rate' }, { value: '200%', label: 'higher lead quality' }] },
+              { name: 'Amaha', logo: 'https://ui-avatars.com/api/?name=Amaha&background=8B5CF6&color=fff', stats: [{ value: '2x', label: 'increase in appointments' }, { value: '60%', label: 'lower CAC' }] },
+              { name: 'MentorBeep', logo: 'https://ui-avatars.com/api/?name=MentorBeep&background=EC4899&color=fff', stats: [{ value: '4x', label: 'increase in admission enquiries' }, { value: '2x', label: 'faster response time' }] },
+              { name: 'Walnut School', logo: 'https://ui-avatars.com/api/?name=Walnut+School&background=F43F5E&color=fff', stats: [{ value: '40%', label: 'higher admission conversion' }, { value: '2x', label: 'faster lead response time' }] },
+              { name: 'The Yoga Institute', logo: 'https://ui-avatars.com/api/?name=The+Yoga+Institute&background=14B8A6&color=fff', stats: [{ value: '2x', label: 'more qualified course enquiries' }, { value: '50%', label: 'reduction in junk leads' }] },
+              { name: 'Solar Square', logo: 'https://ui-avatars.com/api/?name=Solar+Square&background=EAB308&color=fff', stats: [{ value: '3x', label: 'increase in site inspections' }, { value: '2x', label: 'higher enquiry-to-installation rate' }] },
+              { name: 'Jemkon', logo: 'https://ui-avatars.com/api/?name=Jemkon&background=6366F1&color=fff', stats: [{ value: '2x', label: 'more exclusive high-intent leads' }, { value: '34%', label: 'faster lead response & fulfilment' }] },
+              { name: 'Repos Energy', logo: 'https://ui-avatars.com/api/?name=Repos+Energy&background=3B82F6&color=fff', stats: [{ value: '3x', label: 'increase in exclusive B2B enquiries' }, { value: '45%', label: 'faster fuel demand fulfilment' }] }
             ].map((client, idx) => (
               <motion.div 
                 key={idx}
@@ -88,13 +90,12 @@ export const PuneMumbaiLandingPage: React.FC = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.05 }}
-                className="bg-white rounded-3xl p-8 border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(37,99,235,0.12)] hover:-translate-y-1 transition-all duration-300 relative overflow-hidden group"
+                className="bg-white rounded-3xl p-6 border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(37,99,235,0.12)] hover:-translate-y-1 transition-all duration-300 relative overflow-hidden group min-w-[300px] md:min-w-[calc(33.333%-1rem)] snap-center shrink-0"
               >
                 <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-blue-50 to-transparent rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity" />
-                <h3 className="text-xl font-bold text-gray-900 mb-6 flex items-center gap-3">
-                  <div className="w-2 h-2 rounded-full bg-blue-600" />
-                  {client.name}
-                </h3>
+                <div className="mb-6">
+                  <img src={client.logo} alt={client.name} className="h-10 w-auto object-contain rounded-md" />
+                </div>
                 <div className="space-y-5">
                   {client.stats.map((stat, sIdx) => (
                     <div key={sIdx} className="flex items-center gap-4">
@@ -136,10 +137,10 @@ export const PuneMumbaiLandingPage: React.FC = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
             {[
-              { icon: '📉', text: 'Spending ₹1,00,000+ on ads but only converting 10-20% of traffic into actual customers' },
-              { icon: '📵', text: 'Leads and site visitors sitting unattended for hours — competitors close sales while you wait' },
-              { icon: '🔎', text: 'High-intent leads and clicks come in, but there’s no clear way to prioritize them' },
-              { icon: '📊', text: 'No visibility on what happens after the lead - which campaigns convert, which leads turn into revenue' }
+              { icon: <TrendingDown className="w-8 h-8 text-red-500" />, text: 'Spending ₹1,00,000+ on ads but only converting 10-20% of traffic into actual customers' },
+              { icon: <Clock className="w-8 h-8 text-red-500" />, text: 'Leads and site visitors sitting unattended for hours - competitors close sales while you wait' },
+              { icon: <Target className="w-8 h-8 text-red-500" />, text: 'High-intent leads and clicks come in, but there’s no clear way to prioritize them' },
+              { icon: <BarChart3 className="w-8 h-8 text-red-500" />, text: 'No visibility on what happens after the lead - which campaigns convert, which leads turn into revenue' }
             ].map((pain, idx) => (
               <motion.div 
                 key={idx}
@@ -149,7 +150,7 @@ export const PuneMumbaiLandingPage: React.FC = () => {
                 transition={{ delay: idx * 0.1 }}
                 className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 flex items-start gap-4"
               >
-                <div className="text-3xl shrink-0">{pain.icon}</div>
+                <div className="shrink-0 mt-1 bg-red-50 p-3 rounded-xl">{pain.icon}</div>
                 <p className="text-gray-700 text-lg font-medium leading-relaxed">{pain.text}</p>
               </motion.div>
             ))}
@@ -228,13 +229,47 @@ export const PuneMumbaiLandingPage: React.FC = () => {
       </section>
 
       {/* 5. SYSTEM SECTION */}
-      <section className="py-24 bg-[#0A0A0F] text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-24 bg-[#0A0A0F] text-white relative overflow-hidden">
+        {/* Animated Background Elements */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <motion.div 
+            animate={{ 
+              scale: [1, 1.2, 1],
+              opacity: [0.3, 0.5, 0.3],
+            }}
+            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute -top-[20%] -left-[10%] w-[50%] h-[50%] bg-blue-600/20 rounded-full blur-[120px]"
+          />
+          <motion.div 
+            animate={{ 
+              scale: [1, 1.5, 1],
+              opacity: [0.2, 0.4, 0.2],
+            }}
+            transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+            className="absolute top-[40%] -right-[10%] w-[40%] h-[60%] bg-purple-600/20 rounded-full blur-[120px]"
+          />
+          <div className="absolute inset-0 bg-[url('https://ik.imagekit.io/digitalroipune/noise.png')] opacity-[0.03] mix-blend-overlay"></div>
+        </div>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-20 max-w-3xl mx-auto">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">The Full-Funnel Engine for E-Commerce and Lead Generation</h2>
-            <p className="text-xl text-gray-400">
+            <motion.h2 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-4xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white via-blue-100 to-white"
+            >
+              The Full-Funnel Engine for E-Commerce and Lead Generation
+            </motion.h2>
+            <motion.p 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="text-xl text-gray-400"
+            >
               A simple system designed to capture, nurture, and convert leads and visitors into sales and revenue, whether you're focused on service-based leads or online product sales.
-            </p>
+            </motion.p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -266,17 +301,18 @@ export const PuneMumbaiLandingPage: React.FC = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.1 }}
-                className="bg-white/5 border border-white/10 p-8 rounded-3xl hover:bg-white/10 transition-colors relative overflow-hidden group"
+                className="bg-white/5 border border-white/10 p-8 rounded-3xl hover:bg-white/10 transition-all duration-300 relative overflow-hidden group hover:-translate-y-1 hover:shadow-[0_0_40px_rgba(37,99,235,0.15)]"
               >
-                <div className="text-8xl font-black text-white/5 absolute -top-4 -right-4 group-hover:text-blue-500/10 transition-colors">
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="text-8xl font-black text-white/5 absolute -top-4 -right-4 group-hover:text-blue-500/10 transition-colors duration-500 group-hover:scale-110 transform origin-top-right">
                   {step.num}
                 </div>
                 <div className="relative z-10">
-                  <div className="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center text-xl font-bold mb-6">
+                  <div className="w-14 h-14 bg-gradient-to-br from-blue-500 to-blue-700 rounded-2xl flex items-center justify-center text-2xl font-bold mb-6 shadow-lg shadow-blue-500/20">
                     {step.num}
                   </div>
-                  <h3 className="text-2xl font-bold mb-4">{step.title}</h3>
-                  <p className="text-gray-400 leading-relaxed">{step.desc}</p>
+                  <h3 className="text-2xl font-bold mb-4 text-white group-hover:text-blue-200 transition-colors">{step.title}</h3>
+                  <p className="text-gray-400 leading-relaxed group-hover:text-gray-300 transition-colors">{step.desc}</p>
                 </div>
               </motion.div>
             ))}
@@ -370,9 +406,18 @@ export const PuneMumbaiLandingPage: React.FC = () => {
                 </ul>
               </div>
 
-              <div className="bg-slate-50 p-6 rounded-2xl border border-slate-200">
-                <h3 className="font-semibold text-gray-900 mb-2">Industries we commonly work with:</h3>
-                <p className="text-blue-600 font-medium">Healthcare • Solar • Education • High-ticket services</p>
+              <div className="bg-slate-50 p-8 rounded-3xl border border-slate-200">
+                <h3 className="font-bold text-gray-900 mb-6 text-xl">Industries we commonly work with:</h3>
+                <div className="flex flex-wrap gap-3">
+                  {[
+                    'Healthcare', 'Solar', 'Education', 'High-ticket services',
+                    'Jewellery', 'Beauty & Personal Care', 'Home Decor', 'Luxury Goods'
+                  ].map((industry, idx) => (
+                    <span key={idx} className="px-4 py-2 bg-white border border-slate-200 rounded-full text-sm font-semibold text-blue-700 shadow-sm hover:border-blue-300 hover:bg-blue-50 transition-colors">
+                      {industry}
+                    </span>
+                  ))}
+                </div>
               </div>
             </div>
 

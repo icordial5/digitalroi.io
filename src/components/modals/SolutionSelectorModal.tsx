@@ -52,7 +52,7 @@ export const SolutionSelectorModal: React.FC<SolutionSelectorModalProps> = ({ is
             animate={{ opacity: 1, scale: 1, y: 0, rotateX: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 40, rotateX: 15 }}
             transition={{ type: "spring", damping: 25, stiffness: 300 }}
-            className="relative w-full max-w-[600px] bg-white rounded-[3.5rem] shadow-[0_40px_80px_-15px_rgba(0,0,0,0.3)] overflow-hidden border border-white/20"
+            className="relative w-full max-w-[480px] bg-white rounded-[2.5rem] shadow-[0_40px_80px_-15px_rgba(0,0,0,0.3)] overflow-hidden border border-white/20"
           >
             {/* Creative Background Elements */}
             <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
@@ -82,45 +82,45 @@ export const SolutionSelectorModal: React.FC<SolutionSelectorModalProps> = ({ is
 
             <button 
               onClick={handleClose}
-              className="absolute top-8 right-8 w-12 h-12 bg-white/50 hover:bg-red-500 hover:text-white text-slate-400 rounded-full flex items-center justify-center transition-all z-10 shadow-sm border border-slate-100 backdrop-blur-sm"
+              className="absolute top-6 right-6 w-10 h-10 bg-white/50 hover:bg-red-500 hover:text-white text-slate-400 rounded-full flex items-center justify-center transition-all z-10 shadow-sm border border-slate-100 backdrop-blur-sm"
             >
-              <X className="w-6 h-6" />
+              <X className="w-5 h-5" />
             </button>
 
-            <div className="p-10 md:p-14">
-              <div className="text-center mb-12">
+            <div className="p-8 md:p-10">
+              <div className="text-center mb-8">
                 <motion.div 
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.2 }}
-                  className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-blue-600 text-white text-[10px] font-black uppercase tracking-[0.2em] mb-6 shadow-lg shadow-blue-600/20"
+                  className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-600 text-white text-[10px] font-black uppercase tracking-[0.2em] mb-4 shadow-lg shadow-blue-600/20"
                 >
                   <Sparkles className="w-3.5 h-3.5" />
                   Performance Marketing
                 </motion.div>
-                <h2 className="text-4xl md:text-5xl font-black text-[#111118] mb-6 leading-[1.1] tracking-tight">
+                <h2 className="text-3xl md:text-4xl font-black text-[#111118] mb-4 leading-[1.1] tracking-tight">
                   Scale Your <span className="text-blue-600">Revenue</span> <br /> Today.
                 </h2>
-                <p className="text-slate-500 text-lg max-w-sm mx-auto font-medium">
+                <p className="text-slate-500 text-base max-w-sm mx-auto font-medium">
                   Choose your path to growth and let's optimize your ROI.
                 </p>
               </div>
 
-              <div className="grid grid-cols-1 gap-5">
+              <div className="grid grid-cols-1 gap-4">
                 {/* Lead Generation Option */}
                 <motion.button
-                  whileHover={{ scale: 1.02, y: -4 }}
+                  whileHover={{ scale: 1.02, y: -2 }}
                   whileTap={{ scale: 0.98 }}
                   onClick={() => handleNavigation('/lead-generation')}
-                  className="group relative p-8 rounded-[2.5rem] border-2 border-slate-100 bg-white hover:border-blue-600 hover:shadow-[0_20px_40px_-10px_rgba(37,99,235,0.15)] transition-all duration-500 text-left"
+                  className="group relative p-6 rounded-[2rem] border-2 border-slate-100 bg-white hover:border-blue-600 hover:shadow-[0_20px_40px_-10px_rgba(37,99,235,0.15)] transition-all duration-500 text-left"
                 >
-                  <div className="flex items-center gap-6 relative z-10">
-                    <div className="w-16 h-16 rounded-[1.5rem] bg-blue-50 text-blue-600 flex items-center justify-center group-hover:bg-blue-600 group-hover:text-white transition-all duration-500 shadow-inner">
-                      <Target className="w-8 h-8" />
+                  <div className="flex items-center gap-5 relative z-10">
+                    <div className="w-14 h-14 rounded-[1.25rem] bg-blue-50 text-blue-600 flex items-center justify-center group-hover:bg-blue-600 group-hover:text-white transition-all duration-500 shadow-inner">
+                      <Target className="w-7 h-7" />
                     </div>
                     <div className="flex-1">
                       <div className="flex items-center gap-2 mb-1">
-                        <span className="font-black text-2xl text-[#111118] tracking-tight">Lead Generation</span>
+                        <span className="font-black text-xl text-[#111118] tracking-tight">Lead Generation</span>
                         <Zap className="w-4 h-4 text-amber-500 fill-amber-500 opacity-0 group-hover:opacity-100 transition-opacity" />
                       </div>
                       <div className="text-sm text-slate-500 font-semibold flex items-center gap-2">
@@ -128,29 +128,29 @@ export const SolutionSelectorModal: React.FC<SolutionSelectorModalProps> = ({ is
                         High-intent leads from Meta & Google
                       </div>
                     </div>
-                    <div className="w-12 h-12 rounded-full bg-slate-50 flex items-center justify-center group-hover:bg-blue-600 group-hover:text-white transition-all duration-500">
-                      <ArrowRight className="w-5 h-5" />
+                    <div className="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center group-hover:bg-blue-600 group-hover:text-white transition-all duration-500">
+                      <ArrowRight className="w-4 h-4" />
                     </div>
                   </div>
                   
                   {/* Hover Background Glow */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-blue-600/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-[2.5rem]" />
+                  <div className="absolute inset-0 bg-gradient-to-br from-blue-600/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-[2rem]" />
                 </motion.button>
 
                 {/* Ecommerce Option */}
                 <motion.button
-                  whileHover={{ scale: 1.02, y: -4 }}
+                  whileHover={{ scale: 1.02, y: -2 }}
                   whileTap={{ scale: 0.98 }}
                   onClick={() => handleNavigation('/ecommerce-marketing')}
-                  className="group relative p-8 rounded-[2.5rem] border-2 border-slate-100 bg-white hover:border-indigo-600 hover:shadow-[0_20px_40px_-10px_rgba(79,70,229,0.15)] transition-all duration-500 text-left"
+                  className="group relative p-6 rounded-[2rem] border-2 border-slate-100 bg-white hover:border-indigo-600 hover:shadow-[0_20px_40px_-10px_rgba(79,70,229,0.15)] transition-all duration-500 text-left"
                 >
-                  <div className="flex items-center gap-6 relative z-10">
-                    <div className="w-16 h-16 rounded-[1.5rem] bg-indigo-50 text-indigo-600 flex items-center justify-center group-hover:bg-indigo-600 group-hover:text-white transition-all duration-500 shadow-inner">
-                      <ShoppingBag className="w-8 h-8" />
+                  <div className="flex items-center gap-5 relative z-10">
+                    <div className="w-14 h-14 rounded-[1.25rem] bg-indigo-50 text-indigo-600 flex items-center justify-center group-hover:bg-indigo-600 group-hover:text-white transition-all duration-500 shadow-inner">
+                      <ShoppingBag className="w-7 h-7" />
                     </div>
                     <div className="flex-1">
                       <div className="flex items-center gap-2 mb-1">
-                        <span className="font-black text-2xl text-[#111118] tracking-tight">Ecommerce</span>
+                        <span className="font-black text-xl text-[#111118] tracking-tight">Ecommerce</span>
                         <BarChart3 className="w-4 h-4 text-blue-500 opacity-0 group-hover:opacity-100 transition-opacity" />
                       </div>
                       <div className="text-sm text-slate-500 font-semibold flex items-center gap-2">
@@ -158,19 +158,19 @@ export const SolutionSelectorModal: React.FC<SolutionSelectorModalProps> = ({ is
                         Scale sales & optimize ROAS
                       </div>
                     </div>
-                    <div className="w-12 h-12 rounded-full bg-slate-50 flex items-center justify-center group-hover:bg-indigo-600 group-hover:text-white transition-all duration-500">
-                      <ArrowRight className="w-5 h-5" />
+                    <div className="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center group-hover:bg-indigo-600 group-hover:text-white transition-all duration-500">
+                      <ArrowRight className="w-4 h-4" />
                     </div>
                   </div>
 
                   {/* Hover Background Glow */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-indigo-600/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-[2.5rem]" />
+                  <div className="absolute inset-0 bg-gradient-to-br from-indigo-600/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-[2rem]" />
                 </motion.button>
               </div>
 
-              <div className="mt-10 text-center">
+              <div className="mt-8 text-center">
                 <p className="text-xs font-bold text-slate-400 uppercase tracking-[0.3em]">
-                  Trusted by 500+ global brands
+                  Trusted by 130+ brands
                 </p>
               </div>
             </div>
