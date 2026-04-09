@@ -45,12 +45,12 @@ const AnimatedRoutes = () => {
     <AnimatePresence mode="wait">
       <div key={location.pathname}>
         <Routes location={location}>
-          <Route path="/" element={<PageTransition><Home /></PageTransition>} />
+          <Route path="/" element={<PageTransition><LeadGenPage /></PageTransition>} />
           <Route path="/about" element={<PageTransition><AboutPage /></PageTransition>} />
           <Route path="/contact" element={<PageTransition><ContactPage /></PageTransition>} />
           <Route path="/crm-automation" element={<PageTransition><CRMAutomationPage /></PageTransition>} />
           <Route path="/ecommerce-marketing" element={<PageTransition><EcommercePage /></PageTransition>} />
-          <Route path="/lead-generation" element={<PageTransition><LeadGenPage /></PageTransition>} />
+          <Route path="/lead-generation" element={<PageTransition><Home /></PageTransition>} />
           <Route path="/pune-mumbai-digital-marketing" element={<PageTransition><PuneMumbaiLandingPage /></PageTransition>} />
           
           {/* Industries */}

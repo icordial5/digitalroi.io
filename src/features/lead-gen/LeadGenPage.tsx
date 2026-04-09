@@ -1,32 +1,49 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Layout } from '@/components/layout/Layout';
 import { SEO } from '@/components/ui/SEO';
 import { LeadGenHero } from './sections/LeadGenHero';
 import { LeadGenLogos } from './sections/LeadGenLogos';
-import { LeadGenServices } from './sections/LeadGenServices';
 import { LeadGenSolutions } from './sections/LeadGenSolutions';
+import { HowWeGrowSection } from '../home/sections/HowWeGrowSection';
 import { CTASection } from '../home/sections/CTASection';
 import { TestimonialsSection } from '../home/sections/TestimonialsSection';
 import { CaseStudyCarousel } from '../home/sections/CaseStudyCarousel';
 import { PartnersSection } from '../home/sections/PartnersSection';
 import { GrowTogetherSection } from '../home/sections/GrowTogetherSection';
 import { VideoModal } from '../home/components/VideoModal';
+import { SolutionSelectorModal } from '@/components/modals/SolutionSelectorModal';
 
 const LeadGenPage: React.FC = () => {
   const [activeVideo, setActiveVideo] = useState<string | null>(null);
+  const [isSolutionModalOpen, setIsSolutionModalOpen] = useState(false);
+
+  useEffect(() => {
+    const hasSeenPopup = localStorage.getItem('hasSeenHomepagePopup');
+    const lastSeenDate = localStorage.getItem('lastSeenHomepagePopupDate');
+    const today = new Date().toDateString();
+
+    if (lastSeenDate !== today) {
+      const timer = setTimeout(() => {
+        setIsSolutionModalOpen(true);
+        localStorage.setItem('hasSeenHomepagePopup', 'true');
+        localStorage.setItem('lastSeenHomepagePopupDate', today);
+      }, 5000);
+      return () => clearTimeout(timer);
+    }
+  }, []);
 
   return (
     <Layout>
       <SEO 
         title="Lead Generation & E-commerce Marketing | Digital ROI" 
         description="Get more revenue with qualified leads and online sales. Helping businesses grow through smart targeting and automation."
-        canonicalUrl="https://digitalroi.io/lead-generation"
+        canonicalUrl="https://digitalroi.io/"
         exactTitle={true}
       />
       
       <LeadGenHero />
       <LeadGenLogos />
-      <LeadGenServices />
+      <HowWeGrowSection />
       
       <CTASection 
         title={
@@ -58,6 +75,7 @@ const LeadGenPage: React.FC = () => {
       <GrowTogetherSection formType="lead_gen" />
       
       <VideoModal videoUrl={activeVideo} onClose={() => setActiveVideo(null)} />
+      <SolutionSelectorModal isOpen={isSolutionModalOpen} onClose={() => setIsSolutionModalOpen(false)} />
     </Layout>
   );
 };

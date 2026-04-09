@@ -55,12 +55,12 @@ interface GrowTogetherSectionProps {
 
 export const GrowTogetherSection: React.FC<GrowTogetherSectionProps> = ({
   title = "Let's Grow Together.",
-  stat1Label = "Happy Clients",
-  stat1Value = 10,
+  stat1Label = "Clients Served",
+  stat1Value = 130,
   stat1Suffix = "+",
   stat1Prefix = "",
-  stat2Label = "Monthly Ad Spend Managed",
-  stat2Value = 8,
+  stat2Label = "Ad Spend Managed",
+  stat2Value = 500,
   stat2Suffix = "M+",
   stat2Prefix = "₹",
   formType = 'homepage'

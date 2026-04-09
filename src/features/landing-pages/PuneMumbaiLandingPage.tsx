@@ -1,15 +1,48 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Layout } from '@/components/layout/Layout';
 import { SEO } from '@/components/ui/SEO';
-import { motion } from 'motion/react';
+import { motion, AnimatePresence } from 'motion/react';
 import { useModal } from '@/context/ModalContext';
-import { ArrowRight, CheckCircle2, XCircle, TrendingUp, Users, Target, BarChart3, MapPin, Zap, ShieldCheck, TrendingDown, Clock } from 'lucide-react';
+import { ArrowRight, CheckCircle2, XCircle, TrendingUp, Users, Target, BarChart3, MapPin, Zap, ShieldCheck, TrendingDown, Clock, ChevronLeft, ChevronRight } from 'lucide-react';
 import { TestimonialsSection } from '../home/sections/TestimonialsSection';
 import { CaseStudyCarousel } from '../home/sections/CaseStudyCarousel';
 import { StaggerContainer, StaggerItem } from '@/components/ui/ScrollReveal';
 
+const clients = [
+  { name: 'Truemeds', logo: 'https://ik.imagekit.io/digitalroipune/truemeds.png', stats: [{ value: '2×', label: 'increase in conversions' }, { value: '40%', label: 'lower customer acquisition cost (CAC)' }] },
+  { name: 'Papillon', logo: 'https://ik.imagekit.io/digitalroipune/papillon.png', stats: [{ value: '5×', label: 'increase in enquiries' }, { value: '2×', label: 'increase in appointments' }] },
+  { name: 'Spinalogy', logo: 'https://ik.imagekit.io/digitalroipune/spinalogy.png', stats: [{ value: '3×', label: 'higher conversion rate' }, { value: '200%', label: 'improvement in lead quality' }] },
+  { name: 'Amaha', logo: 'https://ik.imagekit.io/digitalroipune/amaha.png', stats: [{ value: '2×', label: 'increase in appointments' }, { value: '60%', label: 'lower customer acquisition cost (CAC)' }] },
+  { name: 'MentorBeep', logo: 'https://ik.imagekit.io/digitalroipune/mentorbeep.png', stats: [{ value: '4×', label: 'increase in admission enquiries' }, { value: '2×', label: 'faster response time' }] },
+  { name: 'Walnut School', logo: 'https://ik.imagekit.io/digitalroipune/Walnut-School.png', stats: [{ value: '40%', label: 'higher admission conversion rate' }, { value: '2×', label: 'faster lead response time' }] },
+  { name: 'The Yoga Institute', logo: 'https://ik.imagekit.io/digitalroipune/the-yoga-institute.png', stats: [{ value: '2×', label: 'more qualified course enquiries' }, { value: '50%', label: 'reduction in junk leads' }] },
+  { name: 'Solar Square', logo: 'https://ik.imagekit.io/digitalroipune/solar-square.png', stats: [{ value: '3×', label: 'increase in site inspections' }, { value: '2×', label: 'higher enquiry-to-installation rate' }] },
+  { name: 'Jemkon', logo: 'https://ik.imagekit.io/digitalroipune/jemkon.png', stats: [{ value: '2×', label: 'more high-intent exclusive leads' }, { value: '34%', label: 'faster lead response & fulfilment' }] },
+  { name: 'Repos Energy', logo: 'https://ik.imagekit.io/digitalroipune/repos-energy.png', stats: [{ value: '3×', label: 'increase in exclusive B2B enquiries' }, { value: '45%', label: 'faster fuel demand fulfilment' }] }
+];
+
 export const PuneMumbaiLandingPage: React.FC = () => {
   const { openModal } = useModal();
+  const [heroTextIndex, setHeroTextIndex] = useState(0);
+  const heroTexts = ["Online Sales.", "Qualified Leads."];
+  const [currentClientIndex, setCurrentClientIndex] = useState(0);
+
+  useEffect(() => {
+    const textInterval = setInterval(() => {
+      setHeroTextIndex((prev) => (prev + 1) % heroTexts.length);
+    }, 3000);
+    return () => clearInterval(textInterval);
+  }, [heroTexts.length]);
+
+  useEffect(() => {
+    const clientInterval = setInterval(() => {
+      setCurrentClientIndex((prev) => (prev + 1) % clients.length);
+    }, 4000);
+    return () => clearInterval(clientInterval);
+  }, []);
+
+  const nextClient = () => setCurrentClientIndex((prev) => (prev + 1) % clients.length);
+  const prevClient = () => setCurrentClientIndex((prev) => (prev - 1 + clients.length) % clients.length);
 
   return (
     <Layout hideHeader={true}>
@@ -35,8 +68,23 @@ export const PuneMumbaiLandingPage: React.FC = () => {
             
             <StaggerItem>
               <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-6 max-w-5xl mx-auto leading-[1.1]">
-                More Conversions/Qualified Leads.<br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-600">
+                More <br className="md:hidden" />
+                <span className="inline-grid">
+                  <AnimatePresence mode="wait">
+                    <motion.span
+                      key={heroTextIndex}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -20 }}
+                      transition={{ duration: 0.5 }}
+                      className="col-start-1 row-start-1 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-600"
+                    >
+                      {heroTexts[heroTextIndex]}
+                    </motion.span>
+                  </AnimatePresence>
+                </span>
+                <br />
+                <span className="text-white">
                   Less Wasted Spend.
                 </span>
               </h1>
@@ -68,51 +116,48 @@ export const PuneMumbaiLandingPage: React.FC = () => {
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 tracking-tight">Trusted by growing businesses across Pune & Mumbai</h2>
           </div>
 
-          <div className="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-8" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
-            <style>{`
-              .flex::-webkit-scrollbar { display: none; }
-            `}</style>
-            {[
-              { name: 'Truemeds', logo: 'https://ui-avatars.com/api/?name=Truemeds&background=0D8ABC&color=fff', stats: [{ value: '2x', label: 'increase in conversions' }, { value: '40%', label: 'lower CAC' }] },
-              { name: 'Papillon Hair World', logo: 'https://ui-avatars.com/api/?name=Papillon+Hair+World&background=F59E0B&color=fff', stats: [{ value: '5x', label: 'increase in enquiries' }, { value: '2x', label: 'increase in appointments' }] },
-              { name: 'Spinalogy Clinic', logo: 'https://ui-avatars.com/api/?name=Spinalogy+Clinic&background=10B981&color=fff', stats: [{ value: '3x', label: 'higher conversion rate' }, { value: '200%', label: 'higher lead quality' }] },
-              { name: 'Amaha', logo: 'https://ui-avatars.com/api/?name=Amaha&background=8B5CF6&color=fff', stats: [{ value: '2x', label: 'increase in appointments' }, { value: '60%', label: 'lower CAC' }] },
-              { name: 'MentorBeep', logo: 'https://ui-avatars.com/api/?name=MentorBeep&background=EC4899&color=fff', stats: [{ value: '4x', label: 'increase in admission enquiries' }, { value: '2x', label: 'faster response time' }] },
-              { name: 'Walnut School', logo: 'https://ui-avatars.com/api/?name=Walnut+School&background=F43F5E&color=fff', stats: [{ value: '40%', label: 'higher admission conversion' }, { value: '2x', label: 'faster lead response time' }] },
-              { name: 'The Yoga Institute', logo: 'https://ui-avatars.com/api/?name=The+Yoga+Institute&background=14B8A6&color=fff', stats: [{ value: '2x', label: 'more qualified course enquiries' }, { value: '50%', label: 'reduction in junk leads' }] },
-              { name: 'Solar Square', logo: 'https://ui-avatars.com/api/?name=Solar+Square&background=EAB308&color=fff', stats: [{ value: '3x', label: 'increase in site inspections' }, { value: '2x', label: 'higher enquiry-to-installation rate' }] },
-              { name: 'Jemkon', logo: 'https://ui-avatars.com/api/?name=Jemkon&background=6366F1&color=fff', stats: [{ value: '2x', label: 'more exclusive high-intent leads' }, { value: '34%', label: 'faster lead response & fulfilment' }] },
-              { name: 'Repos Energy', logo: 'https://ui-avatars.com/api/?name=Repos+Energy&background=3B82F6&color=fff', stats: [{ value: '3x', label: 'increase in exclusive B2B enquiries' }, { value: '45%', label: 'faster fuel demand fulfilment' }] }
-            ].map((client, idx) => (
-              <motion.div 
-                key={idx}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.05 }}
-                className="bg-white rounded-3xl p-6 border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(37,99,235,0.12)] hover:-translate-y-1 transition-all duration-300 relative overflow-hidden group min-w-[300px] md:min-w-[calc(33.333%-1rem)] snap-center shrink-0"
-              >
-                <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-blue-50 to-transparent rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity" />
-                <div className="mb-6">
-                  <img src={client.logo} alt={client.name} className="h-10 w-auto object-contain rounded-md" />
-                </div>
-                <div className="space-y-5">
-                  {client.stats.map((stat, sIdx) => (
-                    <div key={sIdx} className="flex items-center gap-4">
-                      <div className="w-16 shrink-0 text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-400">
-                        {stat.value}
+          <div className="relative max-w-3xl mx-auto">
+            <div className="overflow-hidden rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.08)] border border-slate-100 bg-white relative">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={currentClientIndex}
+                  initial={{ opacity: 0, x: 50 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -50 }}
+                  transition={{ duration: 0.5, ease: "easeInOut" }}
+                  className="p-8 md:p-12 flex flex-col md:flex-row items-center gap-8"
+                >
+                  <div className="w-full md:w-1/3 flex justify-center shrink-0">
+                    <img src={clients[currentClientIndex].logo} alt={clients[currentClientIndex].name} className="h-28 md:h-32 w-auto object-contain" />
+                  </div>
+                  <div className="w-full md:w-2/3 space-y-6">
+                    {clients[currentClientIndex].stats.map((stat, sIdx) => (
+                      <div key={sIdx} className="flex items-center gap-4">
+                        <div className="w-20 shrink-0 text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-400">
+                          {stat.value}
+                        </div>
+                        <div className="text-lg font-medium text-gray-700 leading-tight">
+                          {stat.label}
+                        </div>
                       </div>
-                      <div className="text-sm font-medium text-gray-600 leading-tight">
-                        {stat.label}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </motion.div>
-            ))}
+                    ))}
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+            
+            {/* Carousel Controls */}
+            <div className="flex justify-center gap-4 mt-8">
+              <button onClick={prevClient} className="p-3 rounded-full bg-white border border-slate-200 text-slate-600 hover:text-blue-600 hover:border-blue-200 hover:bg-blue-50 transition-all shadow-sm">
+                <ChevronLeft className="w-6 h-6" />
+              </button>
+              <button onClick={nextClient} className="p-3 rounded-full bg-white border border-slate-200 text-slate-600 hover:text-blue-600 hover:border-blue-200 hover:bg-blue-50 transition-all shadow-sm">
+                <ChevronRight className="w-6 h-6" />
+              </button>
+            </div>
           </div>
 
-          <div className="text-center">
+          <div className="text-center mt-16">
             <p className="text-xl font-medium text-blue-900 bg-blue-100/50 border border-blue-200 inline-block px-8 py-4 rounded-full shadow-sm">
               Helping businesses turn leads into actual enquiries, appointments, sales, and revenue.
             </p>
@@ -121,37 +166,49 @@ export const PuneMumbaiLandingPage: React.FC = () => {
       </section>
 
       {/* 3. PROBLEM SECTION */}
-      <section className="py-24 bg-slate-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center px-4 py-2 rounded-full bg-red-100 text-red-700 font-medium text-sm mb-6">
+      <section className="py-32 bg-[#0B0F19] relative overflow-hidden">
+        {/* Background Glows */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-red-600/10 blur-[120px] rounded-full pointer-events-none" />
+        <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-orange-600/10 blur-[120px] rounded-full pointer-events-none" />
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="text-center mb-20">
+            <div className="inline-flex items-center px-4 py-2 rounded-full bg-red-500/10 border border-red-500/20 text-red-400 font-bold text-sm uppercase tracking-widest mb-6 backdrop-blur-sm">
               The Real Problem
             </div>
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-              Why Most Businesses Bleed Money on Digital Marketing
+            <h2 className="text-4xl md:text-6xl font-black text-white mb-6 tracking-tight">
+              Why Most Businesses <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-orange-500">Bleed Money</span><br className="hidden md:block" /> on Digital Marketing
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-slate-400 max-w-3xl mx-auto font-medium">
               You're not lacking leads or visitors. You're lacking a system to convert them into sales and loyal customers.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             {[
-              { icon: <TrendingDown className="w-8 h-8 text-red-500" />, text: 'Spending ₹1,00,000+ on ads but only converting 10-20% of traffic into actual customers' },
-              { icon: <Clock className="w-8 h-8 text-red-500" />, text: 'Leads and site visitors sitting unattended for hours - competitors close sales while you wait' },
-              { icon: <Target className="w-8 h-8 text-red-500" />, text: 'High-intent leads and clicks come in, but there’s no clear way to prioritize them' },
-              { icon: <BarChart3 className="w-8 h-8 text-red-500" />, text: 'No visibility on what happens after the lead - which campaigns convert, which leads turn into revenue' }
+              { icon: <TrendingDown className="w-6 h-6 text-red-400" />, highlight: 'Spending ₹1,00,000+ on ads', text: 'but only converting 10-20% of traffic into actual customers.' },
+              { icon: <Clock className="w-6 h-6 text-red-400" />, highlight: 'Leads sitting unattended for hours', text: 'while competitors close sales because you wait.' },
+              { icon: <Target className="w-6 h-6 text-red-400" />, highlight: 'High-intent leads come in', text: 'but there’s no clear system to prioritize or nurture them.' },
+              { icon: <BarChart3 className="w-6 h-6 text-red-400" />, highlight: 'No visibility post-click', text: 'on which campaigns convert and which leads turn into revenue.' }
             ].map((pain, idx) => (
               <motion.div 
                 key={idx}
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.1 }}
-                className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 flex items-start gap-4"
+                className="group relative bg-white/5 backdrop-blur-xl border border-white/10 hover:border-red-500/30 p-8 rounded-[2rem] transition-all duration-500 overflow-hidden"
               >
-                <div className="shrink-0 mt-1 bg-red-50 p-3 rounded-xl">{pain.icon}</div>
-                <p className="text-gray-700 text-lg font-medium leading-relaxed">{pain.text}</p>
+                <div className="absolute inset-0 bg-gradient-to-br from-red-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="flex items-start gap-6 relative z-10">
+                  <div className="shrink-0 w-14 h-14 rounded-2xl bg-red-500/10 border border-red-500/20 flex items-center justify-center group-hover:scale-110 group-hover:bg-red-500/20 transition-all duration-500">
+                    {pain.icon}
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-white mb-2 group-hover:text-red-400 transition-colors">{pain.highlight}</h3>
+                    <p className="text-slate-400 leading-relaxed">{pain.text}</p>
+                  </div>
+                </div>
               </motion.div>
             ))}
           </div>
@@ -229,70 +286,86 @@ export const PuneMumbaiLandingPage: React.FC = () => {
       </section>
 
       {/* 5. SYSTEM SECTION */}
-      <section className="py-24 bg-[#0A0A0F] text-white relative overflow-hidden">
-        {/* Animated Background Elements */}
+      <section className="py-32 bg-[#0B0F19] text-white relative overflow-hidden">
+        {/* Premium Animated Background Elements */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <motion.div 
             animate={{ 
               scale: [1, 1.2, 1],
-              opacity: [0.3, 0.5, 0.3],
+              opacity: [0.15, 0.25, 0.15],
+              rotate: [0, 90, 0]
             }}
-            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute -top-[20%] -left-[10%] w-[50%] h-[50%] bg-blue-600/20 rounded-full blur-[120px]"
+            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+            className="absolute -top-[20%] -left-[10%] w-[70vw] h-[70vw] bg-gradient-to-br from-blue-600/20 to-cyan-600/20 rounded-full blur-[120px]"
           />
           <motion.div 
             animate={{ 
-              scale: [1, 1.5, 1],
-              opacity: [0.2, 0.4, 0.2],
+              scale: [1, 1.3, 1],
+              opacity: [0.1, 0.2, 0.1],
+              rotate: [0, -90, 0]
             }}
-            transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-            className="absolute top-[40%] -right-[10%] w-[40%] h-[60%] bg-purple-600/20 rounded-full blur-[120px]"
+            transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+            className="absolute top-[40%] -right-[10%] w-[60vw] h-[60vw] bg-gradient-to-tr from-indigo-600/20 to-purple-600/20 rounded-full blur-[120px]"
           />
-          <div className="absolute inset-0 bg-[url('https://ik.imagekit.io/digitalroipune/noise.png')] opacity-[0.03] mix-blend-overlay"></div>
+          <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay"></div>
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center mb-20 max-w-3xl mx-auto">
+          <div className="text-center mb-24 max-w-4xl mx-auto relative">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-blue-400 text-sm font-bold uppercase tracking-widest mb-8 backdrop-blur-md"
+            >
+              <Zap className="w-4 h-4" />
+              The Growth System
+            </motion.div>
             <motion.h2 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-4xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white via-blue-100 to-white"
+              className="text-4xl md:text-6xl lg:text-7xl font-black mb-8 tracking-tight leading-tight text-white"
             >
-              The Full-Funnel Engine for E-Commerce and Lead Generation
+              The Full-Funnel Engine for <br className="hidden md:block" />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400">E-Commerce & Lead Gen</span>
             </motion.h2>
             <motion.p 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="text-xl text-gray-400"
+              className="text-xl text-slate-400 font-medium leading-relaxed"
             >
-              A simple system designed to capture, nurture, and convert leads and visitors into sales and revenue, whether you're focused on service-based leads or online product sales.
+              A simple, powerful system designed to capture, nurture, and convert leads and visitors into sales and revenue.
             </motion.p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {[
               {
-                num: '1',
+                num: '01',
                 title: 'Audit & Gap Analysis',
-                desc: "Identify where leads or sales are being lost in your funnel, whether it's from ads, landing pages, or follow-ups. We'll find the leaks and fix them."
+                desc: "Identify where leads or sales are being lost in your funnel, whether it's from ads, landing pages, or follow-ups. We'll find the leaks and fix them.",
+                gradient: "from-blue-500 to-cyan-400"
               },
               {
-                num: '2',
-                title: 'Lead Capture & Traffic Generation',
-                desc: 'High-intent campaigns, conversion-focused landing pages, and product ads that drive quality traffic and turn visitors into leads or buyers.'
+                num: '02',
+                title: 'Lead Capture & Traffic',
+                desc: 'High-intent campaigns, conversion-focused landing pages, and product ads that drive quality traffic and turn visitors into leads or buyers.',
+                gradient: "from-purple-500 to-pink-400"
               },
               {
-                num: '3',
+                num: '03',
                 title: 'Follow-Up Automation',
-                desc: 'Instant responses via CRM, WhatsApp, email, and automated workflows to engage, nurture, and convert leads or visitors faster, across both service and e-commerce industries.'
+                desc: 'Instant responses via CRM, WhatsApp, email, and automated workflows to engage, nurture, and convert leads or visitors faster.',
+                gradient: "from-emerald-500 to-teal-400"
               },
               {
-                num: '4',
+                num: '04',
                 title: 'Tracking & Optimization',
-                desc: "Full visibility on leads, sales, and performance. Use real-time data to optimize campaigns and scale your efforts, ensuring you get the best ROI, whether you're driving leads or sales."
+                desc: "Full visibility on leads, sales, and performance. Use real-time data to optimize campaigns and scale your efforts for the best ROI.",
+                gradient: "from-orange-500 to-amber-400"
               }
             ].map((step, idx) => (
               <motion.div 
@@ -301,18 +374,27 @@ export const PuneMumbaiLandingPage: React.FC = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.1 }}
-                className="bg-white/5 border border-white/10 p-8 rounded-3xl hover:bg-white/10 transition-all duration-300 relative overflow-hidden group hover:-translate-y-1 hover:shadow-[0_0_40px_rgba(37,99,235,0.15)]"
+                className="group relative bg-white/[0.03] hover:bg-white/[0.06] backdrop-blur-xl border border-white/10 hover:border-white/20 p-10 rounded-[2.5rem] transition-all duration-500 overflow-hidden"
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                <div className="text-8xl font-black text-white/5 absolute -top-4 -right-4 group-hover:text-blue-500/10 transition-colors duration-500 group-hover:scale-110 transform origin-top-right">
-                  {step.num}
-                </div>
-                <div className="relative z-10">
-                  <div className="w-14 h-14 bg-gradient-to-br from-blue-500 to-blue-700 rounded-2xl flex items-center justify-center text-2xl font-bold mb-6 shadow-lg shadow-blue-500/20">
+                {/* Hover Glow Effect */}
+                <div 
+                  className={`absolute inset-0 bg-gradient-to-r ${step.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500 rounded-[2.5rem] blur-xl -z-10`}
+                />
+                
+                <div className="absolute top-0 right-0 p-8">
+                  <div className={`text-6xl font-black text-transparent bg-clip-text bg-gradient-to-b from-white/10 to-transparent group-hover:from-white/20 transition-all duration-500`}>
                     {step.num}
                   </div>
-                  <h3 className="text-2xl font-bold mb-4 text-white group-hover:text-blue-200 transition-colors">{step.title}</h3>
-                  <p className="text-gray-400 leading-relaxed group-hover:text-gray-300 transition-colors">{step.desc}</p>
+                </div>
+
+                <div className="relative z-10">
+                  <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${step.gradient} p-[1px] mb-8 transform group-hover:scale-110 group-hover:rotate-3 transition-all duration-500`}>
+                    <div className="w-full h-full bg-[#0B0F19] rounded-2xl flex items-center justify-center text-2xl font-bold text-white">
+                      {step.num}
+                    </div>
+                  </div>
+                  <h3 className="text-3xl font-bold mb-4 text-white tracking-wide group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-slate-400 transition-all">{step.title}</h3>
+                  <p className="text-slate-400 leading-relaxed font-medium text-lg">{step.desc}</p>
                 </div>
               </motion.div>
             ))}
@@ -461,9 +543,8 @@ export const PuneMumbaiLandingPage: React.FC = () => {
           <div className="flex flex-wrap justify-center items-center gap-12 md:gap-24 opacity-70 grayscale hover:grayscale-0 transition-all duration-500">
             <img src="https://ik.imagekit.io/digitalroipune/google-partner.png" alt="Google Premier Partner" className="h-24 md:h-28 object-contain" />
             <img src="https://ik.imagekit.io/digitalroipune/meta-partner.png" alt="Meta Business Partner" className="h-24 md:h-28 object-contain" />
-            <div className="flex items-center gap-4 font-bold text-3xl md:text-4xl text-gray-800">
+            <div className="flex items-center justify-center">
               <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" className="h-16 w-16 md:h-20 md:w-20" />
-              WhatsApp Business
             </div>
           </div>
         </div>

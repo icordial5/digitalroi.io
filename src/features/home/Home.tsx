@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Layout } from '@/components/layout/Layout';
 import { SEO } from '@/components/ui/SEO';
 import { HeroSection } from './sections/HeroSection';
@@ -10,29 +10,20 @@ import { CaseStudyCarousel } from './sections/CaseStudyCarousel';
 import { PartnersSection } from './sections/PartnersSection';
 import { GrowTogetherSection } from './sections/GrowTogetherSection';
 import { VideoModal } from './components/VideoModal';
-import { SolutionSelectorModal } from '@/components/modals/SolutionSelectorModal';
 
 const Home: React.FC = () => {
   const [activeVideo, setActiveVideo] = useState<string | null>(null);
-  const [isSolutionModalOpen, setIsSolutionModalOpen] = useState(false);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsSolutionModalOpen(true);
-    }, 3000);
-    return () => clearTimeout(timer);
-  }, []);
 
   return (
     <Layout>
       <SEO 
         title="Full Funnel Marketing Agency - Turn Leads into Revenue" 
         description="Full funnel marketing focused on turning leads into revenue. Improve lead quality, speed up follow-ups, and fix gaps between marketing and conversions."
-        canonicalUrl="https://digitalroi.io/"
+        canonicalUrl="https://digitalroi.io/lead-generation"
         exactTitle={true}
       />
       <HeroSection />
-      <TrustedLogosSection />
+      <TrustedLogosSection hideEcommerce={true} />
       <ServicesSection />
       <CTASection />
       <TestimonialsSection onPlayVideo={setActiveVideo} />
@@ -40,7 +31,6 @@ const Home: React.FC = () => {
       <PartnersSection />
       <GrowTogetherSection />
       <VideoModal videoUrl={activeVideo} onClose={() => setActiveVideo(null)} />
-      <SolutionSelectorModal isOpen={isSolutionModalOpen} onClose={() => setIsSolutionModalOpen(false)} />
     </Layout>
   );
 };
