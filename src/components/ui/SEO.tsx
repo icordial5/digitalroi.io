@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet-async';
 interface SEOProps {
   title: string;
   description: string;
+  keywords?: string;
   canonicalUrl?: string;
   ogType?: string;
   ogImage?: string;
@@ -13,6 +14,7 @@ interface SEOProps {
 export function SEO({
   title,
   description,
+  keywords,
   canonicalUrl,
   ogType = 'website',
   ogImage = 'https://ik.imagekit.io/digitalroipune/digitalroi-logo.svg',
@@ -26,6 +28,7 @@ export function SEO({
     <Helmet>
       <title>{fullTitle}</title>
       <meta name="description" content={description} />
+      {keywords && <meta name="keywords" content={keywords} />}
       
       {/* Open Graph */}
       <meta property="og:title" content={fullTitle} />
@@ -37,6 +40,8 @@ export function SEO({
       
       {/* Twitter */}
       <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:site" content="@digitalroi" />
+      <meta name="twitter:creator" content="@digitalroi" />
       <meta name="twitter:title" content={fullTitle} />
       <meta name="twitter:description" content={description} />
       {ogImage && <meta name="twitter:image" content={ogImage} />}

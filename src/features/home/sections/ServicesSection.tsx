@@ -83,7 +83,7 @@ export const ServicesSection: React.FC = () => {
                 className="w-full md:w-1/2"
               >
                 <div className="rounded-2xl overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.08)] border border-slate-100 bg-white">
-                  <img src={service.image} alt={service.title} className="w-full h-auto object-cover" referrerPolicy="no-referrer" />
+                  <img src={service.image} alt={service.title} className="w-full h-auto object-cover" referrerPolicy="no-referrer" loading="lazy" />
                 </div>
               </motion.div>
 

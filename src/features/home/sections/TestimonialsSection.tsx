@@ -56,7 +56,7 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ onPlay
               className="bg-white rounded-3xl p-4 shadow-sm hover:shadow-xl transition-shadow duration-300"
             >
               <div className="relative rounded-2xl overflow-hidden cursor-pointer group aspect-video" onClick={() => onPlayVideo(testimonial.videoUrl)}>
-                <img src={testimonial.thumbnail} alt={testimonial.name} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" referrerPolicy="no-referrer" />
+                <img src={testimonial.thumbnail} alt={testimonial.name} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" referrerPolicy="no-referrer" loading="lazy" />
                 <div className="absolute inset-0 flex items-center justify-center bg-black/10 group-hover:bg-black/20 transition-colors">
                   <div className="w-16 h-16 rounded-full bg-blue-500/30 flex items-center justify-center backdrop-blur-sm transition-transform duration-300 group-hover:scale-110">
                     <div className="w-12 h-12 rounded-full bg-[#D53F8C] flex items-center justify-center shadow-lg">

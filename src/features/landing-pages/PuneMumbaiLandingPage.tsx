@@ -70,7 +70,7 @@ export const PuneMumbaiLandingPage: React.FC = () => {
             <StaggerItem>
               <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-6 max-w-5xl mx-auto leading-[1.1]">
                 More <br className="md:hidden" />
-                <div className="inline-block min-w-[320px] md:min-w-[480px] text-left md:text-center">
+                <div className="inline-block w-[320px] md:w-[480px] text-left md:text-center">
                   <AnimatePresence mode="wait">
                     <motion.span
                       key={heroTextIndex}
@@ -509,29 +509,6 @@ export const PuneMumbaiLandingPage: React.FC = () => {
               <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" className="h-16 w-16 md:h-20 md:w-20" />
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* 10. FINAL CTA */}
-      <section className="py-12 bg-blue-600 relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10" />
-        <div className="absolute top-0 right-0 w-96 h-96 bg-white/10 blur-[100px] rounded-full pointer-events-none" />
-        
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          <ShieldCheck className="w-16 h-16 text-white/80 mx-auto mb-8" />
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            Fix What Happens After the Lead Comes In
-          </h2>
-          <p className="text-xl text-blue-100 mb-10 leading-relaxed">
-            Most businesses don't need more visitors or leads.<br />
-            They need a better system to convert the ones they already have.
-          </p>
-          <button
-            onClick={() => openModal('pune_mumbai_landing')}
-            className="bg-white text-blue-600 hover:bg-gray-50 px-10 py-4 rounded-xl font-bold text-lg transition-all shadow-xl hover:shadow-2xl hover:-translate-y-1"
-          >
-            Get Your Free Growth Audit
-          </button>
         </div>
       </section>
 

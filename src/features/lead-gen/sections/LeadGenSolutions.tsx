@@ -66,7 +66,7 @@ export const LeadGenSolutions: React.FC = () => {
               ))}
             </ul>
             <button
-              onClick={() => navigate('/ecommerce-marketing')}
+              onClick={() => navigate('/ecommerce')}
               className="bg-white text-[#111118] hover:bg-blue-50 px-8 py-4 rounded-full font-bold text-lg transition-all flex items-center justify-center gap-2"
             >
               Get More Online Sales <ArrowRight className="w-5 h-5" />
