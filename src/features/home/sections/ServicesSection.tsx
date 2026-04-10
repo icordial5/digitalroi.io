@@ -45,7 +45,7 @@ const services = [
 export const ServicesSection: React.FC = () => {
   return (
     <section 
-      className="py-16 relative bg-white"
+      className="py-8 relative bg-white"
       style={{ 
         backgroundImage: 'url(https://ik.imagekit.io/digitalroipune/hero-bg-shape.png)',
         backgroundPosition: 'top left',
@@ -65,7 +65,7 @@ export const ServicesSection: React.FC = () => {
           <h2 className="text-3xl md:text-5xl font-bold text-slate-900">Our Services And Solutions</h2>
         </motion.div>
 
-        <div className="space-y-16">
+        <div className="space-y-12">
           {services.map((service, index) => (
             <motion.div 
               key={index} 
@@ -97,7 +97,7 @@ export const ServicesSection: React.FC = () => {
                 <div className="relative">
                   <div className={cn("absolute w-40 h-40 bg-[#F5F3FF] rounded-3xl -z-10", service.imageLeft ? "-bottom-6 -left-6" : "-bottom-6 -right-6")} />
                   <div 
-                    className={cn("p-10 md:p-12 text-white shadow-xl", service.imageLeft ? "rounded-3xl rounded-bl-[4rem]" : "rounded-3xl rounded-br-[4rem]")}
+                    className={cn("p-8 md:p-10 text-white shadow-xl", service.imageLeft ? "rounded-3xl rounded-bl-[4rem]" : "rounded-3xl rounded-br-[4rem]")}
                     style={{ backgroundImage: 'linear-gradient(100deg, #084E96 0%, #2a81e3 100%)' }}
                   >
                     <h3 className="text-xl md:text-2xl font-bold mb-4">{service.title}</h3>

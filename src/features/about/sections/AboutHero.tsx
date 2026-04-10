@@ -6,7 +6,7 @@ export const AboutHero: React.FC = () => {
   return (
     <section className="relative overflow-hidden">
       {/* Top Banner */}
-      <div className="bg-gradient-to-b from-[#E3F0FF] to-[#F8FAFC] pt-32 pb-20 px-6 text-center">
+      <div className="bg-gradient-to-b from-[#E3F0FF] to-[#F8FAFC] pt-24 pb-12 px-6 text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -28,7 +28,7 @@ export const AboutHero: React.FC = () => {
       </div>
 
       {/* Main Content Section */}
-      <div className="max-w-7xl mx-auto px-6 py-24">
+      <div className="max-w-7xl mx-auto px-6 py-16">
         <div className="text-center mb-16">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}

@@ -7,7 +7,7 @@ import { useModal } from '@/context/ModalContext';
 import logo from '@/assets/logo.svg';
 
 const SERVICES = [
-  { name: 'Ecommerce Marketing', path: '/ecommerce-marketing' },
+  { name: 'Ecommerce', path: '/ecommerce' },
   { name: 'Lead Generation', path: '/lead-generation' },
 ];
 
@@ -94,7 +94,7 @@ export function Header() {
               <button
                 className={cn(
                   "flex items-center font-medium transition-colors py-1",
-                  (location.pathname === '/ecommerce-marketing' || location.pathname === '/') ? "text-[#2563EB]" : "text-[#0F172A] hover:text-[#2563EB]"
+                  (location.pathname === '/ecommerce' || location.pathname === '/') ? "text-[#2563EB]" : "text-[#0F172A] hover:text-[#2563EB]"
                 )}
                 onMouseEnter={() => setIsServicesOpen(true)}
                 onMouseLeave={() => setIsServicesOpen(false)}

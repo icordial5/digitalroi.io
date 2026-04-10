@@ -81,7 +81,7 @@ const LogoRow: React.FC<{ title: string; logos: string[] }> = ({ title, logos })
 
 export const TrustedLogosSection: React.FC<{ hideEcommerce?: boolean }> = ({ hideEcommerce = false }) => {
   return (
-    <section className="bg-white pb-4">
+    <section className="bg-white pb-2">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <div className="logo-scroll-section">
           <h2 className="logo-section-title">Trusted by Leading Companies Across Industries</h2>

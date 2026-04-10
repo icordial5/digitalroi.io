@@ -26,8 +26,8 @@ const services = [
   },
   {
     icon: Users,
-    title: "CRM Integration",
-    description: "We track your customers and help you follow up with them, turning first-time buyers into loyal customers."
+    title: "Customer Retention",
+    description: "Strategies to turn one-time buyers into repeat customers and increase lifetime value."
   },
   {
     icon: LineChart,
@@ -80,7 +80,7 @@ const getTextClass = (index: number) => {
 
 export const EcommerceServices: React.FC = () => {
   return (
-    <section className="py-24 bg-[#F8FAFC] relative overflow-hidden">
+    <section className="py-16 bg-[#F8FAFC] relative overflow-hidden">
       {/* Background decorative elements */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
         <div className="absolute -top-40 -right-40 w-96 h-96 bg-blue-100 rounded-full mix-blend-multiply filter blur-3xl opacity-50" />

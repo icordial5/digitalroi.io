@@ -27,7 +27,7 @@ export const EnergyHero: React.FC = () => {
   const { openModal } = useModal();
 
   return (
-    <section className="relative pt-40 pb-16 overflow-hidden bg-[#F0F4F8]">
+    <section className="relative pt-32 pb-12 overflow-hidden bg-[#F0F4F8]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}

@@ -169,19 +169,6 @@ export const LeadForm: React.FC<LeadFormProps> = ({ type, onSuccess }) => {
         </>
       )}
 
-      {(type === 'solar' || type === 'homepage' || type === 'jewellery' || type === 'ecommerce' || type === 'lead_gen') && (
-        <div className="space-y-1.5">
-          <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider">Brand Name*</label>
-          <input 
-            type="text" 
-            name="brand" 
-            placeholder="Enter brand name" 
-            required 
-            className="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all"
-          />
-        </div>
-      )}
-
       {type === 'education' && (
         <div className="space-y-1.5">
           <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider">Institute Name*</label>

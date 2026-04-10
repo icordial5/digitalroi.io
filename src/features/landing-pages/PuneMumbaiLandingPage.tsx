@@ -7,6 +7,7 @@ import { ArrowRight, CheckCircle2, XCircle, TrendingUp, Users, Target, BarChart3
 import { TestimonialsSection } from '../home/sections/TestimonialsSection';
 import { CaseStudyCarousel } from '../home/sections/CaseStudyCarousel';
 import { StaggerContainer, StaggerItem } from '@/components/ui/ScrollReveal';
+import { CenteredCarousel } from './components/CenteredCarousel';
 
 const clients = [
   { name: 'Truemeds', logo: 'https://ik.imagekit.io/digitalroipune/truemeds.png', stats: [{ value: '2×', label: 'increase in conversions' }, { value: '40%', label: 'lower customer acquisition cost (CAC)' }] },
@@ -47,13 +48,13 @@ export const PuneMumbaiLandingPage: React.FC = () => {
   return (
     <Layout hideHeader={true}>
       <SEO 
-        title="Digital Marketing Agency in Pune & Mumbai | Digital ROI" 
-        description="Helping e-commerce brands and lead generation businesses increase sales and conversions with smarter targeting, automation, and optimized follow-ups."
-        canonicalUrl="https://digitalroi.io/pune-mumbai-digital-marketing"
+        title="Digital Marketing Agency in Pune & Mumbai | Leads & Sales Growth | Digital ROI" 
+        description="Generate high-quality leads and drive e-commerce sales in Pune & Mumbai. Digital ROI helps you convert traffic into revenue with full-funnel marketing, better follow-ups, and smarter campaigns."
+        canonicalUrl="https://digitalroi.io/digital-marketing-agency-pune-mumbai"
       />
 
       {/* 1. HERO SECTION */}
-      <section className="relative pt-20 pb-20 overflow-hidden bg-[#0A0A0F] text-white">
+      <section className="relative pt-12 pb-12 overflow-hidden bg-[#0A0A0F] text-white">
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-600/20 blur-[120px] rounded-full pointer-events-none" />
         <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-900/20 blur-[120px] rounded-full pointer-events-none" />
         
@@ -69,7 +70,7 @@ export const PuneMumbaiLandingPage: React.FC = () => {
             <StaggerItem>
               <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-6 max-w-5xl mx-auto leading-[1.1]">
                 More <br className="md:hidden" />
-                <span className="inline-grid">
+                <div className="inline-block min-w-[320px] md:min-w-[480px] text-left md:text-center">
                   <AnimatePresence mode="wait">
                     <motion.span
                       key={heroTextIndex}
@@ -77,12 +78,12 @@ export const PuneMumbaiLandingPage: React.FC = () => {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -20 }}
                       transition={{ duration: 0.5 }}
-                      className="col-start-1 row-start-1 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-600"
+                      className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-600"
                     >
                       {heroTexts[heroTextIndex]}
                     </motion.span>
                   </AnimatePresence>
-                </span>
+                </div>
                 <br />
                 <span className="text-white">
                   Less Wasted Spend.
@@ -110,54 +111,15 @@ export const PuneMumbaiLandingPage: React.FC = () => {
       </section>
 
       {/* 2. TRUST STRIP */}
-      <section className="py-24 bg-[#F8FAFC]">
+      <section className="py-12 bg-[#F8FAFC]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
+          <div className="text-center mb-4">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 tracking-tight">Trusted by growing businesses across Pune & Mumbai</h2>
           </div>
 
-          <div className="relative max-w-3xl mx-auto">
-            <div className="overflow-hidden rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.08)] border border-slate-100 bg-white relative">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={currentClientIndex}
-                  initial={{ opacity: 0, x: 50 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -50 }}
-                  transition={{ duration: 0.5, ease: "easeInOut" }}
-                  className="p-8 md:p-12 flex flex-col md:flex-row items-center gap-8"
-                >
-                  <div className="w-full md:w-1/3 flex justify-center shrink-0">
-                    <img src={clients[currentClientIndex].logo} alt={clients[currentClientIndex].name} className="h-28 md:h-32 w-auto object-contain" />
-                  </div>
-                  <div className="w-full md:w-2/3 space-y-6">
-                    {clients[currentClientIndex].stats.map((stat, sIdx) => (
-                      <div key={sIdx} className="flex items-center gap-4">
-                        <div className="w-20 shrink-0 text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-400">
-                          {stat.value}
-                        </div>
-                        <div className="text-lg font-medium text-gray-700 leading-tight">
-                          {stat.label}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </motion.div>
-              </AnimatePresence>
-            </div>
-            
-            {/* Carousel Controls */}
-            <div className="flex justify-center gap-4 mt-8">
-              <button onClick={prevClient} className="p-3 rounded-full bg-white border border-slate-200 text-slate-600 hover:text-blue-600 hover:border-blue-200 hover:bg-blue-50 transition-all shadow-sm">
-                <ChevronLeft className="w-6 h-6" />
-              </button>
-              <button onClick={nextClient} className="p-3 rounded-full bg-white border border-slate-200 text-slate-600 hover:text-blue-600 hover:border-blue-200 hover:bg-blue-50 transition-all shadow-sm">
-                <ChevronRight className="w-6 h-6" />
-              </button>
-            </div>
-          </div>
+          <CenteredCarousel items={clients} />
 
-          <div className="text-center mt-16">
+          <div className="text-center mt-12">
             <p className="text-xl font-medium text-blue-900 bg-blue-100/50 border border-blue-200 inline-block px-8 py-4 rounded-full shadow-sm">
               Helping businesses turn leads into actual enquiries, appointments, sales, and revenue.
             </p>
@@ -166,13 +128,13 @@ export const PuneMumbaiLandingPage: React.FC = () => {
       </section>
 
       {/* 3. PROBLEM SECTION */}
-      <section className="py-32 bg-[#0B0F19] relative overflow-hidden">
+      <section className="py-16 bg-[#0B0F19] relative overflow-hidden">
         {/* Background Glows */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-red-600/10 blur-[120px] rounded-full pointer-events-none" />
         <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-orange-600/10 blur-[120px] rounded-full pointer-events-none" />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center mb-20">
+          <div className="text-center mb-12">
             <div className="inline-flex items-center px-4 py-2 rounded-full bg-red-500/10 border border-red-500/20 text-red-400 font-bold text-sm uppercase tracking-widest mb-6 backdrop-blur-sm">
               The Real Problem
             </div>
@@ -216,7 +178,7 @@ export const PuneMumbaiLandingPage: React.FC = () => {
       </section>
 
       {/* 4. BEFORE VS AFTER */}
-      <section className="py-24 bg-white">
+      <section className="py-12 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch max-w-5xl mx-auto">
             {/* Before */}
@@ -286,7 +248,7 @@ export const PuneMumbaiLandingPage: React.FC = () => {
       </section>
 
       {/* 5. SYSTEM SECTION */}
-      <section className="py-32 bg-[#0B0F19] text-white relative overflow-hidden">
+      <section className="py-16 bg-[#0B0F19] text-white relative overflow-hidden">
         {/* Premium Animated Background Elements */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <motion.div 
@@ -311,7 +273,7 @@ export const PuneMumbaiLandingPage: React.FC = () => {
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center mb-24 max-w-4xl mx-auto relative">
+          <div className="text-center mb-16 max-w-4xl mx-auto relative">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -403,7 +365,7 @@ export const PuneMumbaiLandingPage: React.FC = () => {
       </section>
 
       {/* 6. SERVICES SECTION */}
-      <section className="py-24 bg-slate-50">
+      <section className="py-12 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900">Everything You Need to Convert Leads and Traffic Into Sales</h2>
@@ -460,12 +422,12 @@ export const PuneMumbaiLandingPage: React.FC = () => {
 
       {/* 7. CASE STUDIES & TESTIMONIALS */}
       <CaseStudyCarousel />
-      <div className="bg-slate-50 py-12">
+      <div className="bg-slate-50 py-8">
         <TestimonialsSection onPlayVideo={() => {}} />
       </div>
 
       {/* 8. WHO THIS IS FOR */}
-      <section className="py-24 bg-white">
+      <section className="py-12 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
@@ -537,7 +499,7 @@ export const PuneMumbaiLandingPage: React.FC = () => {
       </section>
 
       {/* 9. TRUST SECTION */}
-      <section className="py-20 bg-slate-50 border-y border-slate-200">
+      <section className="py-10 bg-slate-50 border-y border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold text-gray-900 mb-14">Trusted & Recognised Across Platforms</h2>
           <div className="flex flex-wrap justify-center items-center gap-12 md:gap-24 opacity-70 grayscale hover:grayscale-0 transition-all duration-500">
@@ -551,7 +513,7 @@ export const PuneMumbaiLandingPage: React.FC = () => {
       </section>
 
       {/* 10. FINAL CTA */}
-      <section className="py-24 bg-blue-600 relative overflow-hidden">
+      <section className="py-12 bg-blue-600 relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10" />
         <div className="absolute top-0 right-0 w-96 h-96 bg-white/10 blur-[100px] rounded-full pointer-events-none" />
         

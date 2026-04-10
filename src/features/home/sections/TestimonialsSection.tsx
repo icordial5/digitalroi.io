@@ -32,7 +32,7 @@ interface TestimonialsSectionProps {
 
 export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ onPlayVideo }) => {
   return (
-    <section className="py-16 bg-[#DDEDF8]">
+    <section className="py-12 bg-[#DDEDF8]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div 
           initial={{ opacity: 0, y: 15 }} 

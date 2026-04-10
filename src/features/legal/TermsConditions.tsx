@@ -9,7 +9,7 @@ const TermsConditions: React.FC = () => {
         title="Terms & Conditions | Digital ROI" 
         description="Terms and Conditions for Digimonk Marketing Pvt Ltd, operating as Digital ROI."
       />
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-40 pb-24">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-16">
         <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-8">Terms & Conditions</h1>
         <p className="text-sm text-slate-500 mb-12">Last updated: 16 December 2025</p>
         

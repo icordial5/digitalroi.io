@@ -53,7 +53,7 @@ export const HowWeGrowSection: React.FC = () => {
   const { openModal } = useModal();
 
   return (
-    <section className="py-32 bg-white relative overflow-hidden">
+    <section className="py-20 bg-white relative overflow-hidden">
       {/* Dynamic Background Elements - Line Wave */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div 
@@ -77,7 +77,7 @@ export const HowWeGrowSection: React.FC = () => {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
-        <div className="text-center mb-24 relative">
+        <div className="text-center mb-16 relative">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -140,7 +140,7 @@ export const HowWeGrowSection: React.FC = () => {
         </div>
 
         {/* Floating Cards Grid */}
-        <StaggerContainer className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-24">
+        <StaggerContainer className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-16">
           {services.map((service, index) => (
             <StaggerItem key={index}>
               <motion.div 

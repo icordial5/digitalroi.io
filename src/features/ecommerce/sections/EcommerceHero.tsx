@@ -8,7 +8,7 @@ export const EcommerceHero: React.FC = () => {
 
   return (
     <section 
-      className="relative pt-40 pb-4 overflow-hidden"
+      className="relative pt-32 pb-4 overflow-hidden"
       style={{ background: 'linear-gradient(180deg, transparent 63.39%, #ffffff 82%), linear-gradient(107deg, rgba(8, 78, 150, 0.1) 0%, rgba(8, 78, 150, 0.2) 100%)' }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">

@@ -50,9 +50,9 @@ const AnimatedRoutes = () => {
           <Route path="/about" element={<PageTransition><AboutPage /></PageTransition>} />
           <Route path="/contact" element={<PageTransition><ContactPage /></PageTransition>} />
           <Route path="/crm-automation" element={<PageTransition><CRMAutomationPage /></PageTransition>} />
-          <Route path="/ecommerce-marketing" element={<PageTransition><EcommercePage /></PageTransition>} />
+          <Route path="/ecommerce" element={<PageTransition><EcommercePage /></PageTransition>} />
           <Route path="/lead-generation" element={<PageTransition><Home /></PageTransition>} />
-          <Route path="/pune-mumbai-digital-marketing" element={<PageTransition><PuneMumbaiLandingPage /></PageTransition>} />
+          <Route path="/digital-marketing-agency-pune-mumbai" element={<PageTransition><PuneMumbaiLandingPage /></PageTransition>} />
           
           {/* Industries */}
           <Route path="/industries/solar-marketing" element={<PageTransition><EnergyPage /></PageTransition>} />

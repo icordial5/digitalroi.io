@@ -73,17 +73,6 @@ export const ContactForm: React.FC = () => {
           </div>
 
           <div className="space-y-2">
-            <label className="block text-sm font-semibold text-[#374151]">Brand Name*</label>
-            <input 
-              type="text" 
-              name="brand" 
-              placeholder="Enter brand name" 
-              required 
-              className="w-full px-3.5 py-3 border-[1.5px] border-[#e5e7eb] rounded-lg text-base text-[#1f2937] bg-white focus:outline-none focus:border-[#3b82f6] focus:ring-3 focus:ring-blue-500/10 transition-all placeholder:text-[#9ca3af] placeholder:text-sm"
-            />
-          </div>
-
-          <div className="space-y-2">
             <label className="block text-sm font-semibold text-[#374151]">Monthly Marketing Ad Budget*</label>
             <div className="relative">
               <select 

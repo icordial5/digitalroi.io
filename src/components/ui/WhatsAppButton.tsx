@@ -7,6 +7,9 @@ export const WhatsAppButton: React.FC = () => {
   const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
+    // Initial entrance animation
+    controls.start({ opacity: 1, scale: 1, transition: { duration: 0.5, delay: 1 } });
+
     // Periodic bounce animation every 5 seconds
     const interval = setInterval(async () => {
       await controls.start({
@@ -32,7 +35,6 @@ export const WhatsAppButton: React.FC = () => {
         rel="noopener noreferrer"
         initial={{ opacity: 0, scale: 0 }}
         animate={controls}
-        onViewportEnter={() => controls.start({ opacity: 1, scale: 1, transition: { duration: 0.5, delay: 1 } })}
         whileHover={{ scale: 1.1, backgroundColor: "#128c7e" }}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}

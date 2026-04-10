@@ -18,7 +18,7 @@ export const HealthcareJourneyAnalysis: React.FC = () => {
   ];
 
   return (
-    <section className="py-24 px-4 relative overflow-hidden bg-white font-['DM_Sans',_sans-serif]">
+    <section className="py-16 px-4 relative overflow-hidden bg-white font-['DM_Sans',_sans-serif]">
       {/* Background Orbs */}
       <div className="absolute top-[-150px] right-[-150px] w-[600px] h-[600px] bg-blue-600/5 rounded-full blur-[100px] pointer-events-none" />
       <div className="absolute bottom-[-100px] left-[-100px] w-[400px] h-[400px] bg-orange-500/5 rounded-full blur-[80px] pointer-events-none" />

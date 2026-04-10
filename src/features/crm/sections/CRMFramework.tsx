@@ -228,7 +228,7 @@ export const CRMFramework: React.FC = () => {
   return (
     <section className="bg-white">
       {/* Header Section */}
-      <div className="bg-slate-50 py-12 px-6 md:px-16 text-center border-b border-slate-100">
+      <div className="bg-slate-50 py-8 px-6 md:px-16 text-center border-b border-slate-100">
         <motion.h1 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -249,7 +249,7 @@ export const CRMFramework: React.FC = () => {
       </div>
 
       {/* Tab Navigation */}
-      <div className="flex flex-wrap justify-center items-start gap-5 py-10 px-5 bg-white border-b border-slate-100">
+      <div className="flex flex-wrap justify-center items-start gap-5 py-6 px-5 bg-white border-b border-slate-100">
         {phases.map((phase) => (
           <button
             key={phase.id}
@@ -301,7 +301,7 @@ export const CRMFramework: React.FC = () => {
             transition={{ duration: 0.5 }}
             className="w-full"
           >
-            <div className="grid grid-cols-1 lg:grid-cols-[1.5fr_1fr] gap-10 py-12 px-6 md:px-16 max-w-[1400px] mx-auto items-start">
+            <div className="grid grid-cols-1 lg:grid-cols-[1.5fr_1fr] gap-10 py-8 px-6 md:px-16 max-w-[1400px] mx-auto items-start">
               {/* Image Section */}
               <motion.div 
                 initial={{ opacity: 0, x: -50 }}

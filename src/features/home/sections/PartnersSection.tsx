@@ -4,7 +4,7 @@ import { Sparkles } from 'lucide-react';
 
 export const PartnersSection: React.FC = () => {
   return (
-    <section className="py-12 bg-[#F8FBFF] relative overflow-hidden">
+    <section className="py-8 bg-[#F8FBFF] relative overflow-hidden">
       <div className="absolute left-0 top-1/2 -translate-y-1/2 opacity-10 pointer-events-none hidden lg:block">
         <img src="https://ik.imagekit.io/digitalroipune/hero-bg-shape.png" alt="" className="w-[400px] rotate-180" />
       </div>

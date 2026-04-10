@@ -7,7 +7,7 @@ export const ContactHero: React.FC = () => {
   return (
     <section className="relative overflow-hidden bg-white">
       {/* Top Banner */}
-      <div className="bg-gradient-to-b from-[#E3F0FF] to-[#F8FAFC] pt-32 pb-20 px-6 text-center">
+      <div className="bg-gradient-to-b from-[#E3F0FF] to-[#F8FAFC] pt-24 pb-12 px-6 text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -29,7 +29,7 @@ export const ContactHero: React.FC = () => {
       </div>
 
       {/* Main Content Section */}
-      <div className="max-w-7xl mx-auto px-6 py-20">
+      <div className="max-w-7xl mx-auto px-6 py-16">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
           
           {/* Left Side: Contact Info */}

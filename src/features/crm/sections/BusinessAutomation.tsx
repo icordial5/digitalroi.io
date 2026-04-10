@@ -3,7 +3,7 @@ import { motion } from 'motion/react';
 
 export const BusinessAutomation: React.FC = () => {
   return (
-    <section className="w-full py-16 bg-white overflow-hidden">
+    <section className="w-full py-12 bg-white overflow-hidden">
       <div className="max-w-full mx-auto flex flex-col lg:flex-row gap-10 lg:gap-16">
         
         {/* LEFT CONTENT */}

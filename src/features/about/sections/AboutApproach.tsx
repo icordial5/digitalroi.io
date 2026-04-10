@@ -62,7 +62,7 @@ const ApproachCard: React.FC<SectionProps> = ({ icon, title, subtitle, descripti
 
 export const AboutApproach: React.FC = () => {
   return (
-    <section className="py-24 bg-[#F8FAFC]">
+    <section className="py-16 bg-[#F8FAFC]">
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Our Approach */}

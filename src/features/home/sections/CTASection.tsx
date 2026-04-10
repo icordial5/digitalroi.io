@@ -37,14 +37,14 @@ export const CTASection: React.FC<CTASectionProps> = ({
   );
 
   return (
-    <section className="py-16 bg-white">
+    <section className="py-8 bg-white">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.4, ease: "easeOut" }}
-          className="relative bg-[#EAF5FB] border-[3px] border-[#2D3748] rounded-[3rem] p-10 md:p-20 text-center overflow-hidden shadow-2xl"
+          className="relative bg-[#EAF5FB] border-[3px] border-[#2D3748] rounded-[3rem] p-8 md:p-14 text-center overflow-hidden shadow-2xl"
         >
           <img 
             src="https://ik.imagekit.io/digitalroipune/digitalroi-fly.webp" 

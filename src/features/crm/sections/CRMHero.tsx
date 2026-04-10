@@ -1,8 +1,10 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { CRMQuiz } from './CRMQuiz';
+import { useModal } from '@/context/ModalContext';
 
 const crmLogos = [
+// ... (rest of the file)
   { name: 'CRM 1', url: 'https://ik.imagekit.io/digitalroipune/Group%203.png' },
   { name: 'CRM 2', url: 'https://ik.imagekit.io/digitalroipune/Group%205.png' },
   { name: 'CRM 3', url: 'https://ik.imagekit.io/digitalroipune/Group%204.png' },
@@ -12,8 +14,10 @@ const crmLogos = [
 ];
 
 export const CRMHero: React.FC = () => {
+  const { openModal } = useModal();
+
   return (
-    <section className="relative pt-24 pb-16 overflow-hidden bg-[#F8FAFC]">
+    <section className="relative pt-16 pb-8 overflow-hidden bg-[#F8FAFC]">
       {/* Background Shapes */}
       <div className="absolute top-0 left-0 w-full h-full -z-10 opacity-30">
         <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-blue-100 rounded-full blur-[120px]" />
@@ -38,7 +42,7 @@ export const CRMHero: React.FC = () => {
               </p>
               
               <button 
-                onClick={() => document.getElementById('crm-quiz-container')?.scrollIntoView({ behavior: 'smooth' })}
+                onClick={() => openModal('crm_automation')}
                 className="px-10 py-4 bg-gradient-to-r from-slate-900 to-blue-600 text-white rounded-full font-bold text-lg hover:translate-y-[-2px] transition-all shadow-xl shadow-blue-100"
               >
                 Get My Automation Blueprint
@@ -68,7 +72,7 @@ export const CRMHero: React.FC = () => {
         </div>
 
         {/* CRM's we work with */}
-        <div className="mt-24">
+        <div className="mt-16">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
