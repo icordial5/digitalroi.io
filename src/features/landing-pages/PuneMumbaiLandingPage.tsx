@@ -70,19 +70,25 @@ export const PuneMumbaiLandingPage: React.FC = () => {
             <StaggerItem>
               <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-6 max-w-5xl mx-auto leading-[1.1]">
                 More <br className="md:hidden" />
-                <div className="inline-block w-[320px] md:w-[480px] text-left md:text-center">
-                  <AnimatePresence mode="wait">
-                    <motion.span
-                      key={heroTextIndex}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -20 }}
-                      transition={{ duration: 0.5 }}
-                      className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-600"
-                    >
-                      {heroTexts[heroTextIndex]}
-                    </motion.span>
-                  </AnimatePresence>
+                <div className="relative inline-grid grid-cols-1 grid-rows-1 text-left md:text-center align-baseline">
+                  {/* Hidden placeholders to reserve space and prevent layout shift */}
+                  <span className="invisible h-0 overflow-hidden whitespace-nowrap">Online Sales.</span>
+                  <span className="invisible h-0 overflow-hidden whitespace-nowrap">Qualified Leads.</span>
+                  
+                  <div className="col-start-1 row-start-1">
+                    <AnimatePresence mode="wait">
+                      <motion.span
+                        key={heroTextIndex}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -20 }}
+                        transition={{ duration: 0.5 }}
+                        className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-600 whitespace-nowrap"
+                      >
+                        {heroTexts[heroTextIndex]}
+                      </motion.span>
+                    </AnimatePresence>
+                  </div>
                 </div>
                 <br />
                 <span className="text-white">

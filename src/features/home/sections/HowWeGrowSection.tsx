@@ -106,7 +106,7 @@ export const HowWeGrowSection: React.FC = () => {
             transition={{ delay: 0.2 }}
             className="text-xl text-slate-600 max-w-3xl mx-auto font-medium leading-relaxed"
           >
-            Comprehensive marketing solutions designed to scale your revenue and optimize your performance.
+            Designed to capture, nurture, and convert both leads and buyers into real revenue.
           </motion.p>
 
           {/* Floating Badges */}
@@ -189,16 +189,16 @@ export const HowWeGrowSection: React.FC = () => {
           className="text-center relative z-20"
         >
           <div className="absolute inset-0 bg-gradient-to-r from-blue-100 to-purple-100 blur-3xl -z-10 rounded-full opacity-50" />
-          <button
-            onClick={() => openModal('lead_gen')}
-            className="group relative inline-flex items-center justify-center gap-3 px-10 py-5 bg-[#111118] text-white rounded-full font-black text-xl overflow-hidden transition-transform hover:scale-105 active:scale-95"
-          >
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-indigo-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-            <span className="relative z-10">Get More Qualified Leads</span>
-            <div className="relative z-10 w-10 h-10 rounded-full bg-white/20 flex items-center justify-center group-hover:bg-white transition-colors duration-300">
-              <ArrowRight className="w-5 h-5 text-white group-hover:text-blue-600 group-hover:translate-x-1 transition-all duration-300" />
-            </div>
-          </button>
+            <button
+              onClick={() => openModal('lead_gen')}
+              className="group relative inline-flex items-center justify-center gap-3 px-8 py-4 bg-[#111118] text-white rounded-full font-black text-lg overflow-hidden transition-transform hover:scale-105 active:scale-95"
+            >
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-indigo-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <span className="relative z-10">Get a Free Audit</span>
+              <div className="relative z-10 w-8 h-8 rounded-full bg-white/20 flex items-center justify-center group-hover:bg-white transition-colors duration-300">
+                <ArrowRight className="w-4 h-4 text-white group-hover:text-blue-600 group-hover:translate-x-1 transition-all duration-300" />
+              </div>
+            </button>
         </motion.div>
       </div>
     </section>
