@@ -219,7 +219,7 @@ async function startServer() {
             Mobile: mobile,
             Company: company,
             Description: `CRM Quiz Lead - Score: ${scoreNum}/20\nCategory: ${category}\nAnswers: ${JSON.stringify(quizAnswers)}`,
-            Lead_Source: 'Website - CRM Quiz',
+            Lead_Source: 'Website Form',
             Lead_Status: 'Not Contacted',
             Lead_Volume: leadVolume,
             Current_CRM: crmName
@@ -258,7 +258,7 @@ async function startServer() {
       return res.status(400).json({ success: false, message: 'Missing required fields' });
     }
 
-    const leadSource = `Website - ${form_type || 'General'}`;
+    const leadSource = 'Website Form';
     const companyName = company || brand || institute || facility || 'Individual';
 
     // 1. Send Email Notification
