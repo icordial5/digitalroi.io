@@ -1,8 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=DM+Sans:wght@400;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=DM+Sans:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 @import "tailwindcss";
 
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Playfair Display", ui-serif, Georgia, serif;
 }
 
 @layer base {
@@ -59,6 +60,18 @@
     transform: translateY(-2px) scale(1.02);
     @apply shadow-xl shadow-blue-900/30;
   }
+  .writing-mode-vertical-rl {
+    writing-mode: vertical-rl;
+  }
+
+  .writing-mode-vertical-lr {
+    writing-mode: vertical-lr;
+  }
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
 }
 
 /* ========================= */
