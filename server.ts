@@ -95,8 +95,12 @@ async function startServer() {
   const ZOHO_DATACENTER = process.env.ZOHO_DATACENTER || 'in';
 
   let zohoAccessToken = '';
+  let zohoTokenExpiry = 0;
 
   async function getZohoAccessToken() {
+    if (zohoAccessToken && Date.now() < zohoTokenExpiry) {
+      return zohoAccessToken;
+    }
     try {
       const response = await axios.post(`https://accounts.zoho.${ZOHO_DATACENTER}/oauth/v2/token`, null, {
         params: {
@@ -106,10 +110,17 @@ async function startServer() {
           grant_type: 'refresh_token'
         }
       });
-      zohoAccessToken = response.data.access_token;
-      return zohoAccessToken;
-    } catch (error) {
-      console.error('Error fetching Zoho access token:', error);
+      if (response.data && response.data.access_token) {
+        zohoAccessToken = response.data.access_token;
+        const expiresIn = response.data.expires_in ? response.data.expires_in * 1000 : 3500000;
+        zohoTokenExpiry = Date.now() + expiresIn - 60000; // Buffer of 1 minute
+        return zohoAccessToken;
+      } else {
+        console.error('Failed to get access token, response:', response.data);
+        return null;
+      }
+    } catch (error: any) {
+      console.error('Error fetching Zoho access token:', error.response?.data || error.message);
       return null;
     }
   }
@@ -201,7 +212,7 @@ async function startServer() {
     const token = await getZohoAccessToken();
     if (token) {
       try {
-        const zohoResponse = await axios.post(`https://www.zohoapis.${ZOHO_DATACENTER}/crm/v2/Leads`, {
+        const zohoResponse = await axios.post(`https://www.zohoapis.${ZOHO_DATACENTER}/crm/v2/Leads/upsert`, {
           data: [{
             Last_Name: name,
             Email: email,
@@ -213,7 +224,8 @@ async function startServer() {
             Lead_Volume: leadVolume,
             Current_CRM: crmName
           }],
-          trigger: ['workflow']
+          duplicate_check_fields: ['Email'],
+          trigger: ['workflow', 'approval', 'blueprint']
         }, {
           headers: {
             Authorization: `Zoho-oauthtoken ${token}`,
@@ -287,7 +299,7 @@ async function startServer() {
     const token = await getZohoAccessToken();
     if (token) {
       try {
-        await axios.post(`https://www.zohoapis.${ZOHO_DATACENTER}/crm/v2/Leads`, {
+        await axios.post(`https://www.zohoapis.${ZOHO_DATACENTER}/crm/v2/Leads/upsert`, {
           data: [{
             Last_Name: name,
             Email: email,
@@ -299,7 +311,9 @@ async function startServer() {
             Target_Sector: target_sector,
             Lead_Volume: lead_volume,
             Current_CRM: current_crm
-          }]
+          }],
+          duplicate_check_fields: ['Email'],
+          trigger: ['workflow', 'approval', 'blueprint']
         }, {
           headers: { Authorization: `Zoho-oauthtoken ${token}` }
         });
