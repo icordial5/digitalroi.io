@@ -17,7 +17,7 @@ export const EcommerceHero: React.FC = () => {
             <motion.div 
               className="inline-flex items-center px-6 py-2.5 rounded-full bg-[#111118] text-white/90 font-medium text-sm mb-8 shadow-[0_0_20px_rgba(17,17,24,0.3)]"
             >
-              Grow Faster with Smart Automation
+              Grow Your Online Sales
             </motion.div>
           </StaggerItem>
           
@@ -25,9 +25,8 @@ export const EcommerceHero: React.FC = () => {
             <motion.h1 
               className="text-5xl md:text-7xl font-bold tracking-tight text-[#111118] mb-6 max-w-4xl mx-auto leading-[1.1]"
             >
-              Grow Your <br className="hidden md:block" />
-              <span className="text-gradient-blue">Online Sales</span> & <br className="hidden md:block" />
-              <span className="text-gradient-blue">Get More Revenue</span>
+              Increase traffic and get more revenue <br className="hidden md:block" />
+              <span className="text-gradient-blue">with smart marketing strategies.</span>
             </motion.h1>
           </StaggerItem>
           
@@ -35,7 +34,7 @@ export const EcommerceHero: React.FC = () => {
             <motion.p 
               className="text-lg md:text-xl text-slate-600 mb-10 max-w-3xl mx-auto leading-relaxed"
             >
-              We help online stores get more customers and increase sales with smart marketing strategies.
+              We help online stores get more customers and increase sales.
             </motion.p>
           </StaggerItem>
           

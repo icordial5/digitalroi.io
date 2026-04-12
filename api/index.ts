@@ -18,8 +18,12 @@ const ZOHO_REFRESH_TOKEN = process.env.ZOHO_REFRESH_TOKEN || '1000.a5c1b08e949c7
 const ZOHO_DATACENTER = process.env.ZOHO_DATACENTER || 'in';
 
 let zohoAccessToken = '';
+let zohoTokenExpiry = 0;
 
 async function getZohoAccessToken() {
+  if (zohoAccessToken && Date.now() < zohoTokenExpiry) {
+    return zohoAccessToken;
+  }
   try {
     const response = await axios.post(`https://accounts.zoho.${ZOHO_DATACENTER}/oauth/v2/token`, null, {
       params: {
@@ -29,10 +33,17 @@ async function getZohoAccessToken() {
         grant_type: 'refresh_token'
       }
     });
-    zohoAccessToken = response.data.access_token;
-    return zohoAccessToken;
-  } catch (error) {
-    console.error('Error fetching Zoho access token:', error);
+    if (response.data && response.data.access_token) {
+      zohoAccessToken = response.data.access_token;
+      const expiresIn = response.data.expires_in ? response.data.expires_in * 1000 : 3500000;
+      zohoTokenExpiry = Date.now() + expiresIn - 60000; // Buffer of 1 minute
+      return zohoAccessToken;
+    } else {
+      console.error('Failed to get access token, response:', response.data);
+      return null;
+    }
+  } catch (error: any) {
+    console.error('Error fetching Zoho access token:', error.response?.data || error.message);
     return null;
   }
 }
@@ -121,14 +132,14 @@ app.post('/api/crm-quiz/submit', async (req, res) => {
   const token = await getZohoAccessToken();
   if (token) {
     try {
-      const zohoResponse = await axios.post('https://www.zohoapis.com/crm/v2/Leads', {
+      const zohoResponse = await axios.post(`https://www.zohoapis.${ZOHO_DATACENTER}/crm/v2/Leads/upsert`, {
         data: [{
           Last_Name: name,
           Email: email,
           Phone: mobile,
           Company: company,
           Description: `CRM Quiz Lead - Score: ${scoreNum}/20`,
-          Lead_Source: 'Website - CRM Quiz',
+          Lead_Source: 'Website Form',
           Lead_Status: 'Not Contacted',
           Quiz_Score: scoreNum,
           Quiz_Answers: JSON.stringify(quizAnswers),
@@ -136,7 +147,8 @@ app.post('/api/crm-quiz/submit', async (req, res) => {
           CRM_Name: crmName,
           Quiz_Category: category
         }],
-        trigger: ['workflow']
+        duplicate_check_fields: ['Email'],
+        trigger: ['workflow', 'approval', 'blueprint']
       }, {
         headers: {
           Authorization: `Zoho-oauthtoken ${token}`,
@@ -169,7 +181,7 @@ app.post('/api/leads/submit', async (req, res) => {
     return res.status(400).json({ success: false, message: 'Missing required fields' });
   }
 
-  const leadSource = `Website - ${form_type || 'General'}`;
+  const leadSource = 'Website Form';
   const companyName = company || brand || institute || facility || 'Individual';
 
   // 1. Send Email Notification
@@ -210,7 +222,7 @@ app.post('/api/leads/submit', async (req, res) => {
   const token = await getZohoAccessToken();
   if (token) {
     try {
-      await axios.post(`https://www.zohoapis.${ZOHO_DATACENTER}/crm/v2/Leads`, {
+      await axios.post(`https://www.zohoapis.${ZOHO_DATACENTER}/crm/v2/Leads/upsert`, {
         data: [{
           Last_Name: name,
           Email: email,
@@ -222,7 +234,9 @@ app.post('/api/leads/submit', async (req, res) => {
           Target_Sector: target_sector,
           Lead_Volume: lead_volume,
           Current_CRM: current_crm
-        }]
+        }],
+        duplicate_check_fields: ['Email'],
+        trigger: ['workflow', 'approval', 'blueprint']
       }, {
         headers: { Authorization: `Zoho-oauthtoken ${token}` }
       });

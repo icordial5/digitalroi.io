@@ -17,7 +17,7 @@ export const LeadGenHero: React.FC = () => {
             <motion.div 
               className="inline-flex items-center px-6 py-2.5 rounded-full bg-[#111118] text-white/90 font-medium text-sm mb-8 shadow-[0_0_20px_rgba(17,17,24,0.3)]"
             >
-              Scale Faster with Automation
+              Grow Faster with Smart Automation
             </motion.div>
           </StaggerItem>
           
@@ -25,8 +25,8 @@ export const LeadGenHero: React.FC = () => {
             <motion.h1 
               className="text-5xl md:text-7xl font-bold tracking-tight text-[#111118] mb-6 max-w-4xl mx-auto leading-[1.1]"
             >
-              Get More Qualified <br className="hidden md:block" />
-              <span className="text-gradient-blue">Leads that Convert</span>
+              Get More Revenue with <br className="hidden md:block" />
+              <span className="text-gradient-blue">Qualified Leads & Online Sales</span>
             </motion.h1>
           </StaggerItem>
           
@@ -34,7 +34,7 @@ export const LeadGenHero: React.FC = () => {
             <motion.p 
               className="text-lg md:text-xl text-slate-600 mb-10 max-w-3xl mx-auto leading-relaxed"
             >
-              Designed to capture, nurture, and convert both leads and buyers into real revenue.
+              Helping businesses grow by reaching the right audience and turning them into loyal customers with smart targeting and automation.
             </motion.p>
           </StaggerItem>
           
