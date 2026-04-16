@@ -152,7 +152,7 @@ async function startServer() {
     }
 
     // 2. Send Email
-    const teamEmails = process.env.TEAM_EMAILS || 'jogdand.ravi@gmail.com, growth@digitalroi.io, anosh.jadhav@digitalroi.io, anish.motwani@digitalroi.io, vikas.kumar@digitalroi.io';
+    const teamEmails = process.env.TEAM_EMAILS || ' growth@digitalroi.io, anosh.jadhav@digitalroi.io, anish.motwani@digitalroi.io, vikas.kumar@digitalroi.io';
     
     // For demo purposes, we'll use a mock transporter if no SMTP config is provided
     // In a real app, you'd use process.env.SMTP_HOST, etc.
@@ -262,7 +262,7 @@ async function startServer() {
     const companyName = company || brand || institute || facility || 'Individual';
 
     // 1. Send Email Notification
-    const teamEmails = process.env.TEAM_EMAILS || 'jogdand.ravi@gmail.com, growth@digitalroi.io';
+    const teamEmails = process.env.TEAM_EMAILS || 'growth@digitalroi.io';
     const transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST || 'smtp.gmail.com',
       port: parseInt(process.env.SMTP_PORT || '587'),

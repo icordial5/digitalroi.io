@@ -25,8 +25,8 @@ export const EcommerceHero: React.FC = () => {
             <motion.h1 
               className="text-5xl md:text-7xl font-bold tracking-tight text-[#111118] mb-6 max-w-4xl mx-auto leading-[1.1]"
             >
-              Increase traffic and get more revenue <br className="hidden md:block" />
-              <span className="text-gradient-blue">with smart marketing strategies.</span>
+              From Monthly <span className="text-gradient-blue">Revenue</span> of 10 lakhs to 1 Crore <br className="hidden md:block" />
+              <span className="text-gradient-blue">Your D2C Growth Partner</span>
             </motion.h1>
           </StaggerItem>
           
@@ -34,7 +34,7 @@ export const EcommerceHero: React.FC = () => {
             <motion.p 
               className="text-lg md:text-xl text-slate-600 mb-10 max-w-3xl mx-auto leading-relaxed"
             >
-              We help online stores get more customers and increase sales.
+              Helping You Increase Revenue with Paid Ads and Automation.
             </motion.p>
           </StaggerItem>
           
@@ -46,7 +46,7 @@ export const EcommerceHero: React.FC = () => {
                 onClick={() => openModal('ecommerce')}
                 className="btn-primary"
               >
-                Get Your Growth Plan
+                Get Your Free Audit!
               </button>
             </motion.div>
           </StaggerItem>

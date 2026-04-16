@@ -75,7 +75,7 @@ app.post('/api/crm-quiz/submit', async (req, res) => {
   }
 
   // 2. Send Email
-  const teamEmails = process.env.TEAM_EMAILS || 'jogdand.ravi@gmail.com, growth@digitalroi.io, anosh.jadhav@digitalroi.io, anish.motwani@digitalroi.io, vikas.kumar@digitalroi.io';
+  const teamEmails = process.env.TEAM_EMAILS || 'growth@digitalroi.io, anosh.jadhav@digitalroi.io, anish.motwani@digitalroi.io, vikas.kumar@digitalroi.io';
   
   const transporter = nodemailer.createTransport({
     host: process.env.SMTP_HOST || 'smtp.gmail.com',
@@ -185,7 +185,7 @@ app.post('/api/leads/submit', async (req, res) => {
   const companyName = company || brand || institute || facility || 'Individual';
 
   // 1. Send Email Notification
-  const teamEmails = process.env.TEAM_EMAILS || 'jogdand.ravi@gmail.com, growth@digitalroi.io';
+  const teamEmails = process.env.TEAM_EMAILS || 'growth@digitalroi.io';
   const transporter = nodemailer.createTransport({
     host: process.env.SMTP_HOST || 'smtp.gmail.com',
     port: parseInt(process.env.SMTP_PORT || '587'),
