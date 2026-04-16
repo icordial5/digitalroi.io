@@ -23,7 +23,7 @@ const phases: Phase[] = [
     name: 'Discovery',
     title: 'CRM Discovery & Process Mapping',
     icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
         <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
       </svg>
     ),
@@ -45,7 +45,7 @@ const phases: Phase[] = [
     name: 'CRM Setup',
     title: 'CRM Setup & Configuration',
     icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
         <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
         <path d="M9 3v18"></path>
       </svg>
@@ -68,7 +68,7 @@ const phases: Phase[] = [
     name: 'Lead Capture',
     title: 'Lead Capture & Integration',
     icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
         <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
         <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
         <line x1="12" y1="22.08" x2="12" y2="12"></line>
@@ -94,7 +94,7 @@ const phases: Phase[] = [
     name: 'Lead Routing',
     title: 'Lead Routing & Assignment Automation',
     icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
         <circle cx="12" cy="12" r="10"></circle>
         <polyline points="12 6 12 12 16 14"></polyline>
       </svg>
@@ -116,7 +116,7 @@ const phases: Phase[] = [
     name: 'Task & SLA',
     title: 'Task, SLA & Follow-up Automation',
     icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
         <path d="M9 11l3 3L22 4"></path>
         <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
       </svg>
@@ -139,7 +139,7 @@ const phases: Phase[] = [
     name: 'Communication',
     title: 'Communication Automation (CRM-led)',
     icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
         <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
       </svg>
     ),
@@ -174,7 +174,7 @@ const phases: Phase[] = [
     name: 'Pipeline',
     title: 'Deal & Pipeline Automation',
     icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
         <line x1="12" y1="1" x2="12" y2="23"></line>
         <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
       </svg>
@@ -196,7 +196,7 @@ const phases: Phase[] = [
     name: 'Reporting',
     title: 'Reporting & Dashboards',
     icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
         <line x1="18" y1="20" x2="18" y2="10"></line>
         <line x1="12" y1="20" x2="12" y2="4"></line>
         <line x1="6" y1="20" x2="6" y2="14"></line>

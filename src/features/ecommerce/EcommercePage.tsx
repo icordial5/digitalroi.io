@@ -4,6 +4,7 @@ import { Layout } from '@/components/layout/Layout';
 import { EcommerceHero } from './sections/EcommerceHero';
 import { EcommerceBrands } from './sections/EcommerceBrands';
 import { EcommerceServices } from './sections/EcommerceServices';
+import { EcommerceLinkedInPosts } from './sections/EcommerceLinkedInPosts';
 import { CTASection } from '../home/sections/CTASection';
 import { TestimonialsSection } from '../home/sections/TestimonialsSection';
 import { CaseStudyCarousel } from '../home/sections/CaseStudyCarousel';
@@ -24,6 +25,7 @@ const EcommercePage: React.FC = () => {
       <EcommerceHero />
       <EcommerceBrands />
       <EcommerceServices />
+      <EcommerceLinkedInPosts />
       
       <CTASection 
         title={

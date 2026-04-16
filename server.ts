@@ -152,7 +152,7 @@ async function startServer() {
     }
 
     // 2. Send Email
-    const teamEmails = process.env.TEAM_EMAILS || ' growth@digitalroi.io, anosh.jadhav@digitalroi.io, anish.motwani@digitalroi.io, vikas.kumar@digitalroi.io';
+    const teamEmails = process.env.TEAM_EMAILS || 'growth@digitalroi.io, anosh.jadhav@digitalroi.io, anish.motwani@digitalroi.io, vikas.kumar@digitalroi.io';
     
     // For demo purposes, we'll use a mock transporter if no SMTP config is provided
     // In a real app, you'd use process.env.SMTP_HOST, etc.

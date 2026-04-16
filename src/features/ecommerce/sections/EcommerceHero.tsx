@@ -25,16 +25,16 @@ export const EcommerceHero: React.FC = () => {
             <motion.h1 
               className="text-5xl md:text-7xl font-bold tracking-tight text-[#111118] mb-6 max-w-4xl mx-auto leading-[1.1]"
             >
-              From Monthly <span className="text-gradient-blue">Revenue</span> of 10 lakhs to 1 Crore <br className="hidden md:block" />
-              <span className="text-gradient-blue">Your D2C Growth Partner</span>
+              From Monthly Revenue of <span className="text-gradient-blue">10 lakhs</span> to <span className="text-gradient-blue">1 Crore</span> <br className="hidden md:block" />
+              Your <span className="text-gradient-blue">D2C</span> Growth <span className="text-gradient-blue">Partner</span>
             </motion.h1>
           </StaggerItem>
           
           <StaggerItem>
             <motion.p 
-              className="text-lg md:text-xl text-slate-600 mb-10 max-w-3xl mx-auto leading-relaxed"
+              className="text-lg md:text-xl text-[#111118] mb-10 max-w-3xl mx-auto leading-relaxed"
             >
-              Helping You Increase Revenue with Paid Ads and Automation.
+              Helping You <span className="text-gradient-blue font-semibold">Increase Revenue</span> with Paid Ads and Automation.
             </motion.p>
           </StaggerItem>
           
