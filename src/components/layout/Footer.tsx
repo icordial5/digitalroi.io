@@ -9,7 +9,7 @@ import { v4 as uuidv4 } from 'uuid';
 const QUICK_LINKS = [
   { name: 'Home', path: '/' },
   { name: 'Lead Generation', path: '/lead-generation' },
-  { name: 'Ecommerce Marketing', path: '/ecommerce-marketing' },
+  { name: 'Ecommerce Marketing', path: '/ecommerce' },
   { name: 'CRM Automation', path: '/crm-automation' },
   { name: 'About Us', path: '/about' },
   { name: 'Contact Us', path: '/contact' },
