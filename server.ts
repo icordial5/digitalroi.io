@@ -244,6 +244,22 @@ async function startServer() {
       }
     }
 
+    // 4. Gallabox Webhook Integration
+    const gallaboxClient = process.env.GALLABOX_CLIENT_WEBHOOK;
+    const gallaboxOwner = process.env.GALLABOX_OWNER_WEBHOOK;
+    const payload = {
+      name, email, mobile, company,
+      form_type: 'CRM Quiz', source: 'CRM Quiz Form',
+      quiz_score: scoreNum,
+      quiz_category: category,
+      lead_volume: leadVolume,
+      current_crm: crmName,
+      submitted_at: new Date().toISOString()
+    };
+
+    if (gallaboxClient) axios.post(gallaboxClient, payload).catch(e => console.error('Gallabox Client Error:', e.message));
+    if (gallaboxOwner) axios.post(gallaboxOwner, payload).catch(e => console.error('Gallabox Owner Error:', e.message));
+
     res.json({
       success: true,
       emailSent,

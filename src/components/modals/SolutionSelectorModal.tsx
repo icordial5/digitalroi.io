@@ -141,7 +141,7 @@ export const SolutionSelectorModal: React.FC<SolutionSelectorModalProps> = ({ is
                 <motion.button
                   whileHover={{ scale: 1.02, y: -2 }}
                   whileTap={{ scale: 0.98 }}
-                  onClick={() => handleNavigation('/ecommerce')}
+                  onClick={() => handleNavigation('/ecommerce-marketing')}
                   className="group relative p-6 rounded-[2rem] border-2 border-slate-100 bg-white hover:border-indigo-600 hover:shadow-[0_20px_40px_-10px_rgba(79,70,229,0.15)] transition-all duration-500 text-left"
                 >
                   <div className="flex items-center gap-5 relative z-10">
