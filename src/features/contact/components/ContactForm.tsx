@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { cn } from '@/utils/cn';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 export const ContactForm: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -21,9 +22,7 @@ export const ContactForm: React.FC = () => {
       });
       
       if (response.data.success) {
-        setIsSuccess(true);
-        // Reset success message after 5 seconds
-        setTimeout(() => setIsSuccess(false), 5000);
+        navigate('/thank-you');
         (e.target as HTMLFormElement).reset();
       } else {
         throw new Error(response.data.message || 'Submission failed');
@@ -118,12 +117,6 @@ export const ContactForm: React.FC = () => {
           >
             {isSubmitting ? 'Sending...' : 'SEND MESSAGE'}
           </button>
-
-          {isSuccess && (
-            <div className="mt-4 p-3 bg-gradient-to-r from-emerald-100 to-teal-100 text-emerald-800 rounded-lg text-center font-semibold text-sm animate-in zoom-in duration-300">
-              Thank you! We'll contact you shortly.
-            </div>
-          )}
         </form>
       </div>
     </div>

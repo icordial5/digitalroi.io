@@ -22,6 +22,8 @@ const AboutPage = lazy(() => import('./features/about/AboutPage'));
 const ContactPage = lazy(() => import('./features/contact/ContactPage'));
 const CRMAutomationPage = lazy(() => import('./features/crm/CRMAutomationPage'));
 const PuneMumbaiLandingPage = lazy(() => import('./features/landing-pages/PuneMumbaiLandingPage'));
+const ThankYouPage = lazy(() => import('./features/thank-you/ThankYouPage').then(module => ({ default: module.ThankYouPage })));
+const NotFoundPage = lazy(() => import('./features/404/NotFoundPage').then(module => ({ default: module.NotFoundPage })));
 const PrivacyPolicy = lazy(() => import('./features/legal/PrivacyPolicy'));
 const TermsConditions = lazy(() => import('./features/legal/TermsConditions'));
 const PlaceholderPage = lazy(() => import('./components/layout/PlaceholderPage').then(module => ({ default: module.PlaceholderPage })));
@@ -51,6 +53,7 @@ const AnimatedRoutes = () => {
           <Route path="/contact" element={<PageTransition><ContactPage /></PageTransition>} />
           <Route path="/crm-automation" element={<PageTransition><CRMAutomationPage /></PageTransition>} />
           <Route path="/ecommerce" element={<PageTransition><EcommercePage /></PageTransition>} />
+          <Route path="/thank-you" element={<PageTransition><ThankYouPage /></PageTransition>} />
           <Route path="/lead-generation" element={<PageTransition><Home /></PageTransition>} />
           <Route path="/digital-marketing-agency-pune-mumbai" element={<PageTransition><PuneMumbaiLandingPage /></PageTransition>} />
           
@@ -65,6 +68,8 @@ const AnimatedRoutes = () => {
           <Route path="/case-studies" element={<PageTransition><PlaceholderPage title="Case Studies" description="See how we've helped brands scale their revenue." /></PageTransition>} />
           <Route path="/terms" element={<PageTransition><TermsConditions /></PageTransition>} />
           <Route path="/privacy" element={<PageTransition><PrivacyPolicy /></PageTransition>} />
+          
+          <Route path="*" element={<PageTransition><NotFoundPage /></PageTransition>} />
         </Routes>
       </div>
     </AnimatePresence>

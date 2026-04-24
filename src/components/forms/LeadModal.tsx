@@ -4,6 +4,7 @@ import { X, CheckCircle2, Loader2 } from 'lucide-react';
 import { useModal, FormType } from '@/context/ModalContext';
 import { cn } from '@/utils/cn';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 interface LeadFormProps {
   type: FormType;
@@ -12,7 +13,7 @@ interface LeadFormProps {
 
 export const LeadForm: React.FC<LeadFormProps> = ({ type, onSuccess }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
+  const navigate = useNavigate();
 
   const getFormTitle = () => {
     switch (type) {
@@ -51,10 +52,10 @@ export const LeadForm: React.FC<LeadFormProps> = ({ type, onSuccess }) => {
       });
       
       if (response.data.success) {
-        setIsSuccess(true);
         if (onSuccess) {
-          setTimeout(onSuccess, 2000);
+          onSuccess();
         }
+        navigate('/thank-you');
       } else {
         throw new Error(response.data.message || 'Submission failed');
       }
@@ -65,23 +66,6 @@ export const LeadForm: React.FC<LeadFormProps> = ({ type, onSuccess }) => {
       setIsSubmitting(false);
     }
   };
-
-  if (isSuccess) {
-    return (
-      <motion.div 
-        initial={{ opacity: 0, scale: 0.98 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.3, ease: "easeOut" }}
-        className="flex flex-col items-center justify-center py-12 text-center"
-      >
-        <div className="w-20 h-20 bg-emerald-100 rounded-full flex items-center justify-center mb-6">
-          <CheckCircle2 className="w-10 h-10 text-emerald-600" />
-        </div>
-        <h3 className="text-2xl font-bold text-slate-900 mb-2">Submitted Successfully!</h3>
-        <p className="text-slate-600">Redirecting you shortly...</p>
-      </motion.div>
-    );
-  }
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">

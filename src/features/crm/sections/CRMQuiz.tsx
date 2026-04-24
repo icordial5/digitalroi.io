@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { ChevronLeft, ChevronRight, CheckCircle2, Loader2 } from 'lucide-react';
 import { cn } from '@/utils/cn';
+import { useNavigate } from 'react-router-dom';
 
 interface Option {
   text: string;
@@ -80,7 +81,8 @@ export const CRMQuiz: React.FC = () => {
   const [showResult, setShowResult] = useState(false);
   const [showForm, setShowForm] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -138,7 +140,7 @@ export const CRMQuiz: React.FC = () => {
       
       const data = await response.json();
       if (data.success) {
-        setIsSuccess(true);
+        navigate('/thank-you');
       } else {
         alert('Error: ' + (data.message || 'Something went wrong'));
       }
@@ -158,24 +160,6 @@ export const CRMQuiz: React.FC = () => {
   };
 
   const result = getResultCategory();
-
-  if (isSuccess) {
-    return (
-      <div className="p-10 text-center">
-        <div className="w-20 h-20 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-6">
-          <CheckCircle2 className="w-12 h-12 text-white" />
-        </div>
-        <h3 className="text-2xl font-bold text-slate-900 mb-2">Blueprint Generated!</h3>
-        <p className="text-slate-600 mb-6">Check your email for your personalized CRM automation roadmap. It may take 2-3 minutes to arrive.</p>
-        <button 
-          onClick={() => window.location.reload()}
-          className="px-8 py-3 bg-slate-900 text-white rounded-full font-medium hover:bg-slate-800 transition-colors"
-        >
-          Restart Quiz
-        </button>
-      </div>
-    );
-  }
 
   if (showForm) {
     return (
