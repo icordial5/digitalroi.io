@@ -1,9 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { motion } from 'motion/react';
 import { Helmet } from 'react-helmet-async';
 import { Layout } from '@/components/layout/Layout';
 
 export const ThankYouPage: React.FC = () => {
+  useEffect(() => {
+    // Push the standard event so GTM can track form submissions that arrive here
+    if (typeof window !== 'undefined' && (window as any).dataLayer) {
+      (window as any).dataLayer.push({
+        event: 'form_submission_success',
+        page_path: '/thank-you'
+      });
+    }
+  }, []);
+
   return (
     <Layout>
       <Helmet>
