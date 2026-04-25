@@ -57,7 +57,7 @@ export const ThankYouPage: React.FC = () => {
             transition={{ duration: 0.6, ease: "easeOut", delay: 0.6 }}
             className="text-[16px] md:text-[18px] text-[#6b7280] mb-[30px] leading-[1.6]"
           >
-            Thank you — we’ve received your details. <br className="hidden md:block"/>
+            Thank you - we’ve received your details. <br className="hidden md:block"/>
             Our team is reviewing your request and will reach out within <strong className="text-[#374151]">1 business day</strong>.
           </motion.p>
 
