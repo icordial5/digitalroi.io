@@ -125,37 +125,56 @@ async function startServer() {
     }
   }
 
-  // API Routes
-  app.post('/api/crm-quiz/submit', async (req, res) => {
-    const { name, email, mobile, company, quizScore, quizAnswers, leadVolume, crmName } = req.body;
+  // Rate Limiting & Cache-Control Middleware
+  const rateLimitMap = new Map<string, { count: number, resetTime: number }>();
+  const RATE_LIMIT_WINDOW_MS = 60000; // 1 minute
+  const MAX_REQUESTS_PER_WINDOW = 10;
 
-    if (!name || !email || !company) {
-      return res.status(400).json({ success: false, message: 'Missing required fields' });
-    }
-
-    // 1. Determine Category
-    const scoreNum = parseInt(quizScore);
-    let category = '';
-    let priority = '';
-    if (scoreNum >= 0 && scoreNum <= 6) {
-      category = 'CRITICAL LEAKAGE';
-      priority = 'HIGH PRIORITY';
-    } else if (scoreNum >= 7 && scoreNum <= 12) {
-      category = 'HIGH LEAKAGE';
-      priority = 'HIGH PRIORITY';
-    } else if (scoreNum >= 13 && scoreNum <= 16) {
-      category = 'MODERATE LEAKAGE';
-      priority = 'MEDIUM PRIORITY';
-    } else {
-      category = 'HEALTHY SYSTEM';
-      priority = 'MEDIUM PRIORITY';
-    }
-
-    // 2. Send Email
-    const teamEmails = process.env.TEAM_EMAILS || 'growth@digitalroi.io, anosh.jadhav@digitalroi.io, anish.motwani@digitalroi.io, vikas.kumar@digitalroi.io';
+  app.use('/api', (req, res, next) => {
+    const ip = req.ip || req.headers['x-forwarded-for'] || 'unknown';
+    const now = Date.now();
     
-    // For demo purposes, we'll use a mock transporter if no SMTP config is provided
-    // In a real app, you'd use process.env.SMTP_HOST, etc.
+    if (typeof ip === 'string' && ip !== 'unknown') {
+      const record = rateLimitMap.get(ip) || { count: 0, resetTime: now + RATE_LIMIT_WINDOW_MS };
+      if (now > record.resetTime) {
+        record.count = 1;
+        record.resetTime = now + RATE_LIMIT_WINDOW_MS;
+      } else {
+        record.count++;
+      }
+      rateLimitMap.set(ip, record);
+      
+      if (record.count > MAX_REQUESTS_PER_WINDOW) {
+        return res.status(429).json({ success: false, message: 'Too many requests, please try again later.' });
+      }
+    }
+
+    if (req.method === 'GET') {
+      res.setHeader('Cache-Control', 's-maxage=60, stale-while-revalidate=300');
+    } else {
+      res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+      res.setHeader('Pragma', 'no-cache');
+      res.setHeader('Expires', '0');
+    }
+    
+    next();
+  });
+
+  setInterval(() => {
+    const now = Date.now();
+    rateLimitMap.forEach((value, key) => {
+      if (now > value.resetTime) {
+        rateLimitMap.delete(key);
+      }
+    });
+  }, 60000);
+
+  // Background operations dispatcher for CRM Quiz
+  const processCrmQuizBackground = async (data: any) => {
+    const { name, email, mobile, company, quizScore, quizAnswers, leadVolume, crmName, scoreNum, category, priority } = data;
+    const promises: Promise<any>[] = [];
+
+    const teamEmails = process.env.TEAM_EMAILS || 'growth@digitalroi.io, anosh.jadhav@digitalroi.io, anish.motwani@digitalroi.io, vikas.kumar@digitalroi.io';
     const transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST || 'smtp.gmail.com',
       port: parseInt(process.env.SMTP_PORT || '587'),
@@ -194,99 +213,65 @@ async function startServer() {
       `
     };
 
-    let emailSent = false;
     if (process.env.SMTP_USER && process.env.SMTP_PASS) {
-      try {
-        await transporter.sendMail(mailOptions);
-        emailSent = true;
-      } catch (error) {
-        console.error('Error sending email:', error);
-      }
-    } else {
-      console.log('Skipping email send - SMTP credentials not configured');
-      console.log('Mail Options:', mailOptions);
+      promises.push(transporter.sendMail(mailOptions).catch((err) => console.error('Error sending email:', err)));
     }
 
-    // 3. Create Zoho Lead
-    let zohoResult = { success: false, message: 'Not attempted' };
-    const token = await getZohoAccessToken();
-    if (token) {
-      try {
-        const zohoResponse = await axios.post(`https://www.zohoapis.${ZOHO_DATACENTER}/crm/v2/Leads/upsert`, {
-          data: [{
-            Last_Name: name,
-            Email: email,
-            Mobile: mobile,
-            Company: company,
-            Description: `CRM Quiz Lead - Score: ${scoreNum}/20\nCategory: ${category}\nAnswers: ${JSON.stringify(quizAnswers)}`,
-            Lead_Source: 'Website Form',
-            Lead_Status: 'Not Contacted',
-            Lead_Volume: leadVolume,
-            Current_CRM: crmName
-          }],
-          duplicate_check_fields: ['Email'],
-          trigger: ['workflow', 'approval', 'blueprint']
-        }, {
-          headers: {
-            Authorization: `Zoho-oauthtoken ${token}`,
-            'Content-Type': 'application/json'
+    promises.push(
+      getZohoAccessToken()
+        .then(async (token) => {
+          if (token) {
+            await axios.post(`https://www.zohoapis.${ZOHO_DATACENTER}/crm/v2/Leads/upsert`, {
+              data: [{
+                Last_Name: name,
+                Email: email,
+                Phone: mobile,
+                Company: company,
+                Description: `CRM Quiz Lead - Score: ${scoreNum}/20`,
+                Lead_Source: 'Website Form',
+                Lead_Status: 'Not Contacted',
+                Quiz_Score: scoreNum,
+                Quiz_Answers: JSON.stringify(quizAnswers),
+                Lead_Volume: leadVolume,
+                CRM_Name: crmName,
+                Quiz_Category: category
+              }],
+              duplicate_check_fields: ['Email'],
+              trigger: ['workflow', 'approval', 'blueprint']
+            }, {
+              headers: { Authorization: `Zoho-oauthtoken ${token}`, 'Content-Type': 'application/json' }
+            }).catch(err => console.error('Error creating Zoho lead:', err?.message || err));
           }
-        });
+        })
+        .catch(err => console.error('Error with Zoho auth:', err?.message || err))
+    );
 
-        if (zohoResponse.data.data && zohoResponse.data.data[0].code === 'SUCCESS') {
-          zohoResult = { success: true, message: 'Lead created in Zoho CRM' };
-        } else {
-          zohoResult = { success: false, message: zohoResponse.data.data[0].message };
-        }
-      } catch (error: any) {
-        console.error('Error creating Zoho lead:', error.response?.data || error.message);
-        zohoResult = { success: false, message: error.message };
-      }
-    }
-
-    // 4. Gallabox Webhook Integration
     const gallaboxClient = process.env.GALLABOX_CLIENT_WEBHOOK;
     const gallaboxOwner = process.env.GALLABOX_OWNER_WEBHOOK;
     const payload = {
       name, email, mobile, company,
       form_type: 'CRM Quiz', source: 'CRM Quiz Form',
-      quiz_score: scoreNum,
-      quiz_category: category,
-      lead_volume: leadVolume,
-      current_crm: crmName,
+      quiz_score: scoreNum, quiz_category: category, lead_volume: leadVolume, current_crm: crmName,
       submitted_at: new Date().toISOString()
     };
 
-    if (gallaboxClient) axios.post(gallaboxClient, payload).catch(e => console.error('Gallabox Client Error:', e.message));
-    if (gallaboxOwner) axios.post(gallaboxOwner, payload).catch(e => console.error('Gallabox Owner Error:', e.message));
+    if (gallaboxClient) promises.push(axios.post(gallaboxClient, payload).catch(e => console.error('Gallabox Client Error:', e.message)));
+    if (gallaboxOwner) promises.push(axios.post(gallaboxOwner, payload).catch(e => console.error('Gallabox Owner Error:', e.message)));
 
-    res.json({
-      success: true,
-      emailSent,
-      zohoResult
-    });
-  });
+    await Promise.allSettled(promises);
+  };
 
-  app.post('/api/leads/submit', async (req, res) => {
-    const { name, email, phone, budget, form_type, brand, company, institute, facility, lead_volume, current_crm, target_sector } = req.body;
-
-    if (!name || !email || !phone) {
-      return res.status(400).json({ success: false, message: 'Missing required fields' });
-    }
-
+  const processLeadBackground = async (data: any) => {
+    const { name, email, phone, budget, form_type, companyName, lead_volume, current_crm, target_sector } = data;
     const leadSource = 'Website Form';
-    const companyName = company || brand || institute || facility || 'Individual';
+    const promises: Promise<any>[] = [];
 
-    // 1. Send Email Notification
     const teamEmails = process.env.TEAM_EMAILS || 'growth@digitalroi.io';
     const transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST || 'smtp.gmail.com',
       port: parseInt(process.env.SMTP_PORT || '587'),
       secure: false,
-      auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS,
-      },
+      auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS },
     });
 
     const mailOptions = {
@@ -308,66 +293,93 @@ async function startServer() {
     };
 
     if (process.env.SMTP_USER && process.env.SMTP_PASS) {
-      transporter.sendMail(mailOptions).catch(err => console.error('Email error:', err));
+      promises.push(transporter.sendMail(mailOptions).catch(err => console.error('Email error:', err)));
     }
 
-    // 2. Zoho CRM Integration
-    const token = await getZohoAccessToken();
-    if (token) {
-      try {
-        await axios.post(`https://www.zohoapis.${ZOHO_DATACENTER}/crm/v2/Leads/upsert`, {
-          data: [{
-            Last_Name: name,
-            Email: email,
-            Mobile: phone,
-            Company: companyName,
-            Lead_Source: leadSource,
-            Lead_Status: 'Not Contacted',
-            Monthly_Ads_Budget_N: budget,
-            Target_Sector: target_sector,
-            Lead_Volume: lead_volume,
-            Current_CRM: current_crm
-          }],
-          duplicate_check_fields: ['Email'],
-          trigger: ['workflow', 'approval', 'blueprint']
-        }, {
-          headers: { Authorization: `Zoho-oauthtoken ${token}` }
-        });
+    promises.push(
+      getZohoAccessToken()
+        .then(async (token) => {
+          if (token) {
+            const zohoPromises = [];
+            zohoPromises.push(
+              axios.post(`https://www.zohoapis.${ZOHO_DATACENTER}/crm/v2/Leads/upsert`, {
+                data: [{
+                  Last_Name: name, Email: email, Mobile: phone, Company: companyName,
+                  Lead_Source: leadSource, Lead_Status: 'Not Contacted', Monthly_Ads_Budget_N: budget,
+                  Target_Sector: target_sector, Lead_Volume: lead_volume, Current_CRM: current_crm
+                }],
+                duplicate_check_fields: ['Email'],
+                trigger: ['workflow', 'approval', 'blueprint']
+              }, { headers: { Authorization: `Zoho-oauthtoken ${token}` } })
+              .catch(err => console.error('Zoho CRM Upsert Error:', err?.message || err))
+            );
 
-        // 3. Zoho Sheet Integration
-        const sheetId = process.env.ZOHO_SHEET_ID;
-        const sheetName = process.env.ZOHO_SHEET_NAME || 'Sheet1';
-        if (sheetId) {
-          await axios.post(`https://sheet.zoho.com/api/v2/${sheetId}/${sheetName}/rows`, {
-            rows: [{
-              Name: name,
-              Email: email,
-              Mobile: phone,
-              Company: companyName,
-              Budget: budget,
-              Form_Type: form_type,
-              Date: new Date().toISOString()
-            }]
-          }, {
-            headers: { Authorization: `Zoho-oauthtoken ${token}` }
-          });
-        }
-      } catch (error: any) {
-        console.error('Zoho Error:', error.response?.data || error.message);
-      }
-    }
+            const sheetId = process.env.ZOHO_SHEET_ID;
+            const sheetName = process.env.ZOHO_SHEET_NAME || 'Sheet1';
+            if (sheetId) {
+              zohoPromises.push(
+                axios.post(`https://sheet.zoho.com/api/v2/${sheetId}/${sheetName}/rows`, {
+                  rows: [{ Name: name, Email: email, Mobile: phone, Company: companyName, Budget: budget, Form_Type: form_type, Date: new Date().toISOString() }]
+                }, { headers: { Authorization: `Zoho-oauthtoken ${token}` } })
+                .catch(err => console.error('Zoho Sheet Insert Error:', err?.message || err))
+              );
+            }
+            await Promise.allSettled(zohoPromises);
+          }
+        })
+        .catch(err => console.error('Error fetching token for Zoho:', err?.message || err))
+    );
 
-    // 4. Gallabox Webhook Integration
     const gallaboxClient = process.env.GALLABOX_CLIENT_WEBHOOK;
     const gallaboxOwner = process.env.GALLABOX_OWNER_WEBHOOK;
     const payload = {
       name, email, mobile: phone, budget, company: companyName,
-      form_type, source: 'Growth Consultation Form',
-      submitted_at: new Date().toISOString()
+      form_type, source: 'Growth Consultation Form', submitted_at: new Date().toISOString()
     };
+    if (gallaboxClient) promises.push(axios.post(gallaboxClient, payload).catch(e => console.error('Gallabox Client Error:', e.message)));
+    if (gallaboxOwner) promises.push(axios.post(gallaboxOwner, payload).catch(e => console.error('Gallabox Owner Error:', e.message)));
 
-    if (gallaboxClient) axios.post(gallaboxClient, payload).catch(e => console.error('Gallabox Client Error:', e.message));
-    if (gallaboxOwner) axios.post(gallaboxOwner, payload).catch(e => console.error('Gallabox Owner Error:', e.message));
+    await Promise.allSettled(promises);
+  };
+
+  // API Routes
+  app.post('/api/crm-quiz/submit', async (req, res) => {
+    const { name, email, mobile, company, quizScore, quizAnswers, leadVolume, crmName } = req.body;
+
+    if (!name || !email || !company) {
+      return res.status(400).json({ success: false, message: 'Missing required fields' });
+    }
+
+    const scoreNum = parseInt(quizScore);
+    let category = '';
+    let priority = '';
+    if (scoreNum >= 0 && scoreNum <= 6) { category = 'CRITICAL LEAKAGE'; priority = 'HIGH PRIORITY'; }
+    else if (scoreNum >= 7 && scoreNum <= 12) { category = 'HIGH LEAKAGE'; priority = 'HIGH PRIORITY'; }
+    else if (scoreNum >= 13 && scoreNum <= 16) { category = 'MODERATE LEAKAGE'; priority = 'MEDIUM PRIORITY'; }
+    else { category = 'HEALTHY SYSTEM'; priority = 'MEDIUM PRIORITY'; }
+
+    try {
+      await processCrmQuizBackground({ name, email, mobile, company, quizScore, quizAnswers, leadVolume, crmName, scoreNum, category, priority });
+    } catch (err) {
+      console.error('Background processing error:', err);
+    }
+
+    res.json({ success: true, message: 'Submitted successfully' });
+  });
+
+  app.post('/api/leads/submit', async (req, res) => {
+    const { name, email, phone, budget, form_type, brand, company, institute, facility, lead_volume, current_crm, target_sector } = req.body;
+
+    if (!name || !email || !phone) {
+      return res.status(400).json({ success: false, message: 'Missing required fields' });
+    }
+
+    const companyName = company || brand || institute || facility || 'Individual';
+    try {
+      await processLeadBackground({ name, email, phone, budget, form_type, companyName, lead_volume, current_crm, target_sector });
+    } catch (err) {
+      console.error('Background processing error:', err);
+    }
 
     res.json({ success: true, message: 'Lead submitted successfully' });
   });
