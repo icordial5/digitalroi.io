@@ -5,6 +5,7 @@ import { useModal, FormType } from '@/context/ModalContext';
 import { cn } from '@/utils/cn';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 
 interface LeadFormProps {
   type: FormType;
@@ -14,6 +15,7 @@ interface LeadFormProps {
 export const LeadForm: React.FC<LeadFormProps> = ({ type, onSuccess }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
+  const { executeRecaptcha } = useGoogleReCaptcha();
 
   const getFormTitle = () => {
     switch (type) {
@@ -39,16 +41,31 @@ export const LeadForm: React.FC<LeadFormProps> = ({ type, onSuccess }) => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    
+    if (!executeRecaptcha) {
+      alert('reCAPTCHA not loaded correctly. Please try again.');
+      return;
+    }
+
     setIsSubmitting(true);
 
-    const formData = new FormData(e.currentTarget);
-    const data = Object.fromEntries(formData.entries());
-    
     try {
+      const token = await executeRecaptcha('lead_form');
+      
+      const formData = new FormData(e.currentTarget);
+      const data = Object.fromEntries(formData.entries());
+      
       const apiUrl = import.meta.env.VITE_API_URL || '';
+      const apiKey = import.meta.env.VITE_API_KEY || '';
+      
       const response = await axios.post(`${apiUrl}/api/leads/submit`, {
         ...data,
-        form_type: type
+        form_type: type,
+        recaptchaToken: token
+      }, {
+        headers: {
+          'x-api-key': apiKey
+        }
       });
       
       if (response.data.success) {

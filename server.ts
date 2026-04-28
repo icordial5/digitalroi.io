@@ -8,6 +8,8 @@ import dotenv from 'dotenv';
 import { createServer } from 'http';
 import { Server } from 'socket.io';
 import cors from 'cors';
+import helmet from 'helmet';
+import rateLimit from 'express-rate-limit';
 
 dotenv.config();
 
@@ -20,13 +22,32 @@ async function startServer() {
   const httpServer = createServer(app);
   const io = new Server(httpServer, {
     cors: {
-      origin: "*",
+      origin: process.env.CORS_ORIGIN || "*",
       methods: ["GET", "POST"]
     }
   });
 
-  app.use(cors());
+  // Security Middleware
+  app.use(helmet({
+    contentSecurityPolicy: false, // Disabled for local Vite dev server inline scripts
+    crossOriginEmbedderPolicy: false, // Allow cross-origin images (ImageKit, etc)
+  }));
+
+  app.use(cors({
+    origin: process.env.CORS_ORIGIN ? process.env.CORS_ORIGIN.split(',') : "*",
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'x-api-key']
+  }));
   app.use(express.json());
+
+  // API Rate Limiting
+  const apiLimiter = rateLimit({
+    windowMs: 60 * 1000, // 1 minute
+    max: 20, // Limit each IP to 20 requests per windowMs
+    message: { success: false, message: 'Too many requests, please try again later.' },
+    standardHeaders: true,
+    legacyHeaders: false,
+  });
 
   // Live Visitor Counter Logic
   const activeUsers = new Map<string, { lastActive: number, socketId: string }>();
@@ -89,15 +110,19 @@ async function startServer() {
   }, 10000);
 
   // Zoho CRM Integration Logic
-  const ZOHO_CLIENT_ID = process.env.ZOHO_CLIENT_ID || '1000.7KHA0M8KQI3BWRALU6YVDTFCC13W9N';
-  const ZOHO_CLIENT_SECRET = process.env.ZOHO_CLIENT_SECRET || 'cb1d90b7c025bb3dda68bc14bd6bc2b81433292354';
-  const ZOHO_REFRESH_TOKEN = process.env.ZOHO_REFRESH_TOKEN || '1000.a5c1b08e949c766cfa621a32cf5e83c7.a104b8264680ccb90d20bde0e4714132';
+  const ZOHO_CLIENT_ID = process.env.ZOHO_CLIENT_ID;
+  const ZOHO_CLIENT_SECRET = process.env.ZOHO_CLIENT_SECRET;
+  const ZOHO_REFRESH_TOKEN = process.env.ZOHO_REFRESH_TOKEN;
   const ZOHO_DATACENTER = process.env.ZOHO_DATACENTER || 'in';
 
   let zohoAccessToken = '';
   let zohoTokenExpiry = 0;
 
   async function getZohoAccessToken() {
+    if (!ZOHO_CLIENT_ID || !ZOHO_CLIENT_SECRET || !ZOHO_REFRESH_TOKEN) {
+      console.error('Zoho CRM credentials missing in environment variables');
+      return null;
+    }
     if (zohoAccessToken && Date.now() < zohoTokenExpiry) {
       return zohoAccessToken;
     }
@@ -125,28 +150,14 @@ async function startServer() {
     }
   }
 
-  // Rate Limiting & Cache-Control Middleware
-  const rateLimitMap = new Map<string, { count: number, resetTime: number }>();
-  const RATE_LIMIT_WINDOW_MS = 60000; // 1 minute
-  const MAX_REQUESTS_PER_WINDOW = 10;
+  // API Key Protection & Cache-Control Middleware
+  app.use('/api', apiLimiter, (req, res, next) => {
+    // Check API Key
+    const apiKey = req.headers['x-api-key'];
+    const validApiKey = process.env.API_KEY;
 
-  app.use('/api', (req, res, next) => {
-    const ip = req.ip || req.headers['x-forwarded-for'] || 'unknown';
-    const now = Date.now();
-    
-    if (typeof ip === 'string' && ip !== 'unknown') {
-      const record = rateLimitMap.get(ip) || { count: 0, resetTime: now + RATE_LIMIT_WINDOW_MS };
-      if (now > record.resetTime) {
-        record.count = 1;
-        record.resetTime = now + RATE_LIMIT_WINDOW_MS;
-      } else {
-        record.count++;
-      }
-      rateLimitMap.set(ip, record);
-      
-      if (record.count > MAX_REQUESTS_PER_WINDOW) {
-        return res.status(429).json({ success: false, message: 'Too many requests, please try again later.' });
-      }
+    if (validApiKey && apiKey !== validApiKey) {
+      return res.status(401).json({ success: false, message: 'Unauthorized API Key' });
     }
 
     if (req.method === 'GET') {
@@ -160,16 +171,21 @@ async function startServer() {
     next();
   });
 
-  setInterval(() => {
-    const now = Date.now();
-    rateLimitMap.forEach((value, key) => {
-      if (now > value.resetTime) {
-        rateLimitMap.delete(key);
-      }
-    });
-  }, 60000);
-
   // Background operations dispatcher for CRM Quiz
+  const verifyRecaptcha = async (token: string) => {
+    if (!token) return false;
+    try {
+      const secretKey = process.env.RECAPTCHA_SECRET_KEY || '6LenaM4sAAAAAJ1y0sKsUtDG9ahZekDOnbuvGWQ5';
+      const response = await axios.post(
+        `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${token}`
+      );
+      return response.data.success && response.data.score >= 0.5;
+    } catch (error) {
+      console.error('reCAPTCHA verification error:', error);
+      return false;
+    }
+  };
+
   const processCrmQuizBackground = async (data: any) => {
     const { name, email, mobile, company, quizScore, quizAnswers, leadVolume, crmName, scoreNum, category, priority } = data;
     const promises: Promise<any>[] = [];
@@ -344,10 +360,15 @@ async function startServer() {
 
   // API Routes
   app.post('/api/crm-quiz/submit', async (req, res) => {
-    const { name, email, mobile, company, quizScore, quizAnswers, leadVolume, crmName } = req.body;
+    const { name, email, mobile, company, quizScore, quizAnswers, leadVolume, crmName, recaptchaToken } = req.body;
 
     if (!name || !email || !company) {
       return res.status(400).json({ success: false, message: 'Missing required fields' });
+    }
+
+    const isHuman = await verifyRecaptcha(recaptchaToken);
+    if (!isHuman) {
+      return res.status(403).json({ success: false, message: 'Bot verification failed.' });
     }
 
     const scoreNum = parseInt(quizScore);
@@ -368,10 +389,15 @@ async function startServer() {
   });
 
   app.post('/api/leads/submit', async (req, res) => {
-    const { name, email, phone, budget, form_type, brand, company, institute, facility, lead_volume, current_crm, target_sector } = req.body;
+    const { name, email, phone, budget, form_type, brand, company, institute, facility, lead_volume, current_crm, target_sector, recaptchaToken } = req.body;
 
     if (!name || !email || !phone) {
       return res.status(400).json({ success: false, message: 'Missing required fields' });
+    }
+
+    const isHuman = await verifyRecaptcha(recaptchaToken);
+    if (!isHuman) {
+      return res.status(403).json({ success: false, message: 'Bot verification failed.' });
     }
 
     const companyName = company || brand || institute || facility || 'Individual';

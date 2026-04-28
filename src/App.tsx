@@ -28,6 +28,7 @@ const PrivacyPolicy = lazy(() => import('./features/legal/PrivacyPolicy'));
 const TermsConditions = lazy(() => import('./features/legal/TermsConditions'));
 const PlaceholderPage = lazy(() => import('./components/layout/PlaceholderPage').then(module => ({ default: module.PlaceholderPage })));
 
+import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3';
 import { ModalProvider } from './context/ModalContext';
 import { LeadModal } from './components/forms/LeadModal';
 import { CookieConsent } from './components/ui/CookieConsent';
@@ -91,21 +92,23 @@ export default function App() {
 
   return (
     <HelmetProvider>
-      <ModalProvider>
-        <Router>
-          <LoadingScreen isLoading={showLoader} />
-          <Suspense fallback={
-            <SuspenseFallback 
-              onMount={() => setIsSuspenseLoading(true)} 
-              onUnmount={() => setIsSuspenseLoading(false)} 
-            />
-          }>
-            <AnimatedRoutes />
-          </Suspense>
-          <LeadModal />
-          <CookieConsent />
-        </Router>
-      </ModalProvider>
+      <GoogleReCaptchaProvider reCaptchaKey={import.meta.env.VITE_RECAPTCHA_SITE_KEY || '6LenaM4sAAAAAEwVQRNdnKzS0-9bO1rGTAM9s1xu'}>
+        <ModalProvider>
+          <Router>
+            <LoadingScreen isLoading={showLoader} />
+            <Suspense fallback={
+              <SuspenseFallback 
+                onMount={() => setIsSuspenseLoading(true)} 
+                onUnmount={() => setIsSuspenseLoading(false)} 
+              />
+            }>
+              <AnimatedRoutes />
+            </Suspense>
+            <LeadModal />
+            <CookieConsent />
+          </Router>
+        </ModalProvider>
+      </GoogleReCaptchaProvider>
     </HelmetProvider>
   );
 }

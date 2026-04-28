@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { ChevronLeft, ChevronRight, CheckCircle2, Loader2 } from 'lucide-react';
 import { cn } from '@/utils/cn';
 import { useNavigate } from 'react-router-dom';
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 
 interface Option {
   text: string;
@@ -82,6 +83,7 @@ export const CRMQuiz: React.FC = () => {
   const [showForm, setShowForm] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
+  const { executeRecaptcha } = useGoogleReCaptcha();
 
   const [formData, setFormData] = useState({
     name: '',
@@ -118,15 +120,26 @@ export const CRMQuiz: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    if (!executeRecaptcha) {
+      alert('reCAPTCHA not loaded correctly. Please try again.');
+      return;
+    }
+
     setIsSubmitting(true);
     
     const leadVolume = answers[5] !== -1 ? questions[5].options[answers[5]].text : '';
     
     try {
+      const token = await executeRecaptcha('crm_quiz');
       const apiUrl = import.meta.env.VITE_API_URL || '';
+      const apiKey = import.meta.env.VITE_API_KEY || '';
       const response = await fetch(`${apiUrl}/api/crm-quiz/submit`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+          'Content-Type': 'application/json',
+          'x-api-key': apiKey
+        },
         body: JSON.stringify({
           ...formData,
           quizScore: totalScore,
@@ -135,6 +148,7 @@ export const CRMQuiz: React.FC = () => {
             answer: a !== -1 ? questions[i].options[a].text : 'N/A'
           })),
           leadVolume,
+          recaptchaToken: token
         })
       });
       
